@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"vector": "cpp",
+		"list": "cpp",
+		"*.tcc": "cpp",
+		"deque": "cpp",
+		"string": "cpp",
+		"array": "cpp",
+		"unordered_map": "cpp",
+		"string_view": "cpp",
+		"initializer_list": "cpp"
+	},
+	"C_Cpp.dimInactiveRegions": false
+}
