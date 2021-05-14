@@ -1,94 +1,132 @@
+#ifndef VECTOR_HPP 
+#define VECTOR_HPP
+
 #include <iostream>
-#include "ft.hpp"
-#include "iterator.hpp"
-#include <list>
+#include <iterator>
+// #include "iterator.hpp"
 
-template<class T>
-class vector
+namespace ft
 {
-	private:
-		typedef T*	pointer;
-		pointer 	_ptr;
-		size_t		_size;
-   		size_t		_capacity;
+	template<class T>
+	class Vector
+	{
+		private:
+			T 		*_ptr;
+			size_t	_size;
+	   		size_t	_capacity;
 
-	public:
-		// Coplien
-		vector() : _capacity(0), _size(0), _ptr(0) {}
-		vector(size_t n_size) : _capacity(n_size), _size(n_size) { _ptr = new T[n_size]; }
-		vector(size_t n_size, const T&init);
-		vector(const vector<T> &vector);
-		~vector() { delete(this->_ptr); };
+		public:
+			// Coplien
+			Vector() : _capacity(0), _size(0), _ptr(0) {}
+			Vector(size_t n_size) : _capacity(n_size), _size(n_size) { _ptr = new T[n_size]; }
+			Vector(size_t n_size, const T&init);
+			Vector(const Vector<T> &vector);
+			Vector<T> &operator=(const Vector<T> &vector);
+			~Vector() { delete[](this->_ptr); };
 
-		// Getters
-		size_t capacity() const { return (this->_capacity); }
-		size_t size() const { return (this->_size); }
+			// Iterator member function
+			// iterator<T> begin() { return (this->ptr); }
+			// iterator<T> end() { return (this->ptr + this->size); }
 
-		// Other member functions
-		bool empty() const;
-		T& front();
-		T& back();
-		void push_back(const T &value); 
-		void pop_back();
-		void reserve(size_t capacity);   
-		void resize(size_t size);
+			// Getters
+			size_t	size() { return (this->_size); }
+			size_t	capacity() { return (this->_capacity); }
+			T		*data() { return (this->_ptr); };
 
-		iterator begin() { return (this->ptr); }
-		iterator end() { return (this->ptr + this->size); }
+			// Member functions one-liner
+			bool	empty() const { return (this->_size == 0); };
+			void	clear() { this->_size = 0; };
+			T&		front() { return (this->_ptr[0]); }
+			T&		back() { return (this->_ptr[this->_size - 1]); }
+			void	pop_back() { this->_size--; };
 
-		// Operator overloads
-		T & operator[](unsigned int index);  
-		Vector<T> & operator=(const Vector<T> &);
-};
+			// Other member functions
+			void	push_back(const T &value);
+			void	reserve(size_t capacity);   
+			void	resize(size_t size);
+			// assign
+			// at
+			// swap
+			// shrink_to_fit
+			// emplace
+			// emplace_back
+			// erase
+			// insert
+			// max_size
+
+
+			// Operator overloads
+			T &operator[](unsigned int index) { return (this->_ptr[index]); };
+	};
+}
 
 // Coplien implementation
 
 template<class T>
-vector<T>::vector(size_t n_size, const T &init) : _capacity(n_size), _size(n_size)
+ft::Vector<T>::Vector(size_t n_size, const T &init) : _capacity(n_size), _size(n_size)
 {
 	_ptr = new T[n_size];	
 	for (int i = 0; i < n_size; i++)
-	{
 		_ptr[i] = init;
-		T();
-	}
 }
 
 template<class T>
-vector<T>::vector(const vector<T> &vector)
+ft::Vector<T>::Vector(const ft::Vector<T> &vector)
 {
 	this->_size = vector._size;
 	this->_capacity = vector._capacity;
-	_ptr = new T[n_size];
-	for (int i = 0; i < n_size; i++)
+	this->_ptr = new T[vector._size];
+	for (unsigned int i = 0; i < vector._size; i++)
 		_ptr[i] = vector._ptr[i];
+}
+
+template<class T>
+ft::Vector<T> &ft::Vector<T>::operator=(const Vector<T> &vector)
+{
+	this->_size = vector._size;
+	this->_capacity = vector._capacity;
+	this->_ptr = new T[vector._size];
+	for (unsigned int i = 0; i < vector._size; i++)
+		_ptr[i] = vector._ptr[i];
+	return (this);
 }
 
 // Member functions
 
 template<class T>
-bool empty() const
+void ft::Vector<T>::push_back(const T&value)
+{
+	if (this->_size <= this->_capacity)
+		this->reserve(this->_capacity + 3);
+	this->_ptr[this->_size] = value;
+	this->_capacity = this->_capacity + 3;
+	this->_size = this->_size + 1;
+}
+
 
 template<class T>
-T & front()
+void ft::Vector<T>::reserve(size_t capacity)
+{
+	if(this->_ptr == 0)
+    {
+        this->_size = 0;
+        this->_capacity = 0;
+    }
+	T *n_ptr = new T[capacity];
+	
+	for (unsigned int i = 0; i < this->_size; i++)
+    	n_ptr[i] = this->_ptr[i];
+	if(this->_ptr)
+    	delete[](this->_ptr);
+    this->_ptr = n_ptr;
+
+}
 
 template<class T>
-T & back()
+void ft::Vector<T>::resize(size_t size)
+{
+	reserve(size);
+    this->_size = size;
+}
 
-template<class T>
-void push_back(const T & value)
-
-template<class T>
-void pop_back()
-
-template<class T>
-void reserve(unsigned int capacity)
-
-template<class T>
-void resize(unsigned int size)
-
-
-// Operator overloads
-
-T & operator[](unsigned int index);  
-Vector<T> & operator=(const Vector<T> &);
+#endif // VECTOR_HPP
