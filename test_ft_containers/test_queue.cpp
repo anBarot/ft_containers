@@ -10,8 +10,6 @@
 template<class V>
 void	display_queue(V &queue) 
 {
-	int size = queue.size();
-
 	while (!queue.empty())
 	{
 		std::cout << queue.front() << ' ';
@@ -38,7 +36,7 @@ void	test_push_and_pop(V &queue, std::string str)
 	queue.push(13);
 	queue.push(45);
 	test_front_back(queue, str);
-	display_queue(queue);
+	// display_queue(queue);
 }
 
 template<class V_1, class V_2>
@@ -47,21 +45,19 @@ void	test_queue(V_1 &std_queue, V_2 &my_queue)
 	std::cout << "\nQueue content std_queue :" << std::endl;
 	display_queue(std_queue);
 	std::cout << "\nQueue content my_queue :" << std::endl;
-	display_queue(my_queue);
+	// display_queue(my_queue);
 
 	test_push_and_pop(std_queue, "std_queue");
-	// test_push_and_pop(my_queue, value, "my_queue");
+	test_push_and_pop(my_queue, "my_queue");
 }
 
 void	test_queue_list()
 {
-	std::list<int> std_list(5, 12);
+	ft::Vector<int> my_vec();
 
-	std::queue<int, std::list<int>> std_queue(std_list);
-	// std::queue<int, std::list<int>> my_queue(std_list);
-	ft::Queue<int, std::list<int>> my_queue(std_list);
+	std::queue<int, ft::Vector<int>> my_queue(my_vec);
 
-	test_queue(std_queue, my_queue);
+	// test_queue(std_queue, my_queue);
 }
 
 // void	test_queue_float()

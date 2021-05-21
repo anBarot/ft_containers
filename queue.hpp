@@ -8,11 +8,21 @@ namespace ft
 	template<class T, class C>
 	class Queue
 	{
+
 		private:
 			C		_container;
 			size_t	_size;
 
 		public:
+			typedef	T 			value_type;
+			typedef	T& 			reference;
+			typedef C			container_type;
+			typedef	const T& 	const_reference;
+			typedef	T* 			pointer;
+			typedef	const T* 	const_pointer;
+			typedef	size_t 		size_type;
+			typedef	size_type 	difference_type;
+
 			// Coplien
 			Queue() {};
 			Queue(size_t size) : _size(size) {};
