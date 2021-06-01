@@ -4,6 +4,7 @@
 #include <iostream>
 #include <initializer_list>
 #include <limits>
+#include <iterator>
 #include "vector_iterator.hpp"
 
 namespace ft
@@ -33,7 +34,7 @@ namespace ft
 		public:
 			// Coplien
 			explicit Vector(const allocator_type &alloc = allocator_type()) : _capacity(NULL), _size(NULL), _data(NULL), _alloc(alloc) {}
-			explicit Vector(size_type n, const reference val = value_type(), const allocator_type& alloc = allocator_type());
+			explicit Vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
 			Vector(const Vector & x);
 			Vector<T, Alloc> &operator=(const Vector<T, Alloc> &vector);
 			// template <class InputIterator>
@@ -41,14 +42,9 @@ namespace ft
 			~Vector();
 
 			// Iterator
-			iterator		begin()			{ return (iterator(this, 0)); }
-			const_iterator	begin() const 	{ return (iterator(this, 0)); }
-			iterator		end() 			{ return (iterator(this, this->_size)); }
-			iterator		end() const		{ return (iterator(this, this->_size)); }
-			reverse_iterator rbegin();
-			const_reverse_iterator rbegin() const;
-			reverse_iterator rend();
-			const_reverse_iterator rend() const;
+			iterator		begin() { return (iterator(this, 0)); }
+			const_iterator	begin() const { return (iterator(this, 0)); }
+			iterator		end() 	{ return (iterator(this, this->_size)); }
 			iterator		erase(iterator position);
 			iterator		erase(iterator first, iterator last);
 			iterator		insert(iterator position, const value_type& val);
@@ -60,13 +56,13 @@ namespace ft
 			// Getters
 			size_type		size() const 			{ return (_size); }
 			size_type		capacity() const 		{ return (_capacity); }
-			allocator_type	get_allocator() const	{ return (_alloc); };
-			reference		at(size_type n) 		{ return (_data[n]); }
-			const_reference	at(size_type n) const 	{ return (_data[n]); }
+			reference		at (size_type n) 		{ return (_data[n]); }
+			const_reference	at (size_type n) const 	{ return (_data[n]); }
 			reference		back() 					{ return (_data[_size - 1]); }
 			const_reference	back() const 			{ return (_data[_size - 1]); }
 			reference		front() 				{ return (_data[0]); }
 			const_reference	front() const 			{ return (_data[0]); }
+			allocator_type	get_allocator() const	{ return (_alloc); };
 			size_type		max_size() const 		{ return (_alloc.max_size()); } // std::numeric_limits<std::size_t>::max() / sizeof(T)
 
 
@@ -75,29 +71,29 @@ namespace ft
 			void			pop_back();
 			template <class InputIterator>
 			void			assign(InputIterator first, InputIterator last);
-			void			assign(size_type n, const reference val);
+			void			assign(size_type n, const value_type& val);
 
 			// Resizers
 			void			reserve(size_type capacity);
-			void			resize(size_type size, value_type val = value_type());
-			void			shrink_to_fit();
+			void			resize(size_type size) 	{ reserve(size); this->_size = size; }
+			void			shrink_to_fit()			{ this->_capacity = this->_size; }
 
 			// Empty and clear
 			bool			empty() const 	{ return (_size == 0); }
 			void			clear();
 
 			// Other methods
-			void			swap(Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
+			void swap (Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
 
 			// Operator overloads
-			reference operator[](size_type n);
+			reference operator[](size_type n) { return (this->_data[n]); };
 	};
 }
 
 // Coplien implementation
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc>::Vector(size_type n, const reference val = value_type(), const allocator_type& alloc = allocator_type())
+ft::Vector<T, Alloc>::Vector(size_type n, const value_type & val = value_type(), const allocator_type& alloc = allocator_type())
 : _size(n), _capacity(n), _alloc(alloc)
 {
 	this->reserve(n);
@@ -195,14 +191,6 @@ void ft::Vector<T, Alloc>::reserve(size_type capacity)
 	
 	for (size_type i = 0; i < _size; i++)
 		_alloc.construct(_data + i, _data[i]);
-}
-
-template<class T, class Alloc>
-ft::Vector<T, Alloc>::reference ft::Vector<T, Alloc>::operator[](size_type n)
-{
-	if (n >= _size)
-		return ;
-	return(_data[n]);
 }
 
 // Relational operator overload

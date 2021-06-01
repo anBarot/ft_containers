@@ -79,15 +79,15 @@ namespace ft
 
 			// Resizers
 			void			reserve(size_type capacity);
-			void			resize(size_type size, value_type val = value_type());
-			void			shrink_to_fit();
+			// void			resize(size_type size) 	{ reserve(size); this->_size = size; }
+			// void			shrink_to_fit()			{ this->_capacity = this->_size; }
 
 			// Empty and clear
 			bool			empty() const 	{ return (_size == 0); }
 			void			clear();
 
 			// Other methods
-			void			swap(Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
+			void swap (Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
 
 			// Operator overloads
 			reference operator[](size_type n);

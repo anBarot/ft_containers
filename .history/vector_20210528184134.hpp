@@ -41,14 +41,9 @@ namespace ft
 			~Vector();
 
 			// Iterator
-			iterator		begin()			{ return (iterator(this, 0)); }
-			const_iterator	begin() const 	{ return (iterator(this, 0)); }
-			iterator		end() 			{ return (iterator(this, this->_size)); }
-			iterator		end() const		{ return (iterator(this, this->_size)); }
-			reverse_iterator rbegin();
-			const_reverse_iterator rbegin() const;
-			reverse_iterator rend();
-			const_reverse_iterator rend() const;
+			iterator		begin() { return (iterator(this, 0)); }
+			const_iterator	begin() const { return (iterator(this, 0)); }
+			iterator		end() 	{ return (iterator(this, this->_size)); }
 			iterator		erase(iterator position);
 			iterator		erase(iterator first, iterator last);
 			iterator		insert(iterator position, const value_type& val);
@@ -75,19 +70,19 @@ namespace ft
 			void			pop_back();
 			template <class InputIterator>
 			void			assign(InputIterator first, InputIterator last);
-			void			assign(size_type n, const reference val);
+			void			assign(size_type n, const value_type& val);
 
 			// Resizers
 			void			reserve(size_type capacity);
-			void			resize(size_type size, value_type val = value_type());
-			void			shrink_to_fit();
+			// void			resize(size_type size) 	{ reserve(size); this->_size = size; }
+			// void			shrink_to_fit()			{ this->_capacity = this->_size; }
 
 			// Empty and clear
 			bool			empty() const 	{ return (_size == 0); }
 			void			clear();
 
 			// Other methods
-			void			swap(Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
+			void swap (Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
 
 			// Operator overloads
 			reference operator[](size_type n);
@@ -201,7 +196,6 @@ template<class T, class Alloc>
 ft::Vector<T, Alloc>::reference ft::Vector<T, Alloc>::operator[](size_type n)
 {
 	if (n >= _size)
-		return ;
 	return(_data[n]);
 }
 

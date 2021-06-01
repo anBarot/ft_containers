@@ -87,7 +87,7 @@ namespace ft
 			void			clear();
 
 			// Other methods
-			void			swap(Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
+			void swap (Vector &x) { Vector tmp(x); ~x; x = *this; *this = tmp; };
 
 			// Operator overloads
 			reference operator[](size_type n);
