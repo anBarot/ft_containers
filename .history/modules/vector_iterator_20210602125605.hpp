@@ -19,17 +19,17 @@ class ft::Vector<T, Alloc>::Iterator
 												_pvector = it._pvector; 
 												_index = it._index;
 												return (this);
-											}
+											};
 		~Iterator()							{}
 
 		// Operator overload
-	    reference operator*()				{ return (_pvector->at(this->_index)); }
-	    iterator operator++()				{ ++_index; return (*this); }
-	    iterator operator--()				{ --_index; return (*this); }
-		iterator operator++(int)			{ iterator tmp(*this); ++_index; return(tmp); }
-    	iterator operator--(int)			{ iterator tmp(*this); --_index; return(tmp); }
-		iterator operator+(size_type i)		{ iterator tmp(_pvector, _index + i); return(tmp); }
-    	iterator operator-(size_type i)		{ iterator tmp(_pvector, _index - i); return(tmp); }
+	    const_reference operator*() const	{ return (_pvector->at(this->_index)); }
+	    iterator operator++()				{ ++this->_index; return (*this); }
+	    iterator operator--()				{ --this->_index; return (*this); }
+		iterator operator++(int)			{ iterator tmp(*this); ++this->_index; return(tmp); }
+    	iterator operator--(int)			{ iterator tmp(*this); --this->_index; return(tmp); }
+		iterator operator+(size_type i)		{ iterator tmp(this->_pvector, this->_index + i); return(tmp); }
+    	iterator operator-(size_type i)		{ iterator tmp(this->_pvector, this->_index - i); return(tmp); }
 
 		// Comparison operator overload
 	    bool operator!=(const iterator &sec_it) const	{ return (_index != sec_it._index); }
@@ -40,4 +40,4 @@ class ft::Vector<T, Alloc>::Iterator
 	    bool operator<(const iterator &sec_it) const	{ return (_index < sec_it._index); }
 };
 
-#endif
+#endif // VECTOR_ITERATOR_HPP

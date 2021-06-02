@@ -13,10 +13,6 @@ namespace ft
 	{
 		public:
 			class Iterator;
-			class Const_Iterator;
-			class Reverse_Iterator;
-			class Const_Reverse_Iterator;
-			class Iterator;
 			typedef	T 						value_type;
 			typedef	T& 						reference;
 			typedef	const T& 				const_reference;
@@ -25,9 +21,7 @@ namespace ft
 			typedef	size_t					size_type;
 			typedef	long 					difference_type;
 			typedef Iterator				iterator;
-			typedef Const_Iterator			const_iterator;
-			typedef Reverse_Iterator		reverse_iterator;
-			typedef Const_Reverse_Iterator	const_reverse_iterator;
+			typedef const Iterator			const_iterator;
 			typedef	Alloc					allocator_type;
 
 		private:
@@ -43,14 +37,7 @@ namespace ft
 			Vector(const Vector & x);
 			Vector<T, Alloc> &operator=(const Vector<T, Alloc> &vector);
 			template <class InputIterator>
-        	Vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type()) : _size(0), _capacity(0), _alloc(alloc), _data(NULL) 
-			{
-				while (first != last)
-				{
-					this->push_back(*first);
-					first++;
-				}
-			}
+        	Vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
 			~Vector();
 
 			// Iterator
@@ -140,8 +127,16 @@ ft::Vector<T, Alloc> &ft::Vector<T, Alloc>::operator=(const Vector<T, Alloc> &ve
 	return (this);
 }
 
+template<class InputIterator>
+ft::Vector<T, Alloc>::Vector(InputIterator first, InputIterator last, const Alloc &alloc = typename ft::Vector<T, Alloc>::allocator_type())
+{
+
+
+
+}
+
 template <class InputIterator>
-~ft::Vector<T, Alloc>::Vector()
+~ft::Vector<T, Alloc>::Vector()	
 {
 	this->clear();
 	if (this->_capacity > 0)

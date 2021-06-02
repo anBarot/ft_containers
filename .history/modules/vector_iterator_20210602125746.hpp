@@ -19,7 +19,7 @@ class ft::Vector<T, Alloc>::Iterator
 												_pvector = it._pvector; 
 												_index = it._index;
 												return (this);
-											}
+											};
 		~Iterator()							{}
 
 		// Operator overload
@@ -40,4 +40,4 @@ class ft::Vector<T, Alloc>::Iterator
 	    bool operator<(const iterator &sec_it) const	{ return (_index < sec_it._index); }
 };
 
-#endif
+#endif // VECTOR_ITERATOR_HPP

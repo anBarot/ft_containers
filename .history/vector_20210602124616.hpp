@@ -13,10 +13,6 @@ namespace ft
 	{
 		public:
 			class Iterator;
-			class Const_Iterator;
-			class Reverse_Iterator;
-			class Const_Reverse_Iterator;
-			class Iterator;
 			typedef	T 						value_type;
 			typedef	T& 						reference;
 			typedef	const T& 				const_reference;
@@ -25,9 +21,7 @@ namespace ft
 			typedef	size_t					size_type;
 			typedef	long 					difference_type;
 			typedef Iterator				iterator;
-			typedef Const_Iterator			const_iterator;
-			typedef Reverse_Iterator		reverse_iterator;
-			typedef Const_Reverse_Iterator	const_reverse_iterator;
+			typedef const Iterator			const_iterator;
 			typedef	Alloc					allocator_type;
 
 		private:
@@ -47,8 +41,9 @@ namespace ft
 			{
 				while (first != last)
 				{
-					this->push_back(*first);
+					this->push_back();
 					first++;
+
 				}
 			}
 			~Vector();

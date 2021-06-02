@@ -13,10 +13,6 @@ namespace ft
 	{
 		public:
 			class Iterator;
-			class Const_Iterator;
-			class Reverse_Iterator;
-			class Const_Reverse_Iterator;
-			class Iterator;
 			typedef	T 						value_type;
 			typedef	T& 						reference;
 			typedef	const T& 				const_reference;
@@ -26,8 +22,6 @@ namespace ft
 			typedef	long 					difference_type;
 			typedef Iterator				iterator;
 			typedef Const_Iterator			const_iterator;
-			typedef Reverse_Iterator		reverse_iterator;
-			typedef Const_Reverse_Iterator	const_reverse_iterator;
 			typedef	Alloc					allocator_type;
 
 		private:

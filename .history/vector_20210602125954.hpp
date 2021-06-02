@@ -13,10 +13,6 @@ namespace ft
 	{
 		public:
 			class Iterator;
-			class Const_Iterator;
-			class Reverse_Iterator;
-			class Const_Reverse_Iterator;
-			class Iterator;
 			typedef	T 						value_type;
 			typedef	T& 						reference;
 			typedef	const T& 				const_reference;

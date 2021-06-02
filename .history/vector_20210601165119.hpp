@@ -13,10 +13,6 @@ namespace ft
 	{
 		public:
 			class Iterator;
-			class Const_Iterator;
-			class Reverse_Iterator;
-			class Const_Reverse_Iterator;
-			class Iterator;
 			typedef	T 						value_type;
 			typedef	T& 						reference;
 			typedef	const T& 				const_reference;
@@ -25,9 +21,7 @@ namespace ft
 			typedef	size_t					size_type;
 			typedef	long 					difference_type;
 			typedef Iterator				iterator;
-			typedef Const_Iterator			const_iterator;
-			typedef Reverse_Iterator		reverse_iterator;
-			typedef Const_Reverse_Iterator	const_reverse_iterator;
+			typedef const Iterator			const_iterator;
 			typedef	Alloc					allocator_type;
 
 		private:
@@ -43,14 +37,7 @@ namespace ft
 			Vector(const Vector & x);
 			Vector<T, Alloc> &operator=(const Vector<T, Alloc> &vector);
 			template <class InputIterator>
-        	Vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type()) : _size(0), _capacity(0), _alloc(alloc), _data(NULL) 
-			{
-				while (first != last)
-				{
-					this->push_back(*first);
-					first++;
-				}
-			}
+        	Vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type());
 			~Vector();
 
 			// Iterator
@@ -78,8 +65,8 @@ namespace ft
 			const_reference	at(size_type n) const 	{ return (_data[n]); }
 			reference		back() 					{ return (_data[_size - 1]); }
 			const_reference	back() const 			{ return (_data[_size - 1]); }
-			reference		front() 				{ return (*(_data)); }
-			const_reference	front() const 			{ return (*(_data)); }
+			reference		front() 				{ return (_data[0]); }
+			const_reference	front() const 			{ return (_data[0]); }
 			size_type		max_size() const 		{ return (_alloc.max_size()); } // std::numeric_limits<std::size_t>::max() / sizeof(T)
 
 
@@ -110,12 +97,12 @@ namespace ft
 // Coplien implementation
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc>::Vector(size_type n, const reference val = value_type(), const allocator_type &alloc = allocator_type())
+ft::Vector<T, Alloc>::Vector(size_type n, const reference val = value_type(), const allocator_type& alloc = allocator_type())
 : _size(n), _capacity(n), _alloc(alloc)
 {
 	this->reserve(n);
 	for (size_type i = 0; i < n; i++)
-		_alloc.construct(_data + i, val);
+_		_alloc.construct(_data + i, val);
 	_size = n;
 	_capacity = n;
 }
@@ -140,8 +127,16 @@ ft::Vector<T, Alloc> &ft::Vector<T, Alloc>::operator=(const Vector<T, Alloc> &ve
 	return (this);
 }
 
+template <class T, class Alloc, class InputIterator>
+ft::Vector<T, Alloc>::Vector(InputIterator first, InputIterator last, const allocator_type &alloc = allocator_type())
+{
+
+
+
+}
+
 template <class InputIterator>
-~ft::Vector<T, Alloc>::Vector()
+~ft::Vector<T, Alloc>()	
 {
 	this->clear();
 	if (this->_capacity > 0)
