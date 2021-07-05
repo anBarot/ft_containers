@@ -1,0 +1,4 @@
+#ifndef MAP_CONST_ITERATOR_HPP
+#define MAP_CONST_ITERATOR_HPP
+
+#endif

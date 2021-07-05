@@ -41,6 +41,9 @@ namespace ft
 		    bool operator>(const const_reverse_iterator &sec_it) const	{ return (_pvector < sec_it._pvector); }
 		    bool operator<=(const const_reverse_iterator &sec_it) const	{ return (_pvector >= sec_it._pvector); }
 		    bool operator<(const const_reverse_iterator &sec_it) const	{ return (_pvector > sec_it._pvector); }
+
+			// Is input iterator
+			static const bool input_iter = true;
 	};
 }
 

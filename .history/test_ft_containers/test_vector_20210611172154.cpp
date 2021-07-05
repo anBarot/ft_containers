@@ -63,19 +63,8 @@ void	test_clear_empty(V &vec, std::string str)
 	display_vector(vec);
 }
 
-template<class T, class V>
-void	test_insert_erase(V &vec, T value, std::string str)
-{
-	std::cout << "\nTesting insert (begin)" << " - " << str << std::endl;
-	std::cout << *(vec.insert(vec.begin(), value)) << "\n";
-	test_front_back(vec, str);
-	std::cout << "\nTesting erase (begin)" << " - " << str << std::endl;
-	std::cout << *(vec.erase(vec.begin())) << "\n";
-	test_front_back(vec, str);
-}
-
 template<class T, class V_1, class V_2>
-void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
+void	test_vector(V_1 &std_vec, V_2 &my_vec, T value)
 {
 	COLOR(BOLDYELLOW) std::cout << "Vector content std_vec :" << std::endl;
 	display_vector(std_vec);
@@ -89,10 +78,7 @@ void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
 	display_vector(std_vec);
 	COLOR(BOLDGREEN) std::cout << "\nVector content my_vec :" << std::endl;
 	display_vector(my_vec);
-
-	COLOR(BOLDYELLOW) test_insert_erase(std_vec, value, "std_vec");
-	COLOR(BOLDGREEN) test_insert_erase(my_vec, value, "my_vec");
-
+	
 	COLOR(BOLDYELLOW) test_clear_empty(std_vec, "std_vec");
 	COLOR(BOLDGREEN) test_clear_empty(my_vec, "my_vec");
 
@@ -123,6 +109,38 @@ void	test_vector_float()
 	test_vector(std_vec, my_vec, 1.23456);
 }
 
+void	test_vector_queue()
+{
+	std::vector<int> std_vec(2, 12);
+	ft::Vector<int> my_vec(2, 12);
+
+	std::queue<int, std::vector<int> > std_queue(std_vec);
+	std::queue<int, ft::Vector<int> > my_queue(my_vec);
+
+
+	COLOR(BOLDYELLOW) std::cout << "display content std vec:\n";
+	display_vector(std_vec);
+	COLOR(BOLDGREEN) std::cout << "display content my vec :\n";
+	display_vector(my_vec);
+
+	COLOR(BOLDBLUE) std::cout << "\nqueue push(5)\n\n";
+	std_queue.push(5);
+	my_queue.push(5);
+	
+	COLOR(BOLDYELLOW) std::cout << "display content std vec:\n";
+	display_vector(std_vec);
+	COLOR(BOLDGREEN) std::cout << "display content my vec :\n";
+	display_vector(my_vec);
+
+	COLOR(BOLDYELLOW) std::cout << "Test std queue front back:\n";
+	std::cout << std_queue.front() << "\n";
+	std::cout << std_queue.back() << "\n";
+	
+	COLOR(BOLDGREEN) std::cout << "Test my queue front back :\n";
+	std::cout << my_queue.front() << "\n";
+	std::cout << my_queue.back() << "\n";
+}
+
 int main()
 {
 	std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
@@ -131,5 +149,7 @@ int main()
 	test_vector_int();
 	std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
 	test_vector_float();
+	std::cout << "\n\n+++++++++++++++++ Test std::queue(vector) +++++++++++++++++" << std::endl;
+	test_vector_queue();
 	COLOR(RESET)
 }

@@ -1,8 +1,7 @@
 #!/bin/bash
 
-: '
+echo "Enter test name : "
 read CONTAIN
-'
 
 if [ $CONTAIN == "vector" ]; then
 clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_vector.cpp -I.

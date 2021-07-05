@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ft.hpp"
 #include <list>
 
 // list_node implementation
@@ -27,62 +26,62 @@ struct list_node
 
 // list_const_iterator implementation
 
-template<typename _T>
+template<typename T>
 struct list_const_iterator
 {
 	protected :
-		list_node<_T> *node;
+		list_node<T> *node;
   		list_const_iterator(list_node *n_node) : list_node(n_node) {}
 
 	public :
-  		_T& operator*() const { return *(this->node); }
-  		_T* operator->() const { return this->node; }
-  		list_const_iterator<_T>& operator++()	{
+  		T& operator*() const { return *(this->node); }
+  		T* operator->() const { return this->node; }
+  		list_const_iterator<T>& operator++()	{
 													this->node = this->node->next;
 													return *this;
   												}
-		list_const_iterator<_T> operator++(int)	{
-													list_const_iterator<_T> tmp = *this;
+		list_const_iterator<T> operator++(int)	{
+													list_const_iterator<T> tmp = *this;
 													this->node = this->node->next;
 													return tmp;
 												}
-		list_const_iterator<_T>& operator--()	{
+		list_const_iterator<T>& operator--()	{
 													this->node = this->node->prev;
 													return *this;
 												}
-		list_const_iterator<_T> operator--(int) {
-													list_const_iterator<_T> tmp = *this;
+		list_const_iterator<T> operator--(int) {
+													list_const_iterator<T> tmp = *this;
 													this->node = this->node->prev;
 													return tmp;
 												}
-		bool operator==(const list_const_iterator<_T>& other) const { return (this->node == other.node); }
-		bool operator!=(const list_const_iterator<_T>& other) const { return (this->node != other.node); }
+		bool operator==(const list_const_iterator<T>& other) const { return (this->node == other.node); }
+		bool operator!=(const list_const_iterator<T>& other) const { return (this->node != other.node); }
 };
 
 // list_iterator implementation
 
-template < typename _T >
+template < typename T >
 struct list_iterator : public list_const_iterator
 {
 	protected :
 		list_iterator(list_node *n_node) : node(n_node) {}
 
 	public :
-		list_iterator<_T>& operator++() 	{
+		list_iterator<T>& operator++() 	{
 												this->node = this->node->next;
 												return *this;
 											}
-		list_iterator<_T> operator++(int) 	{
-												list_iterator<_T> tmp = *this;
+		list_iterator<T> operator++(int) 	{
+												list_iterator<T> tmp = *this;
 												this->node = this->node->next;
 												return tmp;
 											}
-  		list_iterator<_T>& operator--()		{
+  		list_iterator<T>& operator--()		{
 												this->node = this->node->prev;
 												return *this;
   											}
-  		list_iterator<_T> operator--(int)	{
-			  									list_iterator<_T> tmp = *this;
+  		list_iterator<T> operator--(int)	{
+			  									list_iterator<T> tmp = *this;
 												this->node = this->node->prev;
 												return tmp;
 											}
@@ -90,17 +89,17 @@ struct list_iterator : public list_const_iterator
 
 // list implementation
 
-template < typename _T>
+template < typename T >
 class list
 {
-	typedef list_iterator<_T> iterator;
-    typedef list_const_iterator<_T const> const_iterator;
-	typedef _T	value_type;
+	typedef list_iterator<T> iterator;
+    typedef list_const_iterator<T const> const_iterator;
+	typedef T	valueType;
 
 	private :
-		list_node<_T> *head;
-		list_node<_T> *tail;
-		size_t l_size;
+		list_node<T> *head;
+		list_node<T> *tail;
+		sizeT l_size;
 
 	public :
 	// Coplien
@@ -126,11 +125,11 @@ class list
 
 	// Capacity
 		bool empty() 		{ return (this.size() == 0); };
-		size_t size()		{ return this.l_size; };
+		sizeT size()		{ return this.l_size; };
 
 	// Element access
-		_T &front()			{ return this->head->data; }
-		_T &back()			{ return this->tail->data; }
+		T &front()			{ return this->head->data; }
+		T &back()			{ return this->tail->data; }
 
 	// Modifiers
 		// assign();
