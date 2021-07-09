@@ -11,28 +11,26 @@ namespace ft
 			C		_container;
 
 		public:
-			typedef	T 			value_type;
-			typedef	C 			container_type;
-			typedef	size_t 		size_type;
+			typedef	C 					container_type;
+			typedef	T 					value_type;
+			typedef	C::size_type 		size_type;
 
 			// Coplien
-			explicit Stack(const container_type &ctnr = container_type());
-			Stack(const Stack<T, C> &stack);
-			Stack<T, C> &operator=(const Stack<T, C> &stack);
+			explicit Stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
+			Stack(const Stack<T, C> &stack) : _container(stack._container) {}
+			Stack<T, C> &operator=(const Stack<T, C> &stack) { _container = stack._container; return (*this); }
 			~Stack() {};
 
 			// Getters
 			size_type	size() const { return (_container.size()); }
 
 			// Member functions
-			bool				empty() const { return (this->_container.empty()); }
-			void				pop() { this->_container.pop_back(); }
-			void				push (const value_type& val) { this->_container.push_back(val); }
-			value_type&			top() { return (this->_container.back()); }
-			const 	value_type& top() const { return (this->_container.back()); }
-			template <class... Args>
-			void				emplace(Args&&... args) { this->_container.emplace_back(args); }
-			void				swap(Stack<T, C> &x) { Stack<T, C> tmp = x; x = this; this = tmp; }
+			bool				empty() const					{ return (_container.empty()); }
+			size_type			size() const					{ return (_container.size()); }
+			void				pop()							{ _container.pop_back(); }
+			void				push (const value_type& val)	{ _container.push_back(val); }
+			value_type&			top()							{ return (_container.back()); }
+			const 	value_type& top() const						{ return (_container.back()); }
 	};
 }
 

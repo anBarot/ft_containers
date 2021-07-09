@@ -4,6 +4,8 @@
 #include <iostream>
 #include <utility>
 #include "pair.hpp"
+#include "binary_search_tree.hpp"
+#include "bst_iterator.hpp"
 
 namespace ft
 {
@@ -13,7 +15,7 @@ namespace ft
 		public :
 			typedef Key											key_type;
 			typedef T											mapped_type;
-			typedef std::pair<const key_type, mapped_type>		value_type;
+			typedef ft::Pair<const key_type, mapped_type>		value_type;
 			typedef Compare										key_compare;
 			typedef Alloc										allocator_type;
 			typedef value_type&									reference;
@@ -22,15 +24,15 @@ namespace ft
 			typedef const value_type*							const_pointer;
 			typedef size_t										size_type;
 			typedef ptrdiff_t									difference_type;
-			typedef typename ft::MapIterator<T>					iterator;
-			typedef typename ft::MapConstIterator<T>			const_iterator;
-			typedef typename ft::MapReverseIterator<T>			reverse_iterator;
-			typedef typename ft::MapConstReverseIterator<T>		const_reverse_iterator;
+			typedef typename ft::BSTIterator<T>					iterator;
+			typedef typename ft::BSTConstIterator<T>			const_iterator;
+			typedef typename ft::BSTReverseIterator<T>			reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<T>		const_reverse_iterator;
 
 		private :
-			Compare												_comp;
-			Red_Black_tree<value_type, Compare>					_bst;
-			allocator_type										_alloc;
+			Compare								comp;
+			BinarySearchTree<value_type>		bst;
+			allocator_type						alloc;
 
 		public :
 			// Coplien
