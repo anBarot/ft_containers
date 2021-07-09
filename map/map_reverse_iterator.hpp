@@ -1,4 +1,0 @@
-#ifndef MAP_REVERSE_ITERATOR_HPP
-#define MAP_REVERSE_ITERATOR_HPP
-
-#endif

@@ -40,7 +40,7 @@ namespace ft
 			Vector<T, Alloc> &operator=(Vector &vector);
 			Vector(Vector &x);
 			template <typename InputIterator>
-			Vector(typename __gnu_cxx::__enable_if<InputIterator::input_iter, InputIterator>::__type first,
+			Vector(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
 			InputIterator last, const allocator_type &alloc = allocator_type())
 			: _alloc(alloc),  _data(NULL),  _capacity(0), _size(0)
 			{
@@ -64,7 +64,7 @@ namespace ft
     		void					insert(iterator position, size_type n, const value_type& val);
 			template<typename InputIterator>
 			void					insert(iterator position,
-									typename __gnu_cxx::__enable_if<InputIterator::input_iter, InputIterator>::type first,
+									typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
 									InputIterator last)
 			{
 				if (last - first < _capacity)
@@ -105,7 +105,7 @@ namespace ft
 			void			push_back(const_reference value);
 			void			pop_back();
 			template <typename InputIterator>
-			void			assign(typename __gnu_cxx::__enable_if<InputIterator::input_iter, InputIterator>::type first, 
+			void			assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
 							InputIterator last);
 			void			assign(size_type n, reference val);
 

@@ -4,10 +4,6 @@
 #include <iostream>
 #include <utility>
 #include "pair.hpp"
-#include "map_iterator.hpp"
-#include "map_const_iterator.hpp"
-#include "map_reverse_iterator.hpp"
-#include "map_const_reverse_iterator.hpp"
 
 namespace ft
 {
@@ -32,8 +28,9 @@ namespace ft
 			typedef typename ft::MapConstReverseIterator<T>		const_reverse_iterator;
 
 		private :
-			pointer	_pdata;
-			size_t	_size;
+			Compare												_comp;
+			Red_Black_tree<value_type, Compare>					_bst;
+			allocator_type										_alloc;
 
 		public :
 			// Coplien
