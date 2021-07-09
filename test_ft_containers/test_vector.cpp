@@ -1,12 +1,11 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 #include <iterator>
-#include "vector.hpp"
-#include "modules/vector_const_iterator.hpp"
-#include "modules/vector_const_iterator.hpp"
-#include "modules/vector_reverse_iterator.hpp"
-#include "modules/vector_const_reverse_iterator.hpp"
+#include "vector/vector.hpp"
+#include "vector/modules/vector_const_iterator.hpp"
+#include "vector/modules/vector_const_iterator.hpp"
+#include "vector/modules/vector_reverse_iterator.hpp"
+#include "vector/modules/vector_const_reverse_iterator.hpp"
 
 # define RESET   		"\033[0m"
 # define RED     		"\033[31m"

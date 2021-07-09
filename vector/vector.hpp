@@ -7,6 +7,7 @@
 #include "modules/vector_const_iterator.hpp"
 #include "modules/vector_reverse_iterator.hpp"
 #include "modules/vector_const_reverse_iterator.hpp"
+#include "tools/enable_if.hpp"
 
 namespace ft
 {

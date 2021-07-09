@@ -11,9 +11,9 @@ namespace ft
 			C		_container;
 
 		public:
-			typedef	C 					container_type;
-			typedef	T 					value_type;
-			typedef	C::size_type 		size_type;
+			typedef	C 						container_type;
+			typedef	T 						value_type;
+			typedef	typename C::size_type 	size_type;
 
 			// Coplien
 			explicit Stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
@@ -26,7 +26,6 @@ namespace ft
 
 			// Member functions
 			bool				empty() const					{ return (_container.empty()); }
-			size_type			size() const					{ return (_container.size()); }
 			void				pop()							{ _container.pop_back(); }
 			void				push (const value_type& val)	{ _container.push_back(val); }
 			value_type&			top()							{ return (_container.back()); }
