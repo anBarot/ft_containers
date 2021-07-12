@@ -6,10 +6,13 @@
 #include "pair.hpp"
 #include "binary_search_tree.hpp"
 #include "bst_iterator.hpp"
+#include "bst_const_iterator.hpp"
+#include "bst_reverse_iterator.hpp"
+#include "bst_const_reverse_iterator.hpp"
 
 namespace ft
 {
-	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::Pair<const Key, T>>> 
+	template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::Pair<const Key, T>>>
 	class Map
 	{
 		public :
@@ -45,10 +48,10 @@ namespace ft
 			~Map();
 
 			// Iterator
-			iterator 				begin();
-			const_iterator 			begin() const;
-			reverse_iterator 		rbegin();
-			const_reverse_iterator 	rbegin() const;
+			iterator 				begin() { return(iterator(bst)); }
+			const_iterator 			begin() const { return(const_iterator(bst)); }
+			reverse_iterator 		rbegin() { return(reverse_iterator(bst)); }
+			const_reverse_iterator 	rbegin() const { return(const_reverse_iterator(bst)); }
 			iterator 				end();
 			const_iterator 			end() const;
 			reverse_iterator 		rend();
@@ -59,7 +62,7 @@ namespace ft
 			const_iterator 			upper_bound(const key_type& k) const;
 			iterator 				lower_bound(const key_type& k);
 			const_iterator 			lower_bound(const key_type& k) const;
-			
+
 			// Getters
 			size_type							size() const;
 			size_type							count(const key_type& k) const;
@@ -67,9 +70,14 @@ namespace ft
 			pair<iterator,iterator>				equal_range (const key_type& k);
 			pair<const_iterator,const_iterator>	equal_range (const key_type& k) const;
 			allocator_type						get_allocator() const;
-			key_compare							key_comp();
+			key_compare							key_comp()
+			{
+
+
+
+			}
 			size_type							max_size() const;
-			mapped_type &						operator[](const key_type &k);
+			mapped_type&						operator[](const key_type &k);
 			value_compare						value_comp() const;
 
 			// Setters

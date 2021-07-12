@@ -7,11 +7,12 @@ namespace ft
 	class VectorIterator
 	{
 		public:
-			typedef T						value_type;
-			typedef T*						pointer;
-			typedef T&						reference;
-			typedef ft::VectorIterator<T>	iterator;
-
+			typedef T								value_type;
+    		typedef std::ptrdiff_t					difference_type;
+    		typedef T*								pointer;
+    		typedef T&								reference;
+    		typedef std::random_access_iterator_tag	iterator_category; 
+						
 		private:
 		    pointer			_pvector;
 
@@ -27,6 +28,7 @@ namespace ft
 			reference operator*()				{ return (*_pvector); }
 			iterator operator++()				{ ++_pvector; return (*this); }
 			iterator operator--()				{ --_pvector; return (*this); }
+			reference operator[](int i)			{ return (*(_pvector + i)); }
 			iterator operator++(int)			{ iterator tmp(*this); ++_pvector; return(tmp); }
 	    	iterator operator--(int)			{ iterator tmp(*this); --_pvector; return(tmp); }
 			iterator operator+(size_t i)		{ return (iterator(_pvector + i)); }

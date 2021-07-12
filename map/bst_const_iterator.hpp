@@ -7,18 +7,10 @@
 namespace ft
 {
 	template <class T>
-	class BSTIterator : public iterator_traits<T>
+	class BSTIterator
 	{
-		public :
-			// Iteratpr traits definition
-			typedef T								value_type;
-    		typedef std::ptrdiff_t					difference_type;
-    		typedef T*								pointer;
-    		typedef T&								reference;
-    		typedef std::bidirectional_iterator_tag	iterator_category; 
-
 		private :
-			ft::Stack<s_BSTNode *> st_node;
+			ft::Stack<s_BSTNode*> st_node;
 
 		public :
 			// Coplien

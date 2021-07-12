@@ -8,9 +8,10 @@ namespace ft
 	{
 		public:
 			typedef T								value_type;
-			typedef T*								pointer;
-			typedef T&								reference;
-			typedef VectorConst_Reverse_Iterator	const_reverse_iterator;
+    		typedef std::ptrdiff_t					difference_type;
+    		typedef T*								pointer;
+    		typedef T&								reference;
+    		typedef std::random_access_iterator_tag	iterator_category; 
 
 		private:
 		    const pointer		_pvector;
@@ -27,6 +28,7 @@ namespace ft
 
 			// Operator overload
 		    reference operator*() const						{ return (*_pvector); }
+			reference operator[](int i)						{ return (*(_pvector + i)); }
 		    const_reverse_iterator operator++()				{ --_pvector; return (*this); }
 		    const_reverse_iterator operator--()				{ ++_pvector; return (*this); }
 			const_reverse_iterator operator++(int)			{ const_reverse_iterator tmp(*this); --_pvector; return(tmp); }
