@@ -22,7 +22,7 @@ namespace ft
 			~Stack() {};
 
 			// Getters
-			size_type	size() const { return (_container.size()); }
+			size_type			size() const { return (_container.size()); }
 
 			// Member functions
 			bool				empty() const					{ return (_container.empty()); }

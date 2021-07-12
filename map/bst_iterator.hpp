@@ -2,6 +2,7 @@
 #define BST_ITERATOR_HPP
 
 #include "binary_search_tree.hpp"
+#include "../stack/stack.hpp"
 
 namespace ft
 {
@@ -9,15 +10,33 @@ namespace ft
 	class BSTIterator
 	{
 		private :
-			s_BSTNode	*bstroot;
-			s_BSTNode	*top;
+			ft::Stack<s_BSTNode*> st_node;
 
 		public :
 			// Coplien
-			BSTIterator() : bstroot(nullptr);
-			BSTIterator(BinarySearchTree<T> &bst) : bstroot(bst->bstroot_p), top(nullptr);
-			BSTIterator(s_BSTNode *bst) : bstroot(bst), top(nullptr);
+			BSTIterator() : st_node(nullptr);
+			BSTIterator(BinarySearchTree<T> &bst)
+			{
+        		s_BSTNode* curr = bst->bstroot_p;
+        		while (curr != nullptr)
+            	{
+					q.push(curr);
+					curr = curr->left;
+				}
+			}
+			BSTIterator(s_BSTNode *bst)
+			{
+        		s_BSTNode* curr = bst;
+        		while (curr != nullptr)
+            	{
+					q.push(curr);
+					curr = curr->left;
+				}
+			}
 			~BSTIterator() {};
+
+			// Getters
+			s_BSTNode* curr(){ return st_node.top(); }
 
 			// Member function
     		bool	hasNext();
@@ -32,27 +51,21 @@ namespace ft
 template <class T>
 bool ft::BSTIterator<T>::hasNext()
 {
-	if (bstroot->right != nullptr || (top != nullptr && top->right != nullptr))
-		return (true);
-	return (false);
+	if (st_node == nullptr)
+		return (false);
+	return (true);
 }
 
 template <class T>
 void ft::BSTIterator<T>::next()
 {
-	if (hasNext() == false)
-		return ;
+	s_BSTNode* curr = st_node.top()->right;
 
-	if (bstroot->right != nullptr)
+	st_node.pop();
+    while (curr != nullptr)
 	{
-		top = bstroot;
-		bstroot = bstroot->right;
-	}
-	else if (top->right != nullptr)
-	{
-
-
-
+		st_node.push(curr);
+		curr = curr->left;
 	}
 }
 

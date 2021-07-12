@@ -5,7 +5,7 @@
 #include "stack/stack.hpp"
 #include "vector/vector.hpp"
 
-# define RESET   		"\033[0m"
+# define RESET			"\033[0m"
 # define RED     		"\033[31m"
 # define GREEN   		"\033[32m"
 # define YELLOW  		"\033[33m"
@@ -13,7 +13,7 @@
 # define BOLDRED     	"\033[1m\033[31m"
 # define BOLDGREEN   	"\033[1m\033[32m"
 # define BOLDYELLOW  	"\033[1m\033[33m"
-# define BOLDBLUE    	"\033[1m\033[34m"
+# define BOLDBLUE		"\033[1m\033[34m"
 # define COLOR(COL_VAL)	std::cout << COL_VAL;
 
 template<class S>
@@ -52,7 +52,7 @@ void	test_stack(V_1 &std_stack, V_2 &my_stack , T value )
 
 	COLOR(BOLDYELLOW) test_push_and_pop(std_stack, value, "std_stack");
 	COLOR(BOLDGREEN) test_push_and_pop(my_stack, value, "my_stack");
-	
+
 	COLOR(RESET);
 }
 
