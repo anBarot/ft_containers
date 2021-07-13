@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
-#include "vector/vector.hpp"
-#include "vector/modules/vector_const_iterator.hpp"
-#include "vector/modules/vector_const_iterator.hpp"
-#include "vector/modules/vector_reverse_iterator.hpp"
-#include "vector/modules/vector_const_reverse_iterator.hpp"
+#include "../vector/vector.hpp"
+#include "../vector/modules/vector_const_iterator.hpp"
+#include "../vector/modules/vector_const_iterator.hpp"
+#include "../vector/modules/vector_reverse_iterator.hpp"
+#include "../vector/modules/vector_const_reverse_iterator.hpp"
 
 # define RESET   		"\033[0m"
 # define RED     		"\033[31m"
@@ -54,6 +54,19 @@ void	test_push_and_pop(V &vec, T value, std::string str)
 	test_front_back(vec, str);
 }
 
+template<class T, class V>
+void	test_assign(V &vec, T value, std::string str)
+{
+	std::cout << "Testing assign (3, value) " << value << " - " << str << " :" << std::endl;
+	vec.assign(3, value);
+	display_vector(vec);
+
+	std::cout << "Testing assign iterator(7, value) " << value << " - " << str << " :" << std::endl;
+	V vec_test(7, value);
+	vec.assign(vec_test.begin(), vec_test.end());
+	display_vector(vec);
+}
+
 template<class V>
 void	test_clear_empty(V &vec, std::string str)
 {
@@ -95,6 +108,9 @@ void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
 	COLOR(BOLDYELLOW) test_clear_empty(std_vec, "std_vec");
 	COLOR(BOLDGREEN) test_clear_empty(my_vec, "my_vec");
 
+	COLOR(BOLDYELLOW) test_assign(std_vec, value, "std_vec");
+	COLOR(BOLDGREEN) test_assign(my_vec, value, "my_vec");
+
 	std::cout << RESET;
 }
 
@@ -121,6 +137,8 @@ void	test_vector_float()
 
 	test_vector(std_vec, my_vec, 1.23456);
 }
+
+
 
 int main()
 {

@@ -12,6 +12,7 @@ namespace ft
     		typedef T*								pointer;
     		typedef T&								reference;
     		typedef std::random_access_iterator_tag	iterator_category; 
+			typedef ft::VectorIterator<T>			iterator;
 						
 		private:
 		    pointer			_pvector;

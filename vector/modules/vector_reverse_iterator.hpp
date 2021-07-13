@@ -7,11 +7,12 @@ namespace ft
 	class VectorReverse_Iterator
 	{
 		public:
-			typedef T								value_type;
-    		typedef std::ptrdiff_t					difference_type;
-    		typedef T*								pointer;
-    		typedef T&								reference;
-    		typedef std::random_access_iterator_tag	iterator_category; 
+			typedef T										value_type;
+    		typedef std::ptrdiff_t							difference_type;
+    		typedef T*										pointer;
+    		typedef T&										reference;
+    		typedef std::random_access_iterator_tag			iterator_category;
+			typedef ft::VectorReverse_Iterator<T>			reverse_iterator;
 
 		private:
 		    pointer		_pvector;

@@ -4,7 +4,7 @@ echo "Enter test name : "
 read CONTAIN
 
 if [ $CONTAIN == "vector" ]; then
-clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_vector.cpp -I.
+clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_vector.cpp -I./vector
 ./a.out > vector_result.txt
 cat vector_result.txt
 # elif [ $CONTAIN == "map" ]; then

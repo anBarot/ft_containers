@@ -7,7 +7,7 @@
 #include "modules/vector_const_iterator.hpp"
 #include "modules/vector_reverse_iterator.hpp"
 #include "modules/vector_const_reverse_iterator.hpp"
-#include "tools/enable_if.hpp"
+#include "../tools/enable_if.hpp"
 
 namespace ft
 {
@@ -105,10 +105,29 @@ namespace ft
 			// Setters
 			void			push_back(const_reference value);
 			void			pop_back();
+			void			assign(size_type n, const_reference val);
 			template <typename InputIterator>
 			void			assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
-							InputIterator last);
-			void			assign(size_type n, reference val);
+							InputIterator last)
+			{
+				this->clear();
+
+				size_t count = 0;
+				iterator tmp_first = first;
+				iterator tmp_last = last;
+				while (tmp_first != tmp_last)
+				{
+					tmp_first++;
+					count++;
+				}
+				if (_capacity < count)
+					this->reserve(count);
+				while (first < last)
+				{
+					this->push_back(*first);
+					first++;
+				}
+			}
 
 			// Resizers
 			void			reserve(size_type capacity);
@@ -401,8 +420,8 @@ void ft::Vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 		this->push_back(*it);
 }
 
-template<class T, class Alloc>
-void ft::Vector<T, Alloc>::assign(size_type n, reference val)
+template <class T, class Alloc>
+void ft::Vector<T, Alloc>::assign(size_type n, const_reference val)
 {
 	this->clear();
 
