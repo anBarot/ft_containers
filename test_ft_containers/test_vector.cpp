@@ -2,10 +2,6 @@
 #include <vector>
 #include <iterator>
 #include "../vector/vector.hpp"
-#include "../vector/modules/vector_const_iterator.hpp"
-#include "../vector/modules/vector_const_iterator.hpp"
-#include "../vector/modules/vector_reverse_iterator.hpp"
-#include "../vector/modules/vector_const_reverse_iterator.hpp"
 
 # define RESET   		"\033[0m"
 # define RED     		"\033[31m"
@@ -156,12 +152,12 @@ void	test_vector_float()
 
 int main()
 {
-	// std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
-	// test_vector_str();
-	// std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
-	// test_vector_int();
-	// std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
-	// test_vector_float();
+	std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
+	test_vector_str();
+	std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
+	test_vector_int();
+	std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
+	test_vector_float();
 	std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
 	std::vector<int> std_vec(3, 12);
 	ft::Vector<int> my_vec(3, 12);

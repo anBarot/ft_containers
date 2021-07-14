@@ -11,7 +11,7 @@ namespace ft
 	class BSTConstReverseIterator : public ft::iterator_traits<T*>
 	{
 		private :
-			ft::Stack<s_BSTNode<T>*> st_node;
+			ft::Stack<T, s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien

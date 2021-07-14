@@ -20,7 +20,7 @@ namespace ft
     		typedef std::bidirectional_iterator_tag	iterator_category; 
 
 		private :
-			ft::Stack<s_BSTNode<T> *> st_node;
+			ft::Stack<T, s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien

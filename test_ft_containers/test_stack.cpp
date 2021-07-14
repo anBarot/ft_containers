@@ -2,8 +2,8 @@
 #include <stack>
 #include <vector>
 #include <iterator>
-#include "stack/stack.hpp"
-#include "vector/vector.hpp"
+#include "../stack/stack.hpp"
+#include "../vector/vector.hpp"
 
 # define RESET			"\033[0m"
 # define RED     		"\033[31m"
@@ -37,7 +37,7 @@ void	test_push_and_pop(S &stack, T value, std::string str)
 	std::cout << "Testing push " << value << " - " << str << " :" << std::endl;
 	stack.push(value);
 	test_top(stack, str);
-	std::cout << "Testing pop " << value << " - " << str << " :" << std::endl;
+	std::cout << "Testing pop " <<  " - " << str << " :" << std::endl;
 	stack.pop();
 	test_top(stack, str);
 }

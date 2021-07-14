@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include "pair.hpp"
+#include "value_compare.hpp"
 #include "binary_search_tree.hpp"
 #include "bst_iterator.hpp"
 #include "bst_const_iterator.hpp"
@@ -26,7 +27,7 @@ namespace ft
 			typedef value_type*									pointer;
 			typedef const value_type*							const_pointer;
 			typedef size_t										size_type;
-			typedef ptrdiff_t									difference_type;
+			typedef std::ptrdiff_t								difference_type;
 			typedef typename ft::BSTIterator<T>					iterator;
 			typedef typename ft::BSTConstIterator<T>			const_iterator;
 			typedef typename ft::BSTReverseIterator<T>			reverse_iterator;
@@ -41,7 +42,7 @@ namespace ft
 			// Coplien
 			explicit Map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
 			template <class InputIterator>
-  			Map(typename __gnu_cxx::__enable_if<InputIterator::input_iter, InputIterator>::__type first, 
+  			Map(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
 			InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			Map(const Map &x);
 			Map &operator=(const Map &x);
@@ -50,8 +51,8 @@ namespace ft
 			// Iterator
 			iterator 				begin() { return(iterator(bst)); }
 			const_iterator 			begin() const { return(const_iterator(bst)); }
-			reverse_iterator 		rbegin() { return(reverse_iterator(bst)); }
-			const_reverse_iterator 	rbegin() const { return(const_reverse_iterator(bst)); }
+			reverse_iterator 		rbegin();
+			const_reverse_iterator 	rbegin() const;
 			iterator 				end();
 			const_iterator 			end() const;
 			reverse_iterator 		rend();
@@ -76,9 +77,9 @@ namespace ft
 
 
 			}
-			size_type							max_size() const;
+			size_type							max_size() const { return( alloc.max_size() ); }
 			mapped_type&						operator[](const key_type &k);
-			value_compare						value_comp() const;
+			value_compare						value_comp() const { return ( ft::Map::value_compare(); }
 
 			// Setters
 			void					clear();
@@ -88,11 +89,77 @@ namespace ft
 			pair<iterator, bool>	insert(const value_type &val);
 			iterator				insert(iterator position, const value_type &val);
 			template <class InputIterator>
-			void					insert(InputIterator first, InputIterator last);
+			void					insert(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+											InputIterator last);
 
 			// Other member functions
-			void					swap(map &x);
+			void					swap(ft::Map &x) { Map tmp(x); x = *this; *this = tmp; };
 	};
+}
+
+// Member functions - iterator
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Alloc>::end()
+{
+	typename ft::Map::iterator it = this.begin();
+
+	while (it != this.end())
+		it++;
+
+	return (it);
+}
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare, Alloc>::end() const
+{
+	typename ft::Map::const_iterator it = this.begin();
+
+	while (it != this.end())
+		it++;
+
+	return (it);
+}
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map<Key, T, Compare, Alloc>::iterator find(const typename ft::Map<Key, T, Compare, Alloc>::key_type& k)
+{
+	typename ft::Map::iterator it = this.begin();
+
+	while (it != this.end() && *it != k)
+		it++;
+
+	return (it);
+}
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map::const_iterator find(const typename ft::Map::key_type& k) const
+{
+	typename ft::Map::const_iterator it = this.begin();
+
+	while (it != this.end() && *it != k)
+		it++;
+
+	return (it);
+}
+
+// Member functions - getters
+
+template <class Key, class T, class Compare, class Alloc>
+ft::Map::size_type ft::Map::size()
+{
+	size_type count = 0;
+
+	for (typename ft::Map::iterator it = this.begin(); it != this.end(); ++it)
+		count++;
+
+	return (count);
+}
+
+template <class Key, class T, class Compare, class Alloc>
+mapped_type& ft::Map::operator[](const key_type &k)
+{
+	return ((*((this->insert(make_pair(k,mapped_type()))).first)).second);
 }
 
 // Relational operators
@@ -120,7 +187,7 @@ bool operator==(const ft::Map<Key, T, Compare, Alloc>& lhs, const ft::Map<Key, T
 }
 
 template <class Key, class T, class Compare, class Alloc>
-bool operator!= ( const ft::Map<Key, T, Compare, Alloc>& lhs, const ft::Map<Key, T, Compare, Alloc>& rhs)
+bool operator!=(const ft::Map<Key, T, Compare, Alloc>& lhs, const ft::Map<Key, T, Compare, Alloc>& rhs)
 { 
 	if (lhs == rhs)
 		return (false);	
