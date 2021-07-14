@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <limits>
-#include "modules/vector_iterator.hpp"
-#include "modules/vector_const_iterator.hpp"
-#include "modules/vector_reverse_iterator.hpp"
-#include "modules/vector_const_reverse_iterator.hpp"
+#include "vector_iterator.hpp"
+#include "vector_const_iterator.hpp"
+#include "vector_reverse_iterator.hpp"
+#include "vector_const_reverse_iterator.hpp"
 #include "../tools/enable_if.hpp"
 
 namespace ft
@@ -142,6 +142,14 @@ namespace ft
 
 			// Operator overloads
 			reference operator[](size_type n);
+
+			// Exception
+			class OutOfRange_exception: public std::exception
+			{
+				public :
+			  		virtual const char* what() const throw()
+			  		{ return ("Exception thrown : This pointer is out of range\n");}
+			};
 	};
 }
 
@@ -250,7 +258,7 @@ template<class T, class Alloc>
 typename ft::Vector<T, Alloc>::reference ft::Vector<T, Alloc>::operator[](size_type n)
 {
 	if (n >= _size)
-		return ;
+		throw(ft::Vector<T, Alloc>::OutOfRange_exception()) ;
 	return(_data[n]);
 }
 

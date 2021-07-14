@@ -3,7 +3,11 @@
 echo "Enter test name : "
 read CONTAIN
 
-if [ $CONTAIN == "vector" ]; then
+if [ $CONTAIN == "main" ]; then
+clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/project_main.cpp map/*.hpp tools/*.hpp vector/*.hpp stack/*.hpp
+./a.out > main_result.txt
+cat main_result.txt
+elif [ $CONTAIN == "vector" ]; then
 clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_vector.cpp -I./vector
 ./a.out > vector_result.txt
 cat vector_result.txt

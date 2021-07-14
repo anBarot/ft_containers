@@ -1,37 +1,20 @@
 #if !defined(ITERATOR_TRAITS_HPP)
 #define ITERATOR_TRAITS_HPP
 
-template <class Iterator>
-class iterator_traits
-{
-    public :
-        typedef difference_type;
-        typedef value_type;
-        typedef pointer;
-        typedef reference;
-        typedef iterator_category;
-}
+#include <iostream>
 
-template <class T>
-class iterator_traits<T*>
-{ 
-    public :
-        typedef difference_type;
-        typedef value_type ;
-        typedef pointer ;
-        typedef reference ;		
-        typedef iterator_category;
-}
-
-template <class T>
-class iterator_traits<const T*>
+namespace ft
 {
-    public :
-        typedef difference_type;
-        typedef value_type ;
-        typedef pointer ;
-        typedef reference ;
-        typedef iterator_category;
+    template <class T>
+    class iterator_traits<T*>
+    { 
+        public :
+            typedef typename T::value_type value_type;
+            typedef typename T::difference_type difference_type;
+            typedef typename T::iterator_category iterator_category;
+            typedef typename T::pointer pointer;
+            typedef typename T::reference reference;
+    };
 }
 
 #endif

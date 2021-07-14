@@ -1,13 +1,15 @@
 #if !defined(BST_ITERATOR_HPP)
 #define BST_ITERATOR_HPP
 
+#include <iterator>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
+#include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class BSTIterator : public iterator_traits<T>
+	class BSTIterator : public ft::iterator_traits<T*>
 	{
 		public :
 			// Iteratpr traits definition
@@ -18,33 +20,34 @@ namespace ft
     		typedef std::bidirectional_iterator_tag	iterator_category; 
 
 		private :
-			ft::Stack<s_BSTNode *> st_node;
+			ft::Stack<s_BSTNode<T> *> st_node;
 
 		public :
 			// Coplien
-			BSTIterator() : st_node(nullptr);
+			BSTIterator() : st_node(nullptr) {}
 			BSTIterator(BinarySearchTree<T> &bst)
 			{
-        		s_BSTNode* current = bst->bstroot_p;
+        		s_BSTNode<T>* current = bst->bstroot_p;
         		while (current != nullptr)
             	{
-					q.push(current);
+					st_node.push(current);
 					current = current->left;
 				}
 			}
-			BSTIterator(s_BSTNode *bst)
+			BSTIterator(s_BSTNode<T> *bst)
 			{
-        		s_BSTNode* current = bst;
+        		s_BSTNode<T>* current = bst;
+
         		while (current != nullptr)
             	{
-					q.push(current);
+					st_node.push(current);
 					current = current->left;
 				}
 			}
 			~BSTIterator() {};
 
 			// Getters
-			s_BSTNode* curr(){ return st_node.top(); }
+			s_BSTNode<T>* curr(){ return st_node.top(); }
 
 			// Member function
     		bool	hasNext();
@@ -67,7 +70,7 @@ bool ft::BSTIterator<T>::hasNext()
 template <class T>
 void ft::BSTIterator<T>::next()
 {
-	s_BSTNode* curr = st_node.top()->right;
+	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
     while (curr != nullptr)
