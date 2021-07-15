@@ -3,45 +3,55 @@
 
 #include <iostream>
 
-template <class T>
-struct	s_BSTNode
+namespace ft
 {
-	T				data;
-	s_BSTNode		*left;
-	s_BSTNode		*right;
-};
+	template <class T>
+	struct	s_BSTNode
+	{
+		T				data;
+		s_BSTNode		*left;
+		s_BSTNode		*right;
+	};
+
+	template <class T>
+	class BinarySearchTree
+	{
+		private:
+			struct s_BSTNode<T>	*bstroot_p;
+
+		public:
+		// Coplien
+			BinarySearchTree() : bstroot_p(nullptr) {}
+			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
+			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
+			~BinarySearchTree();
+
+		//Member function
+			s_BSTNode<T>	*GetNewNode(T &data);
+			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, T &data);
+			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
+			bool			Search(s_BSTNode<T> *root, T &data);
+			s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
+	};
+}
+
+~ft::BinarySearchTree::BinarySearchTree()
+{
+	while (bstroot_p != nullptr)
+		this.Delete(bstroot_p, bstroot_p->data);
+}
 
 template <class T>
-class BinarySearchTree
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(T &data)
 {
-	private:
-		struct s_BSTNode<T>	*bstroot_p;
-
-	public:
-	// Coplien
-		BinarySearchTree() : bstroot_p(nullptr) {}
-		BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
-		BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
-
-	//Member function
-		s_BSTNode<T>	*GetNewNode(T &data);
-		s_BSTNode<T>	*Insert(s_BSTNode<T> *root, T &data);
-		s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
-		bool			Search(s_BSTNode<T> *root, T &data);
-		s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
-};
-
-template <class T>
-s_BSTNode	*BinarySearchTree<T>::GetNewNode(T &data)
-{
-	s_BSTNode *n_node = new s_BSTNode;
+	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
 	n_node->data = data;
 	n_node->right = n_node->left = nullptr;
 	return (n_node);
 }
 
 template <class T>
-s_BSTNode<T>	*BinarySearchTree<T>::Insert(s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, T &data)
 {
 	if (bstroot_p == nullptr)
 		return (bstroot_p = GetNewNode(data));
@@ -57,7 +67,7 @@ s_BSTNode<T>	*BinarySearchTree<T>::Insert(s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-s_BSTNode<T>	*BinarySearchTree<T>::Delete(s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
 {
 	if (root == nullptr || bstroot_p == nullptr)
 		return (nullptr);
@@ -74,19 +84,19 @@ s_BSTNode<T>	*BinarySearchTree<T>::Delete(s_BSTNode<T> *root, T &data)
 		}
 		else if (root->left == nullptr)
 		{
-			s_BSTNode<T> *tmp = root;
+			ft::s_BSTNode<T> *tmp = root;
 			root = root->right;
 			delete tmp;
 		}
 		else if (root->right == nullptr)
 		{
-			s_BSTNode<T> *tmp = root;
+			ft::s_BSTNode<T> *tmp = root;
 			root = root->left;
 			delete tmp;
 		}
 		else
 		{
-			s_BSTNode<T> *tmp = FindMin(root->right);
+			ft::s_BSTNode<T> *tmp = FindMin(root->right);
 			root->data = tmp->data;
 			root->right = Delete(root->right, tmp->data);
 		}
@@ -95,7 +105,7 @@ s_BSTNode<T>	*BinarySearchTree<T>::Delete(s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-bool	BinarySearchTree<T>::Search(s_BSTNode<T> *root, T &data)
+bool	BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
 {
 	if (bstroot_p == nullptr || root == nullptr)
 		return (false);
@@ -108,7 +118,7 @@ bool	BinarySearchTree<T>::Search(s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-s_BSTNode<T>	*BinarySearchTree<T>::FindMin(s_BSTNode<T> *root)
+ft::s_BSTNode<T>	*BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 {
 	if (bstroot_p == nullptr || root == nullptr)
 		return (nullptr);

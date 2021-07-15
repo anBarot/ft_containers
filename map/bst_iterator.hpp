@@ -17,7 +17,8 @@ namespace ft
     		typedef std::ptrdiff_t					difference_type;
     		typedef T*								pointer;
     		typedef T&								reference;
-    		typedef std::bidirectional_iterator_tag	iterator_category; 
+    		typedef std::bidirectional_iterator_tag	iterator_category;
+			typedef ft::BSTIterator<T>				iterator
 
 		private :
 			ft::Stack<T, s_BSTNode<T>*> st_node;
@@ -52,9 +53,25 @@ namespace ft
 			// Member function
     		bool	hasNext();
 			void	next();
+			void	prev();
 
 			// Operator overload
-			T		operator*() { return (curr()->data); };
+			T			operator*() 			{ return (curr()->data); };
+			iterator 	operator++()			{ this.next(); return (*this); }
+			iterator 	operator--()			{ this.prev(); return (*this); }
+			iterator 	operator++(int)			{ iterator tmp(*this); this.next(); return(tmp); }
+	    	iterator 	operator--(int)			{ iterator tmp(*this); this.prev(); return(tmp); }
+
+			// Comparison operator overload
+		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
+		    bool operator==(const iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
+		    bool operator>=(const iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
+		    bool operator>(const iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
+		    bool operator<=(const iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
+		    bool operator<(const iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
+
+			// Is input iterator
+			static const bool input_iter = true;
 
 	};
 }
@@ -77,6 +94,19 @@ void ft::BSTIterator<T>::next()
 	{
 		st_node.push(curr);
 		curr = curr->left;
+	}
+}
+
+template <class T>
+void ft::BSTIterator<T>::prev()
+{
+	s_BSTNode<T>* curr = st_node.top()->left;
+
+	st_node.pop();
+    while (curr != nullptr)
+	{
+		st_node.push(curr);
+		curr = curr->right;
 	}
 }
 
