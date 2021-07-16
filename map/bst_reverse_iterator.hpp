@@ -4,15 +4,14 @@
 #include <iterator>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
-#include "../tools/iterator_traits.hpp"
+// #include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class BSTReverseIterator : public ft::iterator_traits<T*>
+	class BSTReverseIterator //: public ft::iterator_traits<T*>
 	{
 		public :
-			// Iteratpr traits definition
 			typedef T								value_type;
     		typedef std::ptrdiff_t					difference_type;
     		typedef T*								pointer;

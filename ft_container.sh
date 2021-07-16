@@ -12,6 +12,7 @@ clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/
 ./a.out > vector_result.txt
 cat vector_result.txt
 elif [ $CONTAIN == "map" ]; then
+# clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_map.cpp
 clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_map.cpp
 ./a.out > map_result.txt
 cat map_result.txt

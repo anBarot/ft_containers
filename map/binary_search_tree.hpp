@@ -35,10 +35,11 @@ namespace ft
 	};
 }
 
-~ft::BinarySearchTree::BinarySearchTree()
+template <class T>
+ft::BinarySearchTree<T>::~BinarySearchTree()
 {
 	while (bstroot_p != nullptr)
-		this.Delete(bstroot_p, bstroot_p->data);
+		Delete(bstroot_p, bstroot_p->data);
 }
 
 template <class T>
@@ -51,7 +52,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(T &data)
 }
 
 template <class T>
-ft::s_BSTNode<T>	*BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, T &data)
 {
 	if (bstroot_p == nullptr)
 		return (bstroot_p = GetNewNode(data));
@@ -67,7 +68,7 @@ ft::s_BSTNode<T>	*BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-ft::s_BSTNode<T>	*BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
 {
 	if (root == nullptr || bstroot_p == nullptr)
 		return (nullptr);
@@ -105,7 +106,7 @@ ft::s_BSTNode<T>	*BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-bool	BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
+bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
 {
 	if (bstroot_p == nullptr || root == nullptr)
 		return (false);
@@ -118,7 +119,7 @@ bool	BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
 }
 
 template <class T>
-ft::s_BSTNode<T>	*BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 {
 	if (bstroot_p == nullptr || root == nullptr)
 		return (nullptr);

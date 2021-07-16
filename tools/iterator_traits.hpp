@@ -1,8 +1,6 @@
 #if !defined(ITERATOR_TRAITS_HPP)
 #define ITERATOR_TRAITS_HPP
 
-#include <iostream>
-
 namespace ft
 {
     template <class T>

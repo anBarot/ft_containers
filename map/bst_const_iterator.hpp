@@ -3,12 +3,12 @@
 
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
-#include "../tools/iterator_traits.hpp"
+// #include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class BSTConstIterator : public ft::iterator_traits<T*>
+	class BSTConstIterator //: public ft::iterator_traits<T*>
 	{
 		private :
 			ft::Stack<T, s_BSTNode<T>*> st_node;

@@ -4,21 +4,20 @@
 #include <iterator>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
-#include "../tools/iterator_traits.hpp"
+// #include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class BSTIterator : public ft::iterator_traits<T*>
+	class BSTIterator //: public ft::iterator_traits<T*>
 	{
 		public :
-			// Iteratpr traits definition
 			typedef T								value_type;
     		typedef std::ptrdiff_t					difference_type;
     		typedef T*								pointer;
     		typedef T&								reference;
     		typedef std::bidirectional_iterator_tag	iterator_category;
-			typedef ft::BSTIterator<T>				iterator
+			typedef BSTIterator<T>					iterator;
 
 		private :
 			ft::Stack<T, s_BSTNode<T>*> st_node;
@@ -45,7 +44,7 @@ namespace ft
 					current = current->left;
 				}
 			}
-			~BSTIterator() {};
+			~BSTIterator() {}
 
 			// Getters
 			s_BSTNode<T>* curr(){ return st_node.top(); }
@@ -57,10 +56,10 @@ namespace ft
 
 			// Operator overload
 			T			operator*() 			{ return (curr()->data); };
-			iterator 	operator++()			{ this.next(); return (*this); }
-			iterator 	operator--()			{ this.prev(); return (*this); }
-			iterator 	operator++(int)			{ iterator tmp(*this); this.next(); return(tmp); }
-	    	iterator 	operator--(int)			{ iterator tmp(*this); this.prev(); return(tmp); }
+			iterator 	operator++()			{ this->next(); return (*this); }
+			iterator 	operator--()			{ this->prev(); return (*this); }
+			iterator 	operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
+	    	iterator 	operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
 		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }

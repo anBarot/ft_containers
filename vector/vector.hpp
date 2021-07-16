@@ -82,52 +82,11 @@ namespace ft
 			template<typename InputIterator>
 			void					insert(iterator position,
 									typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
-									InputIterator last)
-			{
-				if (last - first < _capacity)
-				{
-					pointer n_data = _alloc.allocate(_capacity * 2);
-
-					for (size_type i = 0; i < _size; i++)
-					{
-						_alloc.construct(n_data + i, _data[i]);
-						_alloc.destroy(_data + i);
-					}
-
-					_alloc.deallocate(_data, _capacity);
-					_data = n_data;
-					_capacity *= 2;
-				}
-
-				for (first; first <= last; first++)
-				{
-					insert(position, *first);
-					position++;
-				}
-			}
+									InputIterator last);
 			void					assign(size_type n, const_reference val);
 			template <typename InputIterator>
 			void					assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
-									InputIterator last)
-			{
-				this->clear();
-
-				size_t count = 0;
-				iterator tmp_first = first;
-				iterator tmp_last = last;
-				while (tmp_first != tmp_last)
-				{
-					tmp_first++;
-					count++;
-				}
-				if (_capacity < count)
-					this->reserve(count);
-				while (first < last)
-				{
-					this->push_back(*first);
-					first++;
-				}
-			}
+									InputIterator last);
 
 			// Resizers
 			void			reserve(size_type capacity);
@@ -429,12 +388,64 @@ void ft::Vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 }
 
 template <class T, class Alloc>
+template<typename InputIterator>
+void	ft::Vector<T, Alloc>::insert(iterator position,
+		typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+		InputIterator last)
+{
+	if (last - first < _capacity)
+	{
+		pointer n_data = _alloc.allocate(_capacity * 2);
+
+		for (size_type i = 0; i < _size; i++)
+		{
+			_alloc.construct(n_data + i, _data[i]);
+			_alloc.destroy(_data + i);
+		}
+
+		_alloc.deallocate(_data, _capacity);
+		_data = n_data;
+		_capacity *= 2;
+	}
+
+	for (first; first <= last; first++)
+	{
+		insert(position, *first);
+		position++;
+	}
+}
+
+template <class T, class Alloc>
 void ft::Vector<T, Alloc>::assign(size_type n, const_reference val)
 {
 	this->clear();
 
 	for (size_type i = 0; i < n; i++)
 		this->push_back(val);
+}
+
+template <class T, class Alloc>
+template <typename InputIterator>
+void ft::Vector<T, Alloc>::assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
+						InputIterator last)
+{
+	this->clear();
+
+	size_t count = 0;
+	iterator tmp_first = first;
+	iterator tmp_last = last;
+	while (tmp_first != tmp_last)
+	{
+		tmp_first++;
+		count++;
+	}
+	if (_capacity < count)
+		this->reserve(count);
+	while (first < last)
+	{
+		this->push_back(*first);
+		first++;
+	}
 }
 
 #endif
