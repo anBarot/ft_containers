@@ -1,8 +1,8 @@
 #if !defined(BST_CONST_ITERATOR_HPP)
 #define BST_CONST_ITERATOR_HPP
 
+#include <stack>
 #include "binary_search_tree.hpp"
-#include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"
 
 namespace ft
@@ -11,7 +11,7 @@ namespace ft
 	class BSTConstIterator //: public ft::iterator_traits<T*>
 	{
 		private :
-			ft::Stack<T, s_BSTNode<T>*> st_node;
+			std::stack<T, s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien

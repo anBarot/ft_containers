@@ -18,7 +18,7 @@ template<class M>
 void	display_map(M &map)
 {
 	for (typename M::iterator it = map.begin(); it != map.end(); ++it)
-		std::cout << it.GetFirst() << " : " << it.GetSecond() << "\n";
+		std::cout << it->first << " : " << it->second << "\n";
 	std::cout << "Size : " << map.size() << std::endl;
 	std::cout << "Max size : " << map.max_size() << std::endl;
 	std::cout << "Empty ? : " << map.empty() << "\n\n";

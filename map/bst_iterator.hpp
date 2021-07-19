@@ -2,8 +2,9 @@
 #define BST_ITERATOR_HPP
 
 #include <iterator>
+#include <stack>
 #include "binary_search_tree.hpp"
-#include "../stack/stack.hpp"
+// #include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"
 
 namespace ft
@@ -20,7 +21,7 @@ namespace ft
 			typedef BSTIterator<T>					iterator;
 
 		private :
-			ft::Stack<T, s_BSTNode<T>*> st_node;
+			std::stack<T, s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien
@@ -34,9 +35,9 @@ namespace ft
 					current = current->left;
 				}
 			}
-			BSTIterator(s_BSTNode<T> *bst)
+			BSTIterator(s_BSTNode<T> *bst_node)
 			{
-        		s_BSTNode<T>* current = bst;
+        		s_BSTNode<T>* current = bst_node;
 
         		while (current != nullptr)
             	{

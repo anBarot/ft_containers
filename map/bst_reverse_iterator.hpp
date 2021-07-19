@@ -2,6 +2,7 @@
 #define BST_REVERSE_ITERATOR_HPP
 
 #include <iterator>
+#include <stack>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"

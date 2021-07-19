@@ -64,7 +64,7 @@ bool operator<=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 {
 	if (lhs.GetFirst() == rhs.GetFirst())
 		return (lhs.GetSecond() <= rhs.GetSecond());
-	return (lhs.first <= rhs.first);
+	return (lhs.GetFirst() <= rhs.GetFirst());
 }
 
 template <class T1, class T2>
