@@ -12,12 +12,12 @@ namespace ft
 			typedef bool 	result_type;
 			typedef T		value_type;	
 
-		protected:
+		private :
 			Compare comp;
-			value_compare(Compare c) : comp(c) {}
 
-		public:
-			bool operator()(const value_type & x, const value_type & y) const
+		public :
+			value_compare(Compare c) : comp(c) {}
+			result_type operator()(const value_type & x, const value_type & y) const
 			{ return (comp(x.first, y.first)); }
 	};
 }

@@ -6,14 +6,13 @@ namespace ft
 	template<class T, class C>
 	class Stack
 	{
-
 		private:
 			C		_container;
 
 		public:
-			typedef	C 						container_type;
-			typedef	T 						value_type;
-			typedef	typename C::size_type 	size_type;
+			typedef	C 		container_type;
+			typedef	T 		value_type;
+			typedef	size_t 	size_type;
 
 			// Coplien
 			explicit Stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
@@ -22,6 +21,7 @@ namespace ft
 			~Stack() {};
 
 			// Getters
+			container_type		GetContainer() const { return (_container); };
 			size_type			size() const { return (_container.size()); }
 
 			// Member functions
@@ -47,26 +47,26 @@ void	swap(ft::Stack<T, C> &x, ft::Stack<T, C> &y)
 
 template <class T, class C>
 bool operator==(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container == rhs._container); }
+{ return (lhs.GetContainer() == rhs.GetContainer()); }
  	
 template <class T, class C>
 bool operator!=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container != rhs._container); }
+{ return (lhs.GetContainer() != rhs.GetContainer()); }
  	
 template <class T, class C>
 bool operator<(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container < rhs._container); }
+{ return (lhs.GetContainer() < rhs.GetContainer()); }
  	
 template <class T, class C>
 bool operator<=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container <= rhs._container); }
+{ return (lhs.GetContainer() <= rhs.GetContainer()); }
  	
 template <class T, class C>
 bool operator>(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container > rhs._container); }
+{ return (lhs.GetContainer() > rhs.GetContainer()); }
  	
 template <class T, class C>
 bool operator>=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
-{ return (lhs._container >= rhs._container); }
+{ return (lhs.GetContainer() >= rhs.GetContainer()); }
 
 #endif // STACK_HPP

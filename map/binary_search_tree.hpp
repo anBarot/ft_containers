@@ -26,7 +26,10 @@ namespace ft
 			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
 			~BinarySearchTree();
 
-		//Member function
+		// Getters
+			struct s_BSTNode<T>	*GetRoot() const { return (bstroot_p); }
+
+		// Member function
 			s_BSTNode<T>	*GetNewNode(T &data);
 			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, T &data);
 			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);

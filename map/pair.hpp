@@ -33,6 +33,10 @@ namespace ft
 				return (*this);
 			}
 
+			// Getters
+			T1	GetFirst() const { return (first); }
+			T2	GetSecond() const { return (second); }
+
 			// Member function
 			Pair<T1,T2> make_pair(T1 x, T2 y)
 			{ return (Pair(x, y)); }
@@ -41,7 +45,7 @@ namespace ft
 
 template <class T1, class T2>
 bool operator==(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
-{ return (lhs.first == rhs.first && lhs.second == lhs.second); }
+{ return (lhs.GetFirst() == rhs.GetFirst() && lhs.GetGetSecond()() == lhs.GetSecond()); }
 
 template <class T1, class T2>
 bool operator!=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
@@ -50,16 +54,16 @@ bool operator!=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 template <class T1, class T2>
 bool operator<(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 {
-	if (lhs.first == rhs.first)
-		return (lhs.second < rhs.second);
-	return (lhs.first < rhs.first);
+	if (lhs.GetFirst() == rhs.GetFirst())
+		return (lhs.GetSecond() < rhs.GetSecond());
+	return (lhs.GetFirst() < rhs.GetFirst());
 }
 
 template <class T1, class T2>
 bool operator<=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 {
-	if (lhs.first == rhs.first)
-		return (lhs.second <= rhs.second);
+	if (lhs.GetFirst() == rhs.GetFirst())
+		return (lhs.GetSecond() <= rhs.GetSecond());
 	return (lhs.first <= rhs.first);
 }
 

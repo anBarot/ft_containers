@@ -13,13 +13,13 @@ Empty ?  : 0
 [1m[33mTesting push 24 - std_stack :
 Testing top  - std_stack :
 24
-Testing pop 24 - std_stack :
+Testing pop  - std_stack :
 Testing top  - std_stack :
 12
 [1m[32mTesting push 24 - my_stack :
 Testing top  - my_stack :
 24
-Testing pop 24 - my_stack :
+Testing pop  - my_stack :
 Testing top  - my_stack :
 12
 [0m[0m
