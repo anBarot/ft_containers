@@ -2,9 +2,8 @@
 #define BST_ITERATOR_HPP
 
 #include <iterator>
-#include <stack>
 #include "binary_search_tree.hpp"
-// #include "../stack/stack.hpp"
+#include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"
 
 namespace ft
@@ -21,14 +20,14 @@ namespace ft
 			typedef BSTIterator<T>					iterator;
 
 		private :
-			std::stack<T, s_BSTNode<T>*> st_node;
+			ft::Stack<s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien
 			BSTIterator() : st_node(nullptr) {}
 			BSTIterator(BinarySearchTree<T> &bst)
 			{
-        		s_BSTNode<T>* current = bst->bstroot_p;
+        		s_BSTNode<T>* current = bst.GetRoot();
         		while (current != nullptr)
             	{
 					st_node.push(current);
@@ -56,11 +55,12 @@ namespace ft
 			void	prev();
 
 			// Operator overload
-			T			operator*() 			{ return (curr()->data); };
-			iterator 	operator++()			{ this->next(); return (*this); }
-			iterator 	operator--()			{ this->prev(); return (*this); }
-			iterator 	operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
-	    	iterator 	operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
+			T				operator*() 			{ return (curr()->data); };
+			T 				*operator->()			{ return (curr()->data); }
+			iterator 		operator++()			{ this->next(); return (*this); }
+			iterator 		operator--()			{ this->prev(); return (*this); }
+			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
+	    	iterator 		operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
 		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
@@ -72,7 +72,6 @@ namespace ft
 
 			// Is input iterator
 			static const bool input_iter = true;
-
 	};
 }
 

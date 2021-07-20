@@ -21,7 +21,7 @@ namespace ft
 			typedef ft::BSTReverseIterator<T>		reverse_iterator;
 
 		private :
-			ft::Stack<T, s_BSTNode<T>*> st_node;
+			ft::Stack<s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien

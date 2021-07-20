@@ -28,11 +28,11 @@ namespace ft
 			typedef value_type*									pointer;
 			typedef const value_type*							const_pointer;
 			typedef size_t										size_type;
-			typedef std::ptrdiff_t								difference_type;
-			typedef typename ft::BSTIterator<T>					iterator;
-			typedef typename ft::BSTConstIterator<T>			const_iterator;
-			typedef typename ft::BSTReverseIterator<T>			reverse_iterator;
-			typedef typename ft::BSTConstReverseIterator<T>		const_reverse_iterator;
+			typedef typename std::ptrdiff_t								difference_type;
+			typedef typename ft::BSTIterator<value_type>					iterator;
+			typedef typename ft::BSTConstIterator<value_type>			const_iterator;
+			typedef typename ft::BSTReverseIterator<value_type>			reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<value_type>		const_reverse_iterator;
 
 		private :
 			key_compare							comp;
@@ -100,7 +100,7 @@ namespace ft
 	};
 }
 			
-// Member functions - ft::Map<class Key, class T, class Compare, class Alloc>::iterator
+// Member functions 
 
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Alloc>::end()
@@ -213,7 +213,7 @@ typename ft::Map<Key, T, Compare, Alloc>::size_type ft::Map<Key, T, Compare, All
 {
 	size_type count = 0;
 
-	for (typename ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin(); it != this->end(); ++it)
+	for (typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin(); it != this->end(); ++it)
 		count++;
 
 	return (count);
@@ -238,13 +238,13 @@ typename ft::Map<Key, T, Compare, Alloc>::size_type ft::Map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Alloc>
 void	ft::Map<Key, T, Compare, Alloc>::erase(ft::Map<Key, T, Compare, Alloc>::iterator position)
 {
-	bst.Delete(bst.bstroot_p, *position.first);
+	bst.Delete(bst.GetRoot(), *position.first);
 }
 
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::size_type	ft::Map<Key, T, Compare, Alloc>::erase(const ft::Map<Key, T, Compare, Alloc>::key_type &k)
 {
-	bst.Delete(bst.bstroot_p, k);
+	bst.Delete(bst.GetRoot(), k);
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -260,7 +260,7 @@ void	ft::Map<Key, T, Compare, Alloc>::erase(ft::Map<Key, T, Compare, Alloc>::ite
 template <class Key, class T, class Compare, class Alloc>
 ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>	ft::Map<Key, T, Compare, Alloc>::insert(const value_type &val)
 {
-	bst.Insert(bst.bstroot_p, val);
+	bst.Insert(bst.GetRoot(), val);
 }
 
 template <class Key, class T, class Compare, class Alloc>

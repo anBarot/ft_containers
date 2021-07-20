@@ -10,17 +10,16 @@ namespace ft
 			typedef T1 first_type;
 	    	typedef T2 second_type;
 
-		private :
+		public :
 	    	T1 first;
 	    	T2 second;
 
-		public :
 			// Coplien
-			Pair() {};
+			Pair() {}
 			Pair(const first_type& a, const second_type& b) :
 			first(a), second(b) {}
 			template<class U, class V>
-			Pair(const Pair<U,V>& pr)
+			Pair(const Pair<U, V>& pr)
 			{
 				first = pr.first;
 				second = pr.second;
@@ -33,10 +32,6 @@ namespace ft
 				return (*this);
 			}
 
-			// Getters
-			T1	GetFirst() const { return (first); }
-			T2	GetSecond() const { return (second); }
-
 			// Member function
 			Pair<T1,T2> make_pair(T1 x, T2 y)
 			{ return (Pair(x, y)); }
@@ -45,7 +40,7 @@ namespace ft
 
 template <class T1, class T2>
 bool operator==(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
-{ return (lhs.GetFirst() == rhs.GetFirst() && lhs.GetGetSecond()() == lhs.GetSecond()); }
+{ return (lhs.first == rhs.first && lhs.second == lhs.second); }
 
 template <class T1, class T2>
 bool operator!=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
@@ -54,17 +49,17 @@ bool operator!=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 template <class T1, class T2>
 bool operator<(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 {
-	if (lhs.GetFirst() == rhs.GetFirst())
-		return (lhs.GetSecond() < rhs.GetSecond());
-	return (lhs.GetFirst() < rhs.GetFirst());
+	if (lhs.first == rhs.first)
+		return (lhs.second < rhs.second);
+	return (lhs.first < rhs.first);
 }
 
 template <class T1, class T2>
 bool operator<=(const ft::Pair<T1,T2>& lhs, const ft::Pair<T1,T2>& rhs)
 {
-	if (lhs.GetFirst() == rhs.GetFirst())
-		return (lhs.GetSecond() <= rhs.GetSecond());
-	return (lhs.GetFirst() <= rhs.GetFirst());
+	if (lhs.first == rhs.first)
+		return (lhs.second <= rhs.second);
+	return (lhs.first <= rhs.first);
 }
 
 template <class T1, class T2>

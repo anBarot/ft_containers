@@ -1,9 +1,11 @@
 #if !defined(STACK_HPP)
 #define STACK_HPP
 
+#include <deque>
+
 namespace ft
 {
-	template<class T, class C>
+	template<class T, class C = std::deque<T> >
 	class Stack
 	{
 		private:

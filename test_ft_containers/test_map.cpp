@@ -27,9 +27,13 @@ void	display_map(M &map)
 template<class M>
 void	test_insertmap(M &map)
 {
-	map.insert(std::make_pair("a", 1));
-	map.insert(std::make_pair("b", 2));
-	map.insert(std::make_pair("c", 3));
+	ft::Pair<std::string, int> p1("a", 1);
+	ft::Pair<std::string, int> p2("b", 2);
+	ft::Pair<std::string, int> p3("c", 3);
+
+	map.insert(p1);
+	map.insert(p2);
+	map.insert(p3);
 }
 
 void	test_mapint()

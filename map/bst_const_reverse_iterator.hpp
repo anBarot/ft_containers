@@ -1,7 +1,6 @@
 #if !defined(BST_CONST_REVERSE_ITERATOR_HPP)
 #define BST_CONST_REVERSE_ITERATOR_HPP
 
-#include <stack>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"
@@ -12,12 +11,12 @@ namespace ft
 	class BSTConstReverseIterator //: public ft::iterator_traits<T*>
 	{
 		private :
-			ft::Stack<T, s_BSTNode<T>*> st_node;
+			const ft::Stack<s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien
 			BSTConstReverseIterator() : st_node(nullptr) {};
-			BSTConstReverseIterator(BinarySearchTree<T> &bst)
+			BSTConstReverseIterator(const BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst->bstroot_p;
         		while (current != nullptr)
