@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include "pair.hpp"
+#include "make_pair.hpp"
 #include "value_compare.hpp"
 #include "../tools/enable_if.hpp"
 #include "binary_search_tree.hpp"
@@ -47,7 +48,7 @@ namespace ft
 			Inputiterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			Map(const Map &x);
 			Map &operator=(const Map &x);
-			~Map() { this->clear(); }
+			~Map() {}
 
 			// iterator
 			iterator 							begin() { return(iterator(bst)); }
@@ -74,7 +75,7 @@ namespace ft
 			allocator_type							get_allocator() const { return (alloc); }
 			size_type								max_size() const { return( alloc.max_size() ); }
 			key_compare								key_comp() const { return (comp); }
-			value_compare<Key, T, Compare, Alloc>	value_comp() const { return ( value_compare()); }
+			value_compare<Key, T, Compare, Alloc>	value_comp() const { return ( value_compare<Key,  T,  Compare,  Alloc> (Compare())); }
 			mapped_type&					 		operator[](const key_type &k);
 
 			// Setters

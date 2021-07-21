@@ -31,7 +31,7 @@ namespace ft
 
 		// Member function
 			s_BSTNode<T>	*GetNewNode(T &data);
-			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, T &data);
+			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, const T &data);
 			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
 			bool			Search(s_BSTNode<T> *root, T &data);
 			s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
@@ -55,7 +55,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(T &data)
 }
 
 template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const T &data)
 {
 	if (bstroot_p == nullptr)
 		return (bstroot_p = GetNewNode(data));

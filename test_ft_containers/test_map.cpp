@@ -24,16 +24,18 @@ void	display_map(M &map)
 	std::cout << "Empty ? : " << map.empty() << "\n\n";
 }
 
-template<class M>
-void	test_insertmap(M &map)
+void	test_insertmap_std(std::map<std::string, int> &map)
 {
-	ft::Pair<std::string, int> p1("a", 1);
-	ft::Pair<std::string, int> p2("b", 2);
-	ft::Pair<std::string, int> p3("c", 3);
+	map.insert(std::make_pair("a", 1));
+	map.insert(std::make_pair("b", 2));
+	map.insert(std::make_pair("c", 3));
+}
 
-	map.insert(p1);
-	map.insert(p2);
-	map.insert(p3);
+void	test_insertmap_ft(ft::Map<std::string, int> &map)
+{
+	map.insert(ft::make_pair("a", 1));
+	map.insert(ft::make_pair("b", 2));
+	map.insert(ft::make_pair("c", 3));
 }
 
 void	test_mapint()
@@ -41,9 +43,9 @@ void	test_mapint()
 	std::map<std::string, int> std_map;
 	ft::Map<std::string, int> ft_map;
 
-	test_insertmap(std_map);
+	test_insertmap_std(std_map);
 	COLOR(BOLDYELLOW) display_map(std_map);
-	test_insertmap(ft_map);
+	test_insertmap_ft(ft_map);
 	COLOR(BOLDGREEN) display_map(ft_map);
 }
 

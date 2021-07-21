@@ -24,7 +24,7 @@ namespace ft
 				first = pr.first;
 				second = pr.second;
 			}
-			Pair& operator=(const Pair& pr)
+			Pair<T1, T2>& operator=(const Pair<T1, T2>& pr)
 			{
 				first = pr.first;
 				second = pr.second;
@@ -33,7 +33,7 @@ namespace ft
 			}
 
 			// Member function
-			Pair<T1,T2> make_pair(T1 x, T2 y)
+			Pair<T1,T2> make_pair(T1 x, T2 y) 
 			{ return (Pair(x, y)); }
 	};
 }
