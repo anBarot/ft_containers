@@ -30,7 +30,7 @@ namespace ft
 			struct s_BSTNode<T>	*GetRoot() const { return (bstroot_p); }
 
 		// Member function
-			s_BSTNode<T>	*GetNewNode(T &data);
+			s_BSTNode<T>	*GetNewNode(const T &data);
 			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, const T &data);
 			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
 			bool			Search(s_BSTNode<T> *root, T &data);
@@ -46,10 +46,10 @@ ft::BinarySearchTree<T>::~BinarySearchTree()
 }
 
 template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(T &data)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
 {
 	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
-	n_node->data = data;
+	n_node->data = n_data;
 	n_node->right = n_node->left = nullptr;
 	return (n_node);
 }
@@ -62,12 +62,13 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 	else
 	{
 		if (root == nullptr)
-			root = GetNewNode(data);
+			return (root = GetNewNode(data));
 		else if (data <= root->data)
 			root->left = Insert(root->left, data);
 		else
 			root->right = Insert(root->right, data);
 	}
+	return (nullptr);
 }
 
 template <class T>

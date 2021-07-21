@@ -108,7 +108,7 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 {
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
-	while (it != this->end())
+	while (it.hasNext() == true)
 		it++;
 
 	return (it);
@@ -130,7 +130,7 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 {
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
-	while (it != this->end() && *it != k)
+	while (it != this->end() && it.curr()->data.first != k)
 		it++;
 
 	return (it);
@@ -261,7 +261,9 @@ void	ft::Map<Key, T, Compare, Alloc>::erase(ft::Map<Key, T, Compare, Alloc>::ite
 template <class Key, class T, class Compare, class Alloc>
 ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>	ft::Map<Key, T, Compare, Alloc>::insert(const value_type &val)
 {
-	bst.Insert(bst.GetRoot(), val);
+	if (find(val.first) == this->end())
+		return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(bst.Insert(bst.GetRoot(), val), true));
+	return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(find(val.first), false));
 }
 
 template <class Key, class T, class Compare, class Alloc>

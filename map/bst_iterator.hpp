@@ -56,7 +56,7 @@ namespace ft
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
-			T 				*operator->()			{ return (curr()->data); }
+			T 				*operator->()			{ return (*(curr()->data)); }
 			iterator 		operator++()			{ this->next(); return (*this); }
 			iterator 		operator--()			{ this->prev(); return (*this); }
 			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
@@ -78,7 +78,7 @@ namespace ft
 template <class T>
 bool ft::BSTIterator<T>::hasNext()
 {
-	if (st_node == nullptr)
+	if (curr() == nullptr)
 		return (false);
 	return (true);
 }
