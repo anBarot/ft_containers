@@ -10,24 +10,21 @@ namespace ft
 			typedef T1 first_type;
 	    	typedef T2 second_type;
 
-		public :
 	    	T1 first;
 	    	T2 second;
 
 			// Coplien
-			Pair() {}
-			Pair(const first_type& a, const second_type& b) :
-			first(a), second(b) {}
-			template<class U, class V>
-			Pair(const Pair<U, V>& pr)
+			Pair() : first(T1()), second(T2()) {}
+			Pair(const first_type& a, const second_type& b) : first(a), second(b) { std::cout << "Pair constructor (a, b) \n"; }
+			Pair(const Pair<T1, T2>& pr)
 			{
 				first = pr.first;
 				second = pr.second;
 			}
-			Pair<T1, T2>& operator=(const Pair<T1, T2>& pr)
+			Pair<T1, T2>& operator=(const Pair<const T1, const T2>& pr)
 			{
-				first = pr.first;
-				second = pr.second;
+				this->first = pr.first;
+				this->second = pr.second;
 
 				return (*this);
 			}

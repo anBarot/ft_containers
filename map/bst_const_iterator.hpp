@@ -76,7 +76,7 @@ namespace ft
 template <class T>
 bool ft::BSTConstIterator<T>::hasNext()
 {
-	if (st_node == nullptr)
+	if (st_node.top() == nullptr)
 		return (false);
 	return (true);
 }

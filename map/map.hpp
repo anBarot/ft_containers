@@ -21,7 +21,7 @@ namespace ft
 		public :
 			typedef Key											key_type;
 			typedef T											mapped_type;
-			typedef ft::Pair<const key_type, mapped_type>		value_type;
+			typedef ft::Pair<key_type, mapped_type>				value_type;
 			typedef Compare										key_compare;
 			typedef Alloc										allocator_type;
 			typedef value_type&									reference;
@@ -42,13 +42,14 @@ namespace ft
 
 		public :
 			// Coplien
-			explicit Map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
+			explicit Map(const key_compare &n_comp = key_compare(), const allocator_type &n_alloc = allocator_type())
+			: comp(n_comp), bst(nullptr), alloc(n_alloc) {}
 			template <class Inputiterator>
   			Map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
 			Inputiterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			Map(const Map &x);
+			Map(const Map< Key, T, Compare, Alloc > &x);
 			Map &operator=(const Map &x);
-			~Map() {}
+			// ~Map() {}
 
 			// iterator
 			iterator 							begin() { return(iterator(bst)); }
@@ -119,7 +120,7 @@ typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare
 {
 	ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
 
-	while (it != this->end())
+	while (it.hasNext())
 		it++;
 
 	return (it);
@@ -128,11 +129,16 @@ typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Alloc>::find(const typename ft::Map<Key, T, Compare, Alloc>::key_type& k)
 {
+	std::cout << "Map find ft \n";
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
+
+	std::cout << "this begin : ";
+	// std::cout << (*it).first;
 
 	while (it != this->end() && it.curr()->data.first != k)
 		it++;
 
+	std::cout << "Map find ft end\n";
 	return (it);
 }
 
@@ -261,6 +267,7 @@ void	ft::Map<Key, T, Compare, Alloc>::erase(ft::Map<Key, T, Compare, Alloc>::ite
 template <class Key, class T, class Compare, class Alloc>
 ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>	ft::Map<Key, T, Compare, Alloc>::insert(const value_type &val)
 {
+	std::cout << "Map insert \n";
 	if (find(val.first) == this->end())
 		return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(bst.Insert(bst.GetRoot(), val), true));
 	return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(find(val.first), false));

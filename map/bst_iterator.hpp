@@ -24,7 +24,7 @@ namespace ft
 
 		public :
 			// Coplien
-			BSTIterator() : st_node(nullptr) {}
+			BSTIterator() : st_node(ft::Stack<s_BSTNode<T>*>()) {}
 			BSTIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
@@ -47,7 +47,7 @@ namespace ft
 			~BSTIterator() {}
 
 			// Getters
-			s_BSTNode<T>* curr(){ return st_node.top(); }
+			s_BSTNode<T>* curr(){ return (st_node.top()); }
 
 			// Member function
     		bool	hasNext();
@@ -56,7 +56,7 @@ namespace ft
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
-			T 				*operator->()			{ return (*(curr()->data)); }
+			// T 				*operator->()			{ return (&(curr()->data)); }
 			iterator 		operator++()			{ this->next(); return (*this); }
 			iterator 		operator--()			{ this->prev(); return (*this); }
 			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
