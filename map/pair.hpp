@@ -15,22 +15,21 @@ namespace ft
 
 			// Coplien
 			Pair() : first(T1()), second(T2()) {}
-			Pair(const first_type& a, const second_type& b) : first(a), second(b) { std::cout << "Pair constructor (a, b) \n"; }
-			Pair(const Pair<T1, T2>& pr)
+			template <class U, class V>
+			Pair(const U& a, const V& b) : first(a), second(b) {}
+			template <class U, class V>
+			Pair(const Pair<U, V>& pr) : first(pr.first), second(pr.second) {}
+			template <class U, class V>
+			Pair<T1, T2>& operator=(const Pair<U, V>& pr)
 			{
 				first = pr.first;
 				second = pr.second;
-			}
-			Pair<T1, T2>& operator=(const Pair<const T1, const T2>& pr)
-			{
-				this->first = pr.first;
-				this->second = pr.second;
 
 				return (*this);
 			}
 
 			// Member function
-			Pair<T1,T2> make_pair(T1 x, T2 y) 
+			Pair<T1,T2> make_pair(T1 x, T2 y)
 			{ return (Pair(x, y)); }
 	};
 }

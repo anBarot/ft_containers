@@ -55,8 +55,13 @@ void	test_insertmap_std_intint(std::map<int, int> &map)
 void	test_insertmap_ft_intint(ft::Map<int, int> &map)
 {
 	map.insert(ft::make_pair<int, int>(1, 2));
+	std::cout << "insert 1 : " << map[1] << "\n";
+
 	map.insert(ft::make_pair<int, int>(3, 4));
+	std::cout << "insert 3 : " << map[3] << "\n";
+
 	map.insert(ft::make_pair<int, int>(5, 6));
+	std::cout << "insert 5 : " << map[5] << "\n";
 }
 
 // void	test_mapint()

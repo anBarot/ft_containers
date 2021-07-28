@@ -21,7 +21,7 @@ namespace ft
 		public :
 			typedef Key											key_type;
 			typedef T											mapped_type;
-			typedef ft::Pair<key_type, mapped_type>				value_type;
+			typedef ft::Pair<const Key, T>						value_type;
 			typedef Compare										key_compare;
 			typedef Alloc										allocator_type;
 			typedef value_type&									reference;
@@ -44,11 +44,11 @@ namespace ft
 			// Coplien
 			explicit Map(const key_compare &n_comp = key_compare(), const allocator_type &n_alloc = allocator_type())
 			: comp(n_comp), bst(nullptr), alloc(n_alloc) {}
+			Map(const Map< Key, T, Compare, Alloc > &x);
+			Map &operator=(const Map &x);
 			template <class Inputiterator>
   			Map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
 			Inputiterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			Map(const Map< Key, T, Compare, Alloc > &x);
-			Map &operator=(const Map &x);
 			// ~Map() {}
 
 			// iterator
@@ -101,7 +101,37 @@ namespace ft
 			void					swap(Map &x) { Map tmp(x); x = *this; *this = tmp; };
 	};
 }
-			
+
+// Coplien
+
+template <class Key, class T, class Compare, class Alloc>
+template <class Inputiterator>
+ft::Map<Key, T, Compare, Alloc>::Map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
+Inputiterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(nullptr), alloc(n_alloc)
+{
+	while (first != last)
+	{
+		bst.Insert(bst.GetRoot(), *first);
+		first++;
+	}
+}
+
+template <class Key, class T, class Compare, class Alloc>
+ft::Map<Key, T, Compare, Alloc>::Map(const Map< Key, T, Compare, Alloc > &x)
+{
+	comp = x.comp;
+	bst = x.bst;
+	alloc = x.alloc;
+}
+
+template <class Key, class T, class Compare, class Alloc>
+ft::Map<Key, T, Compare, Alloc> &ft::Map<Key, T, Compare, Alloc>::operator=(const Map &x)
+{
+	comp = x.comp;
+	bst = x.bst;
+	alloc = x.alloc;
+}
+
 // Member functions 
 
 template <class Key, class T, class Compare, class Alloc>
@@ -127,13 +157,12 @@ typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare
 }
 
 template <class Key, class T, class Compare, class Alloc>
-typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Alloc>::find(const typename ft::Map<Key, T, Compare, Alloc>::key_type& k)
+typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Alloc>::find(const ft::Map<Key, T, Compare, Alloc>::key_type& k)
 {
 	std::cout << "Map find ft \n";
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
-	std::cout << "this begin : ";
-	// std::cout << (*it).first;
+	std::cout << "iterator created\n";
 
 	while (it != this->end() && it.curr()->data.first != k)
 		it++;
@@ -143,7 +172,7 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 }
 
 template <class Key, class T, class Compare, class Alloc>
-typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare, Alloc>::find(const typename ft::Map<Key, T, Compare, Alloc>::key_type& k) const
+typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare, Alloc>::find(const ft::Map<Key, T, Compare, Alloc>::key_type& k) const
 {
 	ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
 
@@ -229,7 +258,11 @@ typename ft::Map<Key, T, Compare, Alloc>::size_type ft::Map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::mapped_type& ft::Map<Key, T, Compare, Alloc>::operator[](const key_type &k)
 {
-	return ((*((this->insert(make_pair(k, mapped_type()))).first)).second);
+	std::cout << "enter operator [] \n";
+
+	ft::Pair<const Key, T> p(k, mapped_type());
+
+	return ((*(this->insert(p)).first).second);
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -270,6 +303,7 @@ ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>	ft::Map<Key, 
 	std::cout << "Map insert \n";
 	if (find(val.first) == this->end())
 		return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(bst.Insert(bst.GetRoot(), val), true));
+
 	return (ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::iterator, bool>(find(val.first), false));
 }
 
