@@ -21,7 +21,7 @@ namespace ft
 
 		public:
 		// Coplien
-			BinarySearchTree() : bstroot_p(nullptr) {}
+			BinarySearchTree() : bstroot_p(NULL) {}
 			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
 			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
 			// ~BinarySearchTree();
@@ -41,7 +41,7 @@ namespace ft
 // template <class T>
 // ft::BinarySearchTree<T>::~BinarySearchTree()
 // {
-// 	while (bstroot_p != nullptr)
+// 	while (bstroot_p != NULL)
 // 		Delete(bstroot_p, bstroot_p->data);
 // }
 
@@ -49,52 +49,53 @@ template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
 {
 	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
+
 	n_node->data = n_data;
-	n_node->right = n_node->left = nullptr;
+	n_node->right = n_node->left = NULL;
+
 	return (n_node);
 }
 
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const T &data)
 {
-	std::cout << "bst insert \n";
-	if (bstroot_p == nullptr)
+	if (bstroot_p == NULL)
 		return (bstroot_p = GetNewNode(data));
 	else
 	{
-		if (root == nullptr)
+		if (root == NULL)
 			return (root = GetNewNode(data));
 		else if (data <= root->data)
 			root->left = Insert(root->left, data);
 		else
 			root->right = Insert(root->right, data);
 	}
-	return (nullptr);
+	return (NULL);
 }
 
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
 {
-	if (root == nullptr || bstroot_p == nullptr)
-		return (nullptr);
+	if (root == NULL || bstroot_p == NULL)
+		return (NULL);
 	else if (data < root->data)
 		root->left = Delete(root->left, data);
 	else if (data > root->data)
 		root->right = Delete(root->right, data);
 	else
 	{
-		if (root->left == nullptr && root->right == nullptr)
+		if (root->left == NULL && root->right == NULL)
 		{
 			delete root;
-			root = nullptr;
+			root = NULL;
 		}
-		else if (root->left == nullptr)
+		else if (root->left == NULL)
 		{
 			ft::s_BSTNode<T> *tmp = root;
 			root = root->right;
 			delete tmp;
 		}
-		else if (root->right == nullptr)
+		else if (root->right == NULL)
 		{
 			ft::s_BSTNode<T> *tmp = root;
 			root = root->left;
@@ -113,7 +114,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &dat
 template <class T>
 bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
 {
-	if (bstroot_p == nullptr || root == nullptr)
+	if (bstroot_p == NULL || root == NULL)
 		return (false);
 	if (data == root->data)
 		return (true);
@@ -126,9 +127,9 @@ bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 {
-	if (bstroot_p == nullptr || root == nullptr)
-		return (nullptr);
-	if (root->left == nullptr)
+	if (bstroot_p == NULL || root == NULL)
+		return (NULL);
+	if (root->left == NULL)
 		return (root);
 	else
 		return (FindMin(root->left));

@@ -25,11 +25,11 @@ namespace ft
 
 		public :
 			// Coplien
-			BSTReverseIterator() : st_node(nullptr) {}
+			BSTReverseIterator() : st_node(NULL) {}
 			BSTReverseIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst->bstroot_p;
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -39,7 +39,7 @@ namespace ft
 			{
         		s_BSTNode<T>* current = bst;
 
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -78,7 +78,7 @@ namespace ft
 template <class T>
 bool ft::BSTReverseIterator<T>::hasNext()
 {
-	if (st_node == nullptr)
+	if (st_node == NULL)
 		return (false);
 	return (true);
 }
@@ -89,7 +89,7 @@ void ft::BSTReverseIterator<T>::next()
 	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
-    while (curr != nullptr)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
@@ -102,7 +102,7 @@ void ft::BSTReverseIterator<T>::prev()
 	s_BSTNode<T>* curr = st_node.top()->left;
 
 	st_node.pop();
-    while (curr != nullptr)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->right;

@@ -21,7 +21,7 @@ namespace ft
 		public :
 			typedef Key											key_type;
 			typedef T											mapped_type;
-			typedef ft::Pair<const Key, T>						value_type;
+			typedef ft::Pair<Key, T>							value_type;
 			typedef Compare										key_compare;
 			typedef Alloc										allocator_type;
 			typedef value_type&									reference;
@@ -43,7 +43,7 @@ namespace ft
 		public :
 			// Coplien
 			explicit Map(const key_compare &n_comp = key_compare(), const allocator_type &n_alloc = allocator_type())
-			: comp(n_comp), bst(nullptr), alloc(n_alloc) {}
+			: comp(n_comp), bst(NULL), alloc(n_alloc) {}
 			Map(const Map< Key, T, Compare, Alloc > &x);
 			Map &operator=(const Map &x);
 			template <class Inputiterator>
@@ -72,7 +72,7 @@ namespace ft
 			// Getters
 			size_type								size() const;
 			size_type								count(const key_type& k) const;
-			bool									empty() const { return (bst.GetRoot() == nullptr); }
+			bool									empty() const { return (bst.GetRoot() == NULL); }
 			allocator_type							get_allocator() const { return (alloc); }
 			size_type								max_size() const { return( alloc.max_size() ); }
 			key_compare								key_comp() const { return (comp); }
@@ -107,7 +107,7 @@ namespace ft
 template <class Key, class T, class Compare, class Alloc>
 template <class Inputiterator>
 ft::Map<Key, T, Compare, Alloc>::Map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
-Inputiterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(nullptr), alloc(n_alloc)
+Inputiterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(NULL), alloc(n_alloc)
 {
 	while (first != last)
 	{
@@ -260,8 +260,9 @@ typename ft::Map<Key, T, Compare, Alloc>::mapped_type& ft::Map<Key, T, Compare, 
 {
 	std::cout << "enter operator [] \n";
 
-	ft::Pair<const Key, T> p(k, mapped_type());
+	ft::Pair<Key, T> p(k, mapped_type());
 
+	if ()
 	return ((*(this->insert(p)).first).second);
 }
 

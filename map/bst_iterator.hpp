@@ -31,10 +31,10 @@ namespace ft
 
         		s_BSTNode<T>* current = bst.GetRoot();
 
-				if (current == nullptr)
-					std::cout << "current is nullptr \n";
+				if (current == NULL)
+					std::cout << "current is NULL \n";
 
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -44,7 +44,7 @@ namespace ft
 			{
         		s_BSTNode<T>* current = bst_node;
 
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -90,7 +90,7 @@ namespace ft
 template <class T>
 bool ft::BSTIterator<T>::hasNext()
 {
-	if (curr() == nullptr)
+	if (curr() == NULL)
 		return (false);
 	return (true);
 }
@@ -101,7 +101,7 @@ void ft::BSTIterator<T>::next()
 	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
-    while (curr != nullptr)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
@@ -114,7 +114,7 @@ void ft::BSTIterator<T>::prev()
 	s_BSTNode<T>* curr = st_node.top()->left;
 
 	st_node.pop();
-    while (curr != nullptr)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->right;

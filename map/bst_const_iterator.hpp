@@ -23,11 +23,11 @@ namespace ft
 
 		public :
 			// Coplien
-			BSTConstIterator() : st_node(nullptr) {};
+			BSTConstIterator() : st_node(NULL) {};
 			BSTConstIterator(const BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -36,7 +36,7 @@ namespace ft
 			BSTConstIterator(s_BSTNode<T> *bst)
 			{
         		s_BSTNode<T>* current = bst;
-        		while (current != nullptr)
+        		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
@@ -76,7 +76,7 @@ namespace ft
 template <class T>
 bool ft::BSTConstIterator<T>::hasNext()
 {
-	if (st_node.top() == nullptr)
+	if (st_node.top() == NULL)
 		return (false);
 	return (true);
 }
@@ -87,7 +87,7 @@ void ft::BSTConstIterator<T>::next()
 	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
-    while (curr != nullptr)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
