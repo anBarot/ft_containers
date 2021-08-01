@@ -18,11 +18,12 @@ template<class M>
 void	display_map(M &map)
 {
 	typename M::iterator it_beg = map.begin();
-	typename M::iterator it_end = --map.end();
+	typename M::iterator it_end = map.end();
+	it_end--;
 
-	std::cout << it_beg->first << " , ";
+	std::cout << "it begin : " << it_beg->first << " , ";
 	std::cout << it_beg->second << "\n";
-	std::cout << it_end->first << " , ";
+	std::cout << "it end : " << it_end->first << " , ";
 	std::cout << it_end->second << "\n";
 	// for (typename M::iterator it = map.begin(); it != map.end(); ++it)
 	// 	std::cout << it->first << " : " << it->second << "\n";
@@ -49,8 +50,10 @@ void	test_insertmap_std_intint(std::map<int, int> &map)
 {
 	map.insert(std::make_pair(1, 2));
 	std::cout << "insert 1 : " << map[1] << "\n";
+
 	map.insert(std::make_pair(3, 4));
 	std::cout << "insert 3 : " << map[3] << "\n";
+
 	map.insert(std::make_pair(5, 6));
 	std::cout << "insert 5 : " << map[5] << "\n";
 }
@@ -87,7 +90,7 @@ void	test_map_int_int()
 	COLOR(BOLDYELLOW) display_map(std_map);
 
 	test_insertmap_ft_intint(ft_map);
-	// COLOR(BOLDGREEN) display_map(ft_map);
+	COLOR(BOLDGREEN) display_map(ft_map);
 }
 
 int main()

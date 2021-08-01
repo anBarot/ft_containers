@@ -48,14 +48,10 @@ namespace ft
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
 {
-	std::cout << "New node called : ";
-
 	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
 
 	n_node->data = n_data;
 	n_node->right = n_node->left = NULL;
-
-	std::cout << n_node->data.first << " , " << n_node->data.second << "\n";
 
 	return (n_node);
 }

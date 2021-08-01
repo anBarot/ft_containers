@@ -19,21 +19,21 @@ namespace ft
 	class Map
 	{
 		public :
-			typedef Key											key_type;
-			typedef T											mapped_type;
-			typedef ft::Pair<Key, T>							value_type;
-			typedef Compare										key_compare;
-			typedef Alloc										allocator_type;
-			typedef value_type&									reference;
-			typedef const value_type&							const_reference;
-			typedef value_type*									pointer;
-			typedef const value_type*							const_pointer;
-			typedef size_t										size_type;
+			typedef Key													key_type;
+			typedef T													mapped_type;
+			typedef ft::Pair<Key, T>									value_type;
+			typedef Compare												key_compare;
+			typedef Alloc												allocator_type;
+			typedef value_type&											reference;
+			typedef const value_type&									const_reference;
+			typedef value_type*											pointer;
+			typedef const value_type*									const_pointer;
+			typedef size_t												size_type;
 			typedef typename std::ptrdiff_t								difference_type;
-			typedef typename ft::BSTIterator<value_type>					iterator;
+			typedef typename ft::BSTIterator<value_type>				iterator;
 			typedef typename ft::BSTConstIterator<value_type>			const_iterator;
 			typedef typename ft::BSTReverseIterator<value_type>			reverse_iterator;
-			typedef typename ft::BSTConstReverseIterator<value_type>		const_reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<value_type>	const_reverse_iterator;
 
 		private :
 			key_compare							comp;
@@ -144,7 +144,7 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
 	while (it.hasNext() == true)
-		it++;
+		it.next();
 
 	return (it);
 }
@@ -154,8 +154,8 @@ typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare
 {
 	ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
 
-	while (it.hasNext())
-		it++;
+	while (it.hasNext() != NULL)
+		it.next();
 
 	return (it);
 }

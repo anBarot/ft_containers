@@ -63,7 +63,7 @@ namespace ft
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
-			// T 				*operator->()			{ return (&(curr()->data)); }
+			T 				*operator->()			{ return (&(curr()->data)); }
 			iterator 		operator++()			{ this->next(); return (*this); }
 			iterator 		operator--()			{ this->prev(); return (*this); }
 			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
@@ -96,7 +96,8 @@ void ft::BSTIterator<T>::next()
 	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
-    while (curr != NULL)
+
+    while (curr() != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
@@ -109,7 +110,8 @@ void ft::BSTIterator<T>::prev()
 	s_BSTNode<T>* curr = st_node.top()->left;
 
 	st_node.pop();
-    while (curr != NULL)
+
+    while (curr() != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->right;
