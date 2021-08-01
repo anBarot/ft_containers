@@ -21,9 +21,9 @@ namespace ft
 
 		public:
 		// Coplien
-			BinarySearchTree() : bstroot_p(NULL) {}
-			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
-			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
+			BinarySearchTree() : bstroot_p(NULL) { std::cout << "bst constructor called \n";}
+			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) { std::cout << "bst constructor called \n"; }
+			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) { std::cout << "bst constructor called \n"; }
 			// ~BinarySearchTree();
 
 		// Getters
@@ -48,10 +48,14 @@ namespace ft
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
 {
+	std::cout << "New node called : ";
+
 	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
 
 	n_node->data = n_data;
 	n_node->right = n_node->left = NULL;
+
+	std::cout << n_node->data.first << " , " << n_node->data.second << "\n";
 
 	return (n_node);
 }
@@ -66,9 +70,9 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 		if (root == NULL)
 			return (root = GetNewNode(data));
 		else if (data <= root->data)
-			root->left = Insert(root->left, data);
+			return (root->left = Insert(root->left, data));
 		else
-			root->right = Insert(root->right, data);
+			return (root->right = Insert(root->right, data));
 	}
 	return (NULL);
 }

@@ -48,8 +48,11 @@ void	display_map(M &map)
 void	test_insertmap_std_intint(std::map<int, int> &map)
 {
 	map.insert(std::make_pair(1, 2));
+	std::cout << "insert 1 : " << map[1] << "\n";
 	map.insert(std::make_pair(3, 4));
+	std::cout << "insert 3 : " << map[3] << "\n";
 	map.insert(std::make_pair(5, 6));
+	std::cout << "insert 5 : " << map[5] << "\n";
 }
 
 void	test_insertmap_ft_intint(ft::Map<int, int> &map)
@@ -82,14 +85,14 @@ void	test_map_int_int()
 
 	test_insertmap_std_intint(std_map);
 	COLOR(BOLDYELLOW) display_map(std_map);
-	std::cout << "insert ft \n";
+
 	test_insertmap_ft_intint(ft_map);
 	// COLOR(BOLDGREEN) display_map(ft_map);
 }
 
 int main()
 {
-	std::cout << "Test map <string, int>\n";
+	std::cout << "Test map <int, int>\n";
 	test_map_int_int();
 	COLOR(RESET)
 }

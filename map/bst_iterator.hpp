@@ -27,12 +27,7 @@ namespace ft
 			BSTIterator() : st_node(ft::Stack<s_BSTNode<T>*>()) {}
 			BSTIterator(BinarySearchTree<T> &bst)
 			{
-				std::cout << "entering constructor bst\n";
-
         		s_BSTNode<T>* current = bst.GetRoot();
-
-				if (current == NULL)
-					std::cout << "current is NULL \n";
 
         		while (current != NULL)
             	{
