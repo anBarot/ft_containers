@@ -23,8 +23,8 @@ void	display_map(M &map)
 
 	std::cout << "it begin : " << it_beg->first << " , ";
 	std::cout << it_beg->second << "\n";
-	std::cout << "it end : " << it_end->first << " , ";
-	std::cout << it_end->second << "\n";
+	// std::cout << "it end : " << it_end->first << " , ";
+	// std::cout << it_end->second << "\n";
 	// for (typename M::iterator it = map.begin(); it != map.end(); ++it)
 	// 	std::cout << it->first << " : " << it->second << "\n";
 	// std::cout << "Size : " << map.size() << std::endl;
@@ -48,26 +48,51 @@ void	display_map(M &map)
 
 void	test_insertmap_std_intint(std::map<int, int> &map)
 {
-	map.insert(std::make_pair(1, 2));
-	std::cout << "insert 1 : " << map[1] << "\n";
-
 	map.insert(std::make_pair(3, 4));
 	std::cout << "insert 3 : " << map[3] << "\n";
 
+	map.insert(std::make_pair(1, 2));
+	std::cout << "insert 1 : " << map[1] << "\n";
+
 	map.insert(std::make_pair(5, 6));
 	std::cout << "insert 5 : " << map[5] << "\n";
+
+	map.insert(std::make_pair(7, 8));
+	std::cout << "insert 7 : " << map[7] << "\n";
 }
 
 void	test_insertmap_ft_intint(ft::Map<int, int> &map)
 {
-	map.insert(ft::make_pair<int, int>(1, 2));
-	std::cout << "insert 1 : " << map[1] << "\n";
-
 	map.insert(ft::make_pair<int, int>(3, 4));
 	std::cout << "insert 3 : " << map[3] << "\n";
 
+	map.insert(ft::make_pair<int, int>(1, 2));
+	std::cout << "insert 1 : " << map[1] << "\n";
+
 	map.insert(ft::make_pair<int, int>(5, 6));
 	std::cout << "insert 5 : " << map[5] << "\n";
+	
+	map.insert(ft::make_pair<int, int>(7, 8));
+	std::cout << "insert 7 : " << map[7] << "\n";
+
+	// ft::BSTIterator<ft::Pair<int, int> > it = map.begin();
+
+	// std::cout << "it begin : " << it.curr()->data.first << " , ";
+	// std::cout << it.curr()->data.second << "\n";
+
+	// it++;
+
+	// std::cout << "it++ : " << it.curr()->data.first << " , ";
+	// std::cout << it.curr()->data.second << "\n";
+	// it++;
+
+	// std::cout << "it++ : " << it.curr()->data.first << " , ";
+	// std::cout << it.curr()->data.second << "\n";
+	// it++;
+
+	// std::cout << "it++ : " << it.curr()->data.first << " , ";
+	// std::cout << it.curr()->data.second << "\n";
+
 }
 
 // void	test_mapint()
@@ -86,11 +111,11 @@ void	test_map_int_int()
 	std::map<int, int> std_map;
 	ft::Map<int, int> ft_map;
 
-	test_insertmap_std_intint(std_map);
-	COLOR(BOLDYELLOW) display_map(std_map);
+	COLOR(BOLDYELLOW) test_insertmap_std_intint(std_map);
+	display_map(std_map);
 
-	test_insertmap_ft_intint(ft_map);
-	COLOR(BOLDGREEN) display_map(ft_map);
+	COLOR(BOLDGREEN) test_insertmap_ft_intint(ft_map);
+	display_map(ft_map);
 }
 
 int main()

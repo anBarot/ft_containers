@@ -143,8 +143,17 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 {
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
+	// std::cout << "it begin : " << it->first << " , ";
+	// std::cout << it->second << "\n";
+
+	// std::cout << "it left : " << it.curr()->left->data.first << " , ";
+	// std::cout << it.curr()->left->data.first << "\n";
+	
+	// std::cout << "it right : " << it.curr()->right->data.first << " , ";
+	// std::cout << it.curr()->right->data.first << "\n";
+
 	while (it.hasNext() == true)
-		it.next();
+		it--;
 
 	return (it);
 }

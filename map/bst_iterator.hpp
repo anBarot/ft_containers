@@ -97,7 +97,7 @@ void ft::BSTIterator<T>::next()
 
 	st_node.pop();
 
-    while (curr() != NULL)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
@@ -111,7 +111,7 @@ void ft::BSTIterator<T>::prev()
 
 	st_node.pop();
 
-    while (curr() != NULL)
+    while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->right;
