@@ -35,6 +35,7 @@ namespace ft
 			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
 			bool			Search(s_BSTNode<T> *root, T &data);
 			s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
+			s_BSTNode<T>	*FindMax(s_BSTNode<T> *root);
 	};
 }
 
@@ -140,6 +141,17 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 		return (root);
 	else
 		return (FindMin(root->left));
+}
+
+template <class T>
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMax(ft::s_BSTNode<T> *root)
+{
+	if (bstroot_p == NULL || root == NULL)
+		return (NULL);
+	if (root->right == NULL)
+		return (root);
+	else
+		return (FindMax(root->right));
 }
 
 #endif

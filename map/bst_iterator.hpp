@@ -20,7 +20,8 @@ namespace ft
 			typedef BSTIterator<T>					iterator;
 
 		private :
-			ft::Stack<s_BSTNode<T>*> st_node;
+			ft::Stack<s_BSTNode<T>*> 	st_node;
+			ft::Stack<s_BSTNode<T>*> 	save_stack;
 
 		public :
 			// Coplien
@@ -55,15 +56,17 @@ namespace ft
 
 			// Getters
 			s_BSTNode<T>* curr(){ return (st_node.top()); }
+			s_BSTNode<T>* prev_curr(){ return (save_stack.top()); }
 
 			// Member function
     		bool	hasNext();
 			void	next();
 			void	prev();
+			bool	IsEmpty() { return (st_node.empty()); };
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
-			T 				*operator->()			{ return (&(curr()->data)); }
+			T				*operator->() 			{ return (&(curr()->data)); };
 			iterator 		operator++()			{ this->next(); return (*this); }
 			iterator 		operator--()			{ this->prev(); return (*this); }
 			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
@@ -85,31 +88,39 @@ namespace ft
 template <class T>
 bool ft::BSTIterator<T>::hasNext()
 {
-	if (curr() == NULL)
+	if (this->IsEmpty())
 		return (false);
+
 	return (true);
 }
 
 template <class T>
 void ft::BSTIterator<T>::next()
 {
-	s_BSTNode<T>* curr = st_node.top()->right;
-
-	st_node.pop();
-
-    while (curr != NULL)
+	if (this->hasNext())
 	{
-		st_node.push(curr);
-		curr = curr->left;
+		s_BSTNode<T>* curr = this->curr()->right;
+
+		st_node.pop();
+
+    	while (curr != NULL)
+		{
+			st_node.push(curr);
+			save_stack.push(curr);
+			curr = curr->left;
+		}
 	}
 }
 
 template <class T>
 void ft::BSTIterator<T>::prev()
 {
-	s_BSTNode<T>* curr = st_node.top()->left;
+	s_BSTNode<T>* curr = this->prev_curr()->left;
 
-	st_node.pop();
+	save_stack.pop();
+
+	if (curr == NULL)
+		st_node.push(save_stack.top());
 
     while (curr != NULL)
 	{

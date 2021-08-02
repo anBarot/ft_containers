@@ -1,6 +1,7 @@
 #if !defined(BST_CONST_ITERATOR_HPP)
 #define BST_CONST_ITERATOR_HPP
 
+#include <iterator>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
 // #include "../tools/iterator_traits.hpp"
@@ -16,57 +17,66 @@ namespace ft
     		typedef T*								pointer;
     		typedef T&								reference;
     		typedef std::bidirectional_iterator_tag	iterator_category;
-			typedef BSTConstIterator<T>				const_iterator;
-		
+			typedef BSTConstIterator<T>				iterator;
+
 		private :
-			ft::Stack<s_BSTNode<T>*> st_node;
+			const ft::Stack<s_BSTNode<T>*> st_node;
 
 		public :
 			// Coplien
-			BSTConstIterator() : st_node(NULL) {};
-			BSTConstIterator(const BinarySearchTree<T> &bst)
+			BSTConstIterator() : st_node(ft::Stack<s_BSTNode<T>*>()) {}
+			BSTConstIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
+
         		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
 				}
 			}
-			BSTConstIterator(s_BSTNode<T> *bst)
+			BSTConstIterator(s_BSTNode<T> *bst_node)
 			{
-        		s_BSTNode<T>* current = bst;
+        		s_BSTNode<T>* current = bst_node;
+
         		while (current != NULL)
             	{
 					st_node.push(current);
 					current = current->left;
 				}
 			}
-			~BSTConstIterator() {};
+			iterator operator=(const iterator &n_it)
+			{
+				st_node = n_it.st_node;
+
+				return (*this);
+			}
+			~BSTConstIterator() {}
 
 			// Getters
-			s_BSTNode<T>* curr(){ return st_node.top(); }
+			s_BSTNode<T>* curr(){ return (st_node.top()); }
 
 			// Member function
     		bool	hasNext();
 			void	next();
 			void	prev();
+			bool	IsEmpty() { return (st_node.empty()); };
 
 			// Operator overload
-			T					operator*() 			{ return (curr()->data); };
-			const_iterator 		operator++()			{ this->next(); return (*this); }
-			const_iterator 		operator--()			{ this->prev(); return (*this); }
-			const_iterator 		operator++(int)			{ const_iterator tmp(*this); this->next(); return(tmp); }
-	    	const_iterator 		operator--(int)			{ const_iterator tmp(*this); this->prev(); return(tmp); }
-			T 					operator->()			{ return (curr()->data); }
+			T				operator*() 			{ return (curr()->data); };
+			T				*operator->() 			{ return (&(curr()->data)); };
+			iterator 		operator++()			{ this->next(); return (*this); }
+			iterator 		operator--()			{ this->prev(); return (*this); }
+			iterator 		operator++(int)			{ iterator tmp(*this); this->next(); return(tmp); }
+	    	iterator 		operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
-		    bool operator!=(const const_iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
-		    bool operator==(const const_iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
-		    bool operator>=(const const_iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
-		    bool operator>(const const_iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
-		    bool operator<=(const const_iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
-		    bool operator<(const const_iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
+		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
+		    bool operator==(const iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
+		    bool operator>=(const iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
+		    bool operator>(const iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
+		    bool operator<=(const iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
+		    bool operator<(const iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
 
 			// Is input iterator
 			static const bool input_iter = true;
@@ -76,8 +86,9 @@ namespace ft
 template <class T>
 bool ft::BSTConstIterator<T>::hasNext()
 {
-	if (st_node.top() == NULL)
+	if (this->IsEmpty())
 		return (false);
+
 	return (true);
 }
 
@@ -87,10 +98,25 @@ void ft::BSTConstIterator<T>::next()
 	s_BSTNode<T>* curr = st_node.top()->right;
 
 	st_node.pop();
+
     while (curr != NULL)
 	{
 		st_node.push(curr);
 		curr = curr->left;
+	}
+}
+
+template <class T>
+void ft::BSTConstIterator<T>::prev()
+{
+	s_BSTNode<T>* curr = st_node.top()->left;
+
+	st_node.pop();
+
+    while (curr != NULL)
+	{
+		st_node.push(curr);
+		curr = curr->right;
 	}
 }
 
