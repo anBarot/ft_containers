@@ -168,7 +168,7 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 
 	ft::Map<Key, T, Compare, Alloc>::iterator it = this->begin();
 
-	while (it != NULL && it.curr()->data.first != k)
+	while (it != NULL && it->first != k)
 		it++;
 
 	return (it);

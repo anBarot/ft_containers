@@ -55,8 +55,8 @@ namespace ft
 			~BSTIterator() {}
 
 			// Getters
-			s_BSTNode<T>* curr(){ return (st_node.top()); }
-			s_BSTNode<T>* prev_curr(){ return (save_stack.top()); }
+			s_BSTNode<T>* curr() const		{ return (st_node.top()); }
+			s_BSTNode<T>* prev_curr()const	{ return (save_stack.top()); }
 
 			// Member function
     		bool	hasNext();
@@ -72,12 +72,12 @@ namespace ft
 	    	iterator 		operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
-		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
-		    bool operator==(const iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
-		    bool operator>=(const iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
-		    bool operator>(const iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
-		    bool operator<=(const iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
-		    bool operator<(const iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
+		    bool operator!=(const iterator &sec_it) const	{ return (st_node.top() != sec_it.st_node.top()); }
+		    bool operator==(const iterator &sec_it) const	{ return (st_node.top() == sec_it.st_node.top()); }
+		    bool operator>=(const iterator &sec_it) const	{ return (st_node.top() >= sec_it.st_node.top()); }
+		    bool operator>(const iterator &sec_it) const	{ return (st_node.top() > sec_it.st_node.top()); }
+		    bool operator<=(const iterator &sec_it) const	{ return (st_node.top() <= sec_it.st_node.top()); }
+		    bool operator<(const iterator &sec_it) const	{ return (st_node.top() < sec_it.st_node.top()); }
 
 			// Is input iterator
 			static const bool input_iter = true;
@@ -115,13 +115,10 @@ void ft::BSTIterator<T>::next()
 template <class T>
 void ft::BSTIterator<T>::prev()
 {
-	if (save_stack.empty() == false)
-	{
-		if (st_node.empty() == false)
-			st_node.pop();
-		st_node.push(save_stack.top());
-		save_stack.pop();
-	}
+	if (st_node.empty() == false)
+		st_node.pop();
+	st_node.push(save_stack.top());
+	save_stack.pop();
 }
 
 #endif

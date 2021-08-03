@@ -112,7 +112,9 @@ void	test_plus_less(M &map)
 
 	typename M::iterator it = map.end();
 	
-	while (it != it_b)
+	it--;
+
+	while (it != map.begin())
 	{
 		std::cout << it->first << " : " << it->second << "\n";
 		it--;
