@@ -26,7 +26,7 @@ namespace ft
 		public :
 			// Coplien
 			BSTConstIterator() : st_node(ft::Stack<s_BSTNode<T>*>()), save_stack(ft::Stack<s_BSTNode<T>*>()) {}
-			BSTConstIterator(const BinarySearchTree<T> &bst)
+			BSTConstIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
 

@@ -157,7 +157,7 @@ typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare
 	while (it.hasNext() == true)
 		it++;
 
-	return (it);
+	return (const_iterator(this->end()));
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -250,12 +250,7 @@ typename ft::Pair<typename ft::Map<Key, T, Compare, Alloc>::const_iterator, type
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::size_type ft::Map<Key, T, Compare, Alloc>::size() const
 {
-	size_type count = 0;
-
-	for (typename ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin(); it != this->end(); ++it)
-		count++;
-
-	return (count);
+	return (bst.GetSize());
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -280,13 +275,15 @@ typename ft::Map<Key, T, Compare, Alloc>::size_type ft::Map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Alloc>
 void	ft::Map<Key, T, Compare, Alloc>::erase(ft::Map<Key, T, Compare, Alloc>::iterator position)
 {
-	bst.Delete(bst.GetRoot(), *position.first);
+	bst.Delete(bst.GetRoot(), *position);
 }
 
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::size_type	ft::Map<Key, T, Compare, Alloc>::erase(const ft::Map<Key, T, Compare, Alloc>::key_type &k)
 {
-	bst.Delete(bst.GetRoot(), k);
+	bst.Delete(bst.GetRoot(), *find(k));
+
+	return (bst.GetSize());
 }
 
 template <class Key, class T, class Compare, class Alloc>

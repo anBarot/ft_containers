@@ -18,7 +18,7 @@ namespace ft
 	{
 		private:
 			struct s_BSTNode<T>	*bstroot_p;
-			int					size;
+			size_t					size;
 
 		public:
 		// Coplien
@@ -28,13 +28,14 @@ namespace ft
 			// ~BinarySearchTree();
 
 		// Getters
-			struct s_BSTNode<T>	*GetRoot() const { return (bstroot_p); }
+			struct s_BSTNode<T>	*GetRoot() const 	{ return (bstroot_p); }
+			size_t	GetSize() const					{ return (size); }
 
 		// Member function
 			s_BSTNode<T>	*GetNewNode(const T &data);
 			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, const T &data);
-			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, T &data);
-			bool			Search(s_BSTNode<T> *root, T &data);
+			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, const T &data);
+			bool			Search(s_BSTNode<T> *root, const T &data);
 			s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
 			s_BSTNode<T>	*FindMax(s_BSTNode<T> *root);
 	};
@@ -65,7 +66,8 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 	if (bstroot_p == NULL)
 	{
 		size++;
-		return (bstroot_p = GetNewNode(data));
+		bstroot_p = GetNewNode(data);
+		return (bstroot_p);
 	}
 	else
 	{
@@ -83,7 +85,8 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 			if (root->right == NULL)
 			{
 				size++;
-				return (root->right = GetNewNode(data));
+				root->right = GetNewNode(data);
+				return (root->right);
 			}
 			Insert(root->right, data);
 		}
@@ -92,7 +95,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 }
 
 template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &data)
+ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const T &data)
 {
 	if (root == NULL || bstroot_p == NULL)
 		return (NULL);
@@ -133,7 +136,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &dat
 }
 
 template <class T>
-bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, T &data)
+bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, const T &data)
 {
 	if (bstroot_p == NULL || root == NULL)
 		return (false);
