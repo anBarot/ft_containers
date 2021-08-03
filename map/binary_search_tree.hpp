@@ -18,6 +18,7 @@ namespace ft
 	{
 		private:
 			struct s_BSTNode<T>	*bstroot_p;
+			int					size;
 
 		public:
 		// Coplien
@@ -62,19 +63,28 @@ template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const T &data)
 {
 	if (bstroot_p == NULL)
+	{
+		size++;
 		return (bstroot_p = GetNewNode(data));
+	}
 	else
 	{
 		if (data <= root->data)
 		{
 			if (root->left == NULL)
+			{
+				size++;
 				return (root->left = GetNewNode(data));
+			}
 			Insert(root->left, data);
 		}
 		else
 		{
 			if (root->right == NULL)
+			{
+				size++;
 				return (root->right = GetNewNode(data));
+			}
 			Insert(root->right, data);
 		}
 	}
@@ -95,18 +105,21 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, T &dat
 		if (root->left == NULL && root->right == NULL)
 		{
 			delete root;
+			size--;
 			root = NULL;
 		}
 		else if (root->left == NULL)
 		{
 			ft::s_BSTNode<T> *tmp = root;
 			root = root->right;
+			size--;
 			delete tmp;
 		}
 		else if (root->right == NULL)
 		{
 			ft::s_BSTNode<T> *tmp = root;
 			root = root->left;
+			size--;
 			delete tmp;
 		}
 		else

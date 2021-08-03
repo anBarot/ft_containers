@@ -25,7 +25,7 @@ namespace ft
 
 		public :
 			// Coplien
-			BSTIterator() : st_node(ft::Stack<s_BSTNode<T>*>()) {}
+			BSTIterator() : st_node(ft::Stack<s_BSTNode<T>*>()), save_stack(ft::Stack<s_BSTNode<T>*>()) {}
 			BSTIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
@@ -62,7 +62,6 @@ namespace ft
     		bool	hasNext();
 			void	next();
 			void	prev();
-			bool	IsEmpty() { return (st_node.empty()); };
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
@@ -88,7 +87,7 @@ namespace ft
 template <class T>
 bool ft::BSTIterator<T>::hasNext()
 {
-	if (this->IsEmpty())
+	if (st_node.empty() == true)
 		return (false);
 
 	return (true);
@@ -99,6 +98,8 @@ void ft::BSTIterator<T>::next()
 {
 	if (this->hasNext())
 	{
+		save_stack.push(this->curr());
+
 		s_BSTNode<T>* curr = this->curr()->right;
 
 		st_node.pop();
@@ -106,7 +107,6 @@ void ft::BSTIterator<T>::next()
     	while (curr != NULL)
 		{
 			st_node.push(curr);
-			save_stack.push(curr);
 			curr = curr->left;
 		}
 	}
@@ -115,17 +115,12 @@ void ft::BSTIterator<T>::next()
 template <class T>
 void ft::BSTIterator<T>::prev()
 {
-	s_BSTNode<T>* curr = this->prev_curr()->left;
-
-	save_stack.pop();
-
-	if (curr == NULL)
-		st_node.push(save_stack.top());
-
-    while (curr != NULL)
+	if (save_stack.empty() == false)
 	{
-		st_node.push(curr);
-		curr = curr->right;
+		if (st_node.empty() == false)
+			st_node.pop();
+		st_node.push(save_stack.top());
+		save_stack.pop();
 	}
 }
 

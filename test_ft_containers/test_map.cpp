@@ -17,64 +17,30 @@
 template<class M>
 void	display_map(M &map)
 {
-	// typename M::iterator it_beg = map.begin();
+	for (typename M::iterator it = map.begin(); it != map.end(); ++it)
+		std::cout << it->first << " : " << it->second << "\n";
 
-	// std::cout << "it begin operator * : " << (*it_beg).first << " , ";
-	// std::cout << (*it_beg).second << "\n";
-	// std::cout << "it begin operator -> : " << it_beg->first << " , ";
-	// std::cout << it_beg->second << "\n";
-
-	typename M::iterator it_end = map.end();
-
-	if (it_end == NULL)
-		std::cout << "map end is NULL\n";
-
-	it_end.prev() ;
-
-	std::cout << "it end : " << it_end->first << " , ";
-	std::cout << it_end->second << "\n";
-	
-	it_end.prev() ;
-
-	std::cout << "it end : " << it_end->first << " , ";
-	std::cout << it_end->second << "\n";
-
-	// for (typename M::iterator it = map.begin(); it != map.end(); ++it)
-	// 	std::cout << it->first << " : " << it->second << "\n";
-	// std::cout << "Size : " << map.size() << std::endl;
-	// std::cout << "Max size : " << map.max_size() << std::endl;
-	// std::cout << "Empty ? : " << map.empty() << "\n\n";
+	std::cout << "Size : " << map.size() << std::endl;
+	std::cout << "Max size : " << map.max_size() << std::endl;
+	std::cout << "Empty ? : " << map.empty() << "\n\n";
 }
 
 void	test_insertmap_std_intint(std::map<int, int> &map)
 {
 	map.insert(std::make_pair(3, 4));
-	std::cout << "insert 3 : " << map[3] << "\n";
-
 	map.insert(std::make_pair(1, 2));
-	std::cout << "insert 1 : " << map[1] << "\n";
-
 	map.insert(std::make_pair(5, 6));
-	std::cout << "insert 5 : " << map[5] << "\n";
-
 	map.insert(std::make_pair(7, 8));
-	std::cout << "insert 7 : " << map[7] << "\n";
 }
 
 void	test_insertmap_ft_intint(ft::Map<int, int> &map)
 {
 	map.insert(ft::make_pair<int, int>(3, 4));
-	// std::cout << "insert 3 : " << map[3] << "\n";
-
 	map.insert(ft::make_pair<int, int>(1, 2));
-	// std::cout << "insert 1 : " << map[1] << "\n";
-
 	map.insert(ft::make_pair<int, int>(5, 6));
-	// std::cout << "insert 5 : " << map[5] << "\n";
-	
 	map.insert(ft::make_pair<int, int>(7, 8));
-	// std::cout << "insert 7 : " << map[7] << "\n";
 
+	std::cout << "end of insert\n";
 
 }
 
@@ -95,7 +61,7 @@ void	test_map_int_int()
 	ft::Map<int, int> ft_map;
 
 	COLOR(BOLDYELLOW) test_insertmap_std_intint(std_map);
-	// display_map(std_map);
+	display_map(std_map);
 
 	COLOR(BOLDGREEN) test_insertmap_ft_intint(ft_map);
 	display_map(ft_map);
