@@ -22,9 +22,9 @@ namespace ft
 
 		public:
 		// Coplien
-			BinarySearchTree() : bstroot_p(NULL) {}
-			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
-			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
+			BinarySearchTree() : bstroot_p(NULL), size(0) {}
+			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node), size(0) {}
+			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)), size(0) {}
 			~BinarySearchTree();
 
 		// Getters

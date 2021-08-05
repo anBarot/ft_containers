@@ -17,14 +17,15 @@ namespace ft
     		typedef T*								pointer;
     		typedef T&								reference;
     		typedef std::bidirectional_iterator_tag	iterator_category;
-			typedef BSTReverseIterator<T>			iterator;
+			typedef BSTReverseIterator<T>				iterator;
 
 		private :
 			ft::Stack<s_BSTNode<T>*> 	st_node;
+			ft::Stack<s_BSTNode<T>*> 	save_stack;
 
 		public :
 			// Coplien
-			BSTReverseIterator() : st_node(ft::Stack<s_BSTNode<T>*>()) {}
+			BSTReverseIterator() : st_node(ft::Stack<s_BSTNode<T>*>()), save_stack(ft::Stack<s_BSTNode<T>*>()) {}
 			BSTReverseIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
@@ -32,7 +33,7 @@ namespace ft
         		while (current != NULL)
             	{
 					st_node.push(current);
-					current = current->left;
+					current = current->right;
 				}
 			}
 			BSTReverseIterator(s_BSTNode<T> *bst_node)
@@ -42,7 +43,7 @@ namespace ft
         		while (current != NULL)
             	{
 					st_node.push(current);
-					current = current->left;
+					current = current->right;
 				}
 			}
 			iterator operator=(const iterator &n_it)
@@ -54,13 +55,13 @@ namespace ft
 			~BSTReverseIterator() {}
 
 			// Getters
-			s_BSTNode<T>* curr(){ return (st_node.top()); }
+			s_BSTNode<T>* curr() const		{ return (st_node.top()); }
+			s_BSTNode<T>* prev_curr()const	{ return (save_stack.top()); }
 
 			// Member function
     		bool	hasNext();
 			void	next();
 			void	prev();
-			bool	IsEmpty() { return (st_node.empty()); };
 
 			// Operator overload
 			T				operator*() 			{ return (curr()->data); };
@@ -71,12 +72,30 @@ namespace ft
 	    	iterator 		operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
-		    bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
-		    bool operator==(const iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
-		    bool operator>=(const iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
-		    bool operator>(const iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
-		    bool operator<=(const iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
-		    bool operator<(const iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
+		    bool operator!=(const iterator &sec_it) const	{ 
+																if (st_node.empty() == false && sec_it.st_node.empty() == false)
+																	return (curr()->data.first != sec_it.curr()->data.first); 
+																else if (st_node.empty() == true && sec_it.st_node.empty() == true)
+																	return (false);
+																return (true);
+															}
+		    bool operator==(const iterator &sec_it) const	{ return !(st_node != sec_it.st_node); }
+		    bool operator>(const iterator &sec_it) const	{ 
+																if (st_node.empty() == false && sec_it.st_node.empty() == false)
+																	return (curr()->data.first > sec_it.curr()->data.first); 
+																else if ((st_node.empty() == true && sec_it.st_node.empty() == true) || st_node.empty() == true)
+																	return (false);
+																return (true);
+															}
+		    bool operator<=(const iterator &sec_it) const	{ return !(st_node > sec_it.st_node); }
+		    bool operator<(const iterator &sec_it) const	{ 
+																if (st_node.empty() == false && sec_it.st_node.empty() == false)
+																	return (curr()->data.first < sec_it.curr()->data.first); 
+																else if ((st_node.empty() == true && sec_it.st_node.empty() == true) || st_node.empty() == true)
+																	return (false);
+																return (true);
+															}
+		    bool operator>=(const iterator &sec_it) const	{ return !(st_node < sec_it.st_node); }
 
 			// Is input iterator
 			static const bool input_iter = true;
@@ -86,7 +105,7 @@ namespace ft
 template <class T>
 bool ft::BSTReverseIterator<T>::hasNext()
 {
-	if (this->IsEmpty())
+	if (st_node.empty() == true)
 		return (false);
 
 	return (true);
@@ -95,20 +114,10 @@ bool ft::BSTReverseIterator<T>::hasNext()
 template <class T>
 void ft::BSTReverseIterator<T>::next()
 {
-		s_BSTNode<T>* curr = this->curr()->right;
+	if (this->hasNext())
+	{
+		save_stack.push(this->curr());
 
-		st_node.pop();
-
-    	while (curr != NULL)
-		{
-			st_node.push(curr);
-			curr = curr->left;
-		}
-}
-
-template <class T>
-void ft::BSTReverseIterator<T>::prev()
-{
 		s_BSTNode<T>* curr = this->curr()->left;
 
 		st_node.pop();
@@ -118,6 +127,19 @@ void ft::BSTReverseIterator<T>::prev()
 			st_node.push(curr);
 			curr = curr->right;
 		}
+	}
+}
+
+template <class T>
+void ft::BSTReverseIterator<T>::prev()
+{
+	if (save_stack.empty() == false)
+	{
+		if (st_node.empty() == false)
+			st_node.pop();
+		st_node.push(save_stack.top());
+		save_stack.pop();
+	}
 }
 
 #endif

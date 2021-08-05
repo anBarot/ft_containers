@@ -114,11 +114,31 @@ void	test_plus_less(M &map)
 	
 	it--;
 
-	while (it != map.begin())
+	while (it-- != map.begin())
 	{
 		std::cout << it->first << " : " << it->second << "\n";
-		it--;
 	}
+}
+
+template <class M>
+void	test_plus_less_rev(M &map)
+{
+
+	std::cout << "it rbegin++ loop :\n";
+
+	for (typename M::reverse_iterator it_beg = map.rbegin(); it_beg != map.rend(); it_beg++)
+		std::cout << it_beg->first << " : " << it_beg->second << "\n";
+
+
+	std::cout << "it rend-- loop :\n";
+
+	typename M::reverse_iterator it = map.rend();
+
+	while (--it != map.rbegin())
+	{
+		std::cout << it->first << " : " << it->second << "\n";
+	}
+	std::cout << it->first << " : " << it->second << "\n";
 }
 
 void	test_iterator()
@@ -134,6 +154,18 @@ void	test_iterator()
 
 }
 
+void	test_reverse_iterator()
+{
+	std::map<int, std::string> std_map;
+	ft::Map<int, std::string> ft_map;
+	
+	test_insertmap_std_intstr(std_map);
+	test_insertmap_ft_intstr(ft_map);
+
+	COLOR(BOLDYELLOW) test_plus_less_rev(std_map);
+	COLOR(BOLDGREEN) test_plus_less_rev(ft_map);
+}
+
 int main()
 {
 	std::cout << "Test map <int, int>\n";
@@ -142,9 +174,7 @@ int main()
 	test_map_int_string();
 	std::cout << "Test iterator functions\n";
 	test_iterator();
-	std::cout << "Test iterator functions\n";
-	test_iterator();
-	// std::cout << "Test reverse iterator functions\n";
-	// test_reverse_iterator();
+	std::cout << "Test reverse iterator functions\n";
+	test_reverse_iterator();
 	COLOR(RESET)
 }

@@ -49,13 +49,13 @@ namespace ft
 			template <class Inputiterator>
   			Map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
 			Inputiterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			// ~Map() {}
+			~Map();
 
 			// iterator
 			iterator 							begin() { return(iterator(bst)); }
 			const_iterator 						begin() const { return(const_iterator(bst)); }
-			reverse_iterator 					rbegin() { return (reverse_iterator(bst.end())); }
-			const_reverse_iterator 				rbegin() const { return (reverse_iterator(bst.end())); }
+			reverse_iterator 					rbegin() { return (reverse_iterator(bst)); }
+			const_reverse_iterator 				rbegin() const { return (reverse_iterator(bst)); }
 			iterator 							end();
 			const_iterator 						end() const;
 			reverse_iterator 					rend();
@@ -80,7 +80,7 @@ namespace ft
 			mapped_type&					 		operator[](const key_type &k);
 
 			// Setters
-			void					clear() { ~bst(); }
+			void					clear() { bst.~BinarySearchTree(); }
 			void					erase(iterator position);
 			size_type				erase(const key_type &k);
 			void					erase(iterator first, iterator last);
@@ -127,8 +127,15 @@ ft::Map<Key, T, Compare, Alloc>::Map(const Map< Key, T, Compare, Alloc > &x)
 }
 
 template <class Key, class T, class Compare, class Alloc>
+ft::Map<Key, T, Compare, Alloc>::~Map()
+{
+	clear();
+}
+
+template <class Key, class T, class Compare, class Alloc>
 ft::Map<Key, T, Compare, Alloc> &ft::Map<Key, T, Compare, Alloc>::operator=(const Map &x)
 {
+	clear();
 	comp = x.comp;
 	alloc = x.alloc;
 
@@ -152,12 +159,24 @@ typename ft::Map<Key, T, Compare, Alloc>::iterator ft::Map<Key, T, Compare, Allo
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Map<Key, T, Compare, Alloc>::const_iterator ft::Map<Key, T, Compare, Alloc>::end() const
 {
-	ft::Map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
+	return (const_iterator(this->end()));
+}
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map<Key, T, Compare, Alloc>::reverse_iterator ft::Map<Key, T, Compare, Alloc>::rend()
+{
+	ft::Map<Key, T, Compare, Alloc>::reverse_iterator it = this->rbegin();
 
 	while (it.hasNext() == true)
 		it++;
 
-	return (const_iterator(this->end()));
+	return (it);
+}
+
+template <class Key, class T, class Compare, class Alloc>
+typename ft::Map<Key, T, Compare, Alloc>::const_reverse_iterator ft::Map<Key, T, Compare, Alloc>::rend() const
+{
+	return (const_reverse_iterator(this->rend()));
 }
 
 template <class Key, class T, class Compare, class Alloc>
