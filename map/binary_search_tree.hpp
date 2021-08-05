@@ -18,14 +18,14 @@ namespace ft
 	{
 		private:
 			struct s_BSTNode<T>	*bstroot_p;
-			size_t					size;
+			size_t				size;
 
 		public:
 		// Coplien
 			BinarySearchTree() : bstroot_p(NULL) {}
 			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node) {}
 			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)) {}
-			// ~BinarySearchTree();
+			~BinarySearchTree();
 
 		// Getters
 			struct s_BSTNode<T>	*GetRoot() const 	{ return (bstroot_p); }
@@ -41,12 +41,14 @@ namespace ft
 	};
 }
 
-// template <class T>
-// ft::BinarySearchTree<T>::~BinarySearchTree()
-// {
-// 	while (bstroot_p != NULL)
-// 		Delete(bstroot_p, bstroot_p->data);
-// }
+template <class T>
+ft::BinarySearchTree<T>::~BinarySearchTree()
+{
+	while (bstroot_p != NULL)
+	{
+		Delete(bstroot_p, bstroot_p->data);
+	}
+}
 
 template <class T>
 ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
@@ -107,23 +109,29 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const 
 	{
 		if (root->left == NULL && root->right == NULL)
 		{
-			delete root;
+			if (root == bstroot_p)
+				bstroot_p = NULL;
 			size--;
+			delete root;
 			root = NULL;
 		}
 		else if (root->left == NULL)
 		{
-			ft::s_BSTNode<T> *tmp = root;
-			root = root->right;
+			if (root == bstroot_p)
+				bstroot_p = root->right;
+			ft::s_BSTNode<T> *tmp = root->right;
+			delete root;
 			size--;
-			delete tmp;
+			return (tmp);
 		}
 		else if (root->right == NULL)
 		{
-			ft::s_BSTNode<T> *tmp = root;
-			root = root->left;
+			if (root == bstroot_p)
+				bstroot_p = root->left;
+			ft::s_BSTNode<T> *tmp = root->left;
+			delete root;
 			size--;
-			delete tmp;
+			return (tmp);
 		}
 		else
 		{
@@ -154,6 +162,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 	if (bstroot_p == NULL || root == NULL)
 		return (NULL);
 	if (root->left == NULL)
+
 		return (root);
 	else
 		return (FindMin(root->left));

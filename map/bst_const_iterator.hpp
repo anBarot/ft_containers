@@ -72,12 +72,12 @@ namespace ft
 	    	iterator 		operator--(int)			{ iterator tmp(*this); this->prev(); return(tmp); }
 
 			// Comparison operator overload
-		 	bool operator!=(const iterator &sec_it) const	{ return (st_node.top() != sec_it.st_node.top()); }
-		    bool operator==(const iterator &sec_it) const	{ return (st_node.top() == sec_it.st_node.top()); }
-		    bool operator>=(const iterator &sec_it) const	{ return (st_node.top() >= sec_it.st_node.top()); }
-		    bool operator>(const iterator &sec_it) const	{ return (st_node.top() > sec_it.st_node.top()); }
-		    bool operator<=(const iterator &sec_it) const	{ return (st_node.top() <= sec_it.st_node.top()); }
-		    bool operator<(const iterator &sec_it) const	{ return (st_node.top() < sec_it.st_node.top()); }
+		 	bool operator!=(const iterator &sec_it) const	{ return (st_node != sec_it.st_node); }
+		    bool operator==(const iterator &sec_it) const	{ return (st_node == sec_it.st_node); }
+		    bool operator>=(const iterator &sec_it) const	{ return (st_node >= sec_it.st_node); }
+		    bool operator>(const iterator &sec_it) const	{ return (st_node > sec_it.st_node); }
+		    bool operator<=(const iterator &sec_it) const	{ return (st_node <= sec_it.st_node); }
+		    bool operator<(const iterator &sec_it) const	{ return (st_node < sec_it.st_node); }
 
 			// Is input iterator
 			static const bool input_iter = true;
