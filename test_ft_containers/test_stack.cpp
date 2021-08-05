@@ -61,7 +61,7 @@ void	test_stack_vector()
 	std::vector<int> vec(5, 12);
 
 	std::stack<int, std::vector<int> > std_stack(vec);
-	ft::Stack<int, std::vector<int> > my_stack(vec);
+	ft::stack<int, std::vector<int> > my_stack(vec);
 
 	test_stack(std_stack, my_stack, 24);
 }

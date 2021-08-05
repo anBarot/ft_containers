@@ -1,16 +1,13 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
-	#include <map>
-	#include <stack>
-	#include <vector>
-	namespace ft = std;
-#else
-	#include <map.hpp>
-	#include <stack.hpp>
-	#include <vector.hpp>
-#endif
+// #if 1 //CREATE A REAL STL EXAMPLE
+#include <map>
+#include <stack>
+#include <vector>
+#include "../vector/vector.hpp"
+#include "../stack/stack.hpp"
+#include "../map/map.hpp"
 
 #include <stdlib.h>
 
@@ -33,15 +30,15 @@ public:
 	MutantStack(const MutantStack<T>& src) { *this = src; }
 	MutantStack<T>& operator=(const MutantStack<T>& rhs) 
 	{
-		this->c = rhs.c;
+		this->_container = rhs._container;
 		return *this;
 	}
 	~MutantStack() {}
 
 	typedef typename ft::stack<T>::container_type::iterator iterator;
 
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
+	iterator begin() { return this->GetContainer().begin(); }
+	iterator end() { return this->GetContainer().end(); }
 };
 
 int main(int argc, char** argv) {
@@ -74,6 +71,8 @@ int main(int argc, char** argv) {
 	}
 	ft::vector<Buffer>().swap(vector_buffer);
 
+	std::cout << "count value : " << COUNT << "\n";
+
 	try
 	{
 		for (int i = 0; i < COUNT; i++)
@@ -88,10 +87,14 @@ int main(int argc, char** argv) {
 		std::cout << e.what() << "\n";
 	}
 	
+	std::cout << "exception thrown\n";
+
 	for (int i = 0; i < COUNT; ++i)
 	{
 		map_int.insert(ft::make_pair(rand(), rand()));
 	}
+
+	std::cout << "map insert OK \n";
 
 	int sum = 0;
 	for (int i = 0; i < 10000; i++)
@@ -99,6 +102,7 @@ int main(int argc, char** argv) {
 		int access = rand();
 		sum += map_int[access];
 	}
+
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{

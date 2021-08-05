@@ -35,7 +35,7 @@ void	test_insertmap_std_intint(std::map<int, int> &map)
 	map.insert(std::make_pair(7, 8));
 }
 
-void	test_insertmap_ft_intint(ft::Map<int, int> &map)
+void	test_insertmap_ft_intint(ft::map<int, int> &map)
 {
 	map.insert(ft::make_pair(3, 4));
 	map.insert(ft::make_pair(1, 2));
@@ -51,7 +51,7 @@ void	test_insertmap_std_intstr(std::map<int, std::string> &map)
 	map.insert(std::make_pair(7, "seven"));
 }
 
-void	test_insertmap_ft_intstr(ft::Map<int, std::string> &map)
+void	test_insertmap_ft_intstr(ft::map<int, std::string> &map)
 {
 	map.insert(ft::make_pair<int, std::string>(3, "three"));
 	map.insert(ft::make_pair<int, std::string>(1, "one"));
@@ -71,7 +71,7 @@ void	test_erase_map(M &map)
 void	test_map_int_int()
 {
 	std::map<int, int> std_map;
-	ft::Map<int, int> ft_map;
+	ft::map<int, int> ft_map;
 
 	COLOR(BOLDYELLOW) test_insertmap_std_intint(std_map);
 	display_map(std_map);
@@ -86,7 +86,7 @@ void	test_map_int_int()
 void	test_map_int_string()
 {
 	std::map<int, std::string> std_map;
-	ft::Map<int, std::string> ft_map;
+	ft::map<int, std::string> ft_map;
 
 	COLOR(BOLDYELLOW) test_insertmap_std_intstr(std_map);
 	display_map(std_map);
@@ -144,7 +144,7 @@ void	test_plus_less_rev(M &map)
 void	test_iterator()
 {
 	std::map<int, std::string> std_map;
-	ft::Map<int, std::string> ft_map;
+	ft::map<int, std::string> ft_map;
 	
 	test_insertmap_std_intstr(std_map);
 	test_insertmap_ft_intstr(ft_map);
@@ -157,7 +157,7 @@ void	test_iterator()
 void	test_reverse_iterator()
 {
 	std::map<int, std::string> std_map;
-	ft::Map<int, std::string> ft_map;
+	ft::map<int, std::string> ft_map;
 	
 	test_insertmap_std_intstr(std_map);
 	test_insertmap_ft_intstr(ft_map);

@@ -12,7 +12,7 @@
 namespace ft
 {
 	template < class T, class Alloc = std::allocator<T> >
-	class Vector
+	class vector
 	{
 		public:
 			typedef	T												value_type;
@@ -23,9 +23,9 @@ namespace ft
 			typedef	size_t											size_type;
 			typedef	long 											difference_type;
 			typedef typename ft::VectorIterator<T>					iterator;
-			typedef typename ft::VectorConst_Iterator<T>			const_iterator;
-			typedef typename ft::VectorReverse_Iterator<T>			reverse_iterator;
-			typedef typename ft::VectorConst_Reverse_Iterator<T>	const_reverse_iterator;
+			typedef typename ft::VectorConstIterator<T>				const_iterator;
+			typedef typename ft::VectorReverseIterator<T>			reverse_iterator;
+			typedef typename ft::VectorConstReverseIterator<T>		const_reverse_iterator;
 			typedef	Alloc											allocator_type;
 
 		private:
@@ -36,19 +36,19 @@ namespace ft
 
 		public:
 			// Coplien
-			explicit Vector(const allocator_type &alloc = allocator_type()) : _capacity(0), _size(0), _data(NULL), _alloc(alloc) {}
-			explicit Vector(size_type n, const value_type &val = value_type(), const allocator_type& alloc = allocator_type());
-			Vector<T, Alloc> &operator=(const Vector &vector);
-			Vector(Vector &x);
+			explicit vector(const allocator_type &alloc = allocator_type()) : _alloc(alloc), _data(NULL), _capacity(0), _size(0) {}
+			explicit vector(size_type n, const value_type &val = value_type(), const allocator_type& alloc = allocator_type());
+			vector<T, Alloc> &operator=(const vector &vector);
+			vector(vector &x);
 			template <typename InputIterator>
-			Vector(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+			vector(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
 			InputIterator last, const allocator_type &alloc = allocator_type())
 			: _alloc(alloc),  _data(NULL),  _capacity(0), _size(0)
 			{
 				while (first != last)
 					this->push_back(*first++);
 			}
-			virtual ~Vector();
+			virtual ~vector();
 
 			// Iterator
 			iterator				begin()			{ return (iterator(_data)); }
@@ -64,8 +64,8 @@ namespace ft
 			size_type		size() const 			{ return (_size); }
 			size_type		capacity() const 		{ return (_capacity); }
 			allocator_type	get_allocator() const	{ return (_alloc); }
-			reference		at(size_type n) 		{ return (_data[n]); }
-			const_reference	at(size_type n) const 	{ return (_data[n]); }
+			reference		at(size_type n); 	
+			const_reference	at(size_type n) const;
 			reference		back() 					{ return (_data[_size - 1]); }
 			const_reference	back() const 			{ return (_data[_size - 1]); }
 			reference		front() 				{ return (*(_data)); }
@@ -97,7 +97,7 @@ namespace ft
 			void			clear();
 
 			// Other methods
-			void			swap(Vector &x) { Vector tmp(x); x = *this; *this = tmp; };
+			void			swap(vector &x) { vector tmp(x); x = *this; *this = tmp; };
 
 			// Operator overloads
 			reference operator[](size_type n);
@@ -115,7 +115,7 @@ namespace ft
 // Coplien implementation
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc>::Vector(size_type n, const value_type &val, const allocator_type &alloc)
+ft::vector<T, Alloc>::vector(size_type n, const value_type &val, const allocator_type &alloc)
 : _alloc(alloc), _capacity(0), _size(0) 
 {
 	this->reserve(n);
@@ -126,12 +126,12 @@ ft::Vector<T, Alloc>::Vector(size_type n, const value_type &val, const allocator
 }
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc>::Vector(ft::Vector<T, Alloc> &x) : 
+ft::vector<T, Alloc>::vector(ft::vector<T, Alloc> &x) : 
 _alloc(allocator_type()), _capacity(0), _size(0)
 { *this = x; }
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc> &ft::Vector<T, Alloc>::operator=(const Vector &vector)
+ft::vector<T, Alloc> &ft::vector<T, Alloc>::operator=(const vector &vector)
 {
 	_size = vector._size;
 	_capacity = vector._capacity;
@@ -144,17 +144,17 @@ ft::Vector<T, Alloc> &ft::Vector<T, Alloc>::operator=(const Vector &vector)
 }
 
 template<class T, class Alloc>
-ft::Vector<T, Alloc>::~Vector()
+ft::vector<T, Alloc>::~vector()
 {
 	this->clear();
 	if (_capacity > 0)
 		_alloc.deallocate(this->_data, this->_capacity);
 }
 
-// Vector methods
+// vector methods
 
 template<class T, class Alloc>
-void ft::Vector<T, Alloc>::clear()
+void ft::vector<T, Alloc>::clear()
 {
 	if (_size)
 	{
@@ -165,7 +165,7 @@ void ft::Vector<T, Alloc>::clear()
 }
 
 template<class T, class Alloc>
-void ft::Vector<T, Alloc>::pop_back()
+void ft::vector<T, Alloc>::pop_back()
 {
 	if (this->empty() == false)
 	{
@@ -175,7 +175,7 @@ void ft::Vector<T, Alloc>::pop_back()
 }
 
 template<class T, class Alloc>
-void ft::Vector<T, Alloc>::push_back(const_reference value)
+void ft::vector<T, Alloc>::push_back(const_reference value)
 {
 	if (!_capacity)
 	{
@@ -201,7 +201,7 @@ void ft::Vector<T, Alloc>::push_back(const_reference value)
 }
 
 template<class T, class Alloc>
-void ft::Vector<T, Alloc>::reserve(size_type capacity)
+void ft::vector<T, Alloc>::reserve(size_type capacity)
 {
 	if (capacity <= _capacity)
 		return;
@@ -214,23 +214,39 @@ void ft::Vector<T, Alloc>::reserve(size_type capacity)
 }
 
 template<class T, class Alloc>
-typename ft::Vector<T, Alloc>::reference ft::Vector<T, Alloc>::operator[](size_type n)
+typename ft::vector<T, Alloc>::reference	ft::vector<T, Alloc>::at(size_type n) 		
 {
 	if (n >= _size)
-		throw(ft::Vector<T, Alloc>::OutOfRange_exception()) ;
+		throw(ft::vector<T, Alloc>::OutOfRange_exception());
+	return (_data[n]); 
+}
+
+template<class T, class Alloc>
+typename ft::vector<T, Alloc>::const_reference	ft::vector<T, Alloc>::at(size_type n) const 	
+{ 
+	if (n >= _size)
+		throw(ft::vector<T, Alloc>::OutOfRange_exception());
+	return (_data[n]); 
+}
+
+template<class T, class Alloc>
+typename ft::vector<T, Alloc>::reference ft::vector<T, Alloc>::operator[](size_type n)
+{
+	if (n >= _size)
+		throw(ft::vector<T, Alloc>::OutOfRange_exception());
 	return(_data[n]);
 }
 
 // Relational operator overload
 
 template<class T, class Alloc>
-bool operator==(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator==(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {
 	if (lhs._size != rhs._size)
 		return (false);
 
-	typename ft::Vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::Vector<T, Alloc>::iterator i_rhs = rhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
 
 	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
 	{
@@ -244,14 +260,14 @@ bool operator==(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & r
 }
 
 template<class T, class Alloc>
-bool operator!=(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator!=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {	return (!(lhs == rhs)); }
 
 template<class T, class Alloc>
-bool operator<(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator<(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {
-	typename ft::Vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::Vector<T, Alloc>::iterator i_rhs = rhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
 
 	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
 	{
@@ -265,10 +281,10 @@ bool operator<(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rh
 }
 
 template<class T, class Alloc>
-bool operator<=(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator<=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {
-	typename ft::Vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::Vector<T, Alloc>::iterator i_rhs = rhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
 
 	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
 	{
@@ -282,17 +298,17 @@ bool operator<=(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & r
 }
 
 template<class T, class Alloc>
-bool operator>(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator>(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {	return (!(lhs <= rhs)); }
 
 template<class T, class Alloc>
-bool operator>=(const ft::Vector<T, Alloc> & lhs, const ft::Vector<T, Alloc> & rhs)
+bool operator>=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {	return (!(lhs < rhs)); }
 
-// Vector methods : Iterator
+// vector methods : Iterator
 
 template<class T, class Alloc>
-typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::erase(iterator position)
+typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::erase(iterator position)
 {
 	if (this->empty() == true || position > this->end())
 		return (NULL);
@@ -303,7 +319,7 @@ typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::erase(iterator pos
 		return (position--);
 	}
 
-	Vector<T, Alloc> tmp(position + 1, this->end());
+	vector<T, Alloc> tmp(position + 1, this->end());
 
 	for (size_type i = 0; i <= tmp.size(); i++)
 		this->pop_back();
@@ -314,7 +330,7 @@ typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::erase(iterator pos
 }
 
 template<class T, class Alloc>
-typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::erase(iterator first, iterator last)
+typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::erase(iterator first, iterator last)
 {
 	if (this->empty() == true || last > this->end() || first > this->end())
 		return (NULL);
@@ -328,7 +344,7 @@ typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::erase(iterator fir
 }
 
 template<class T, class Alloc>
-typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::insert(iterator position, const value_type& val)
+typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator position, const value_type& val)
 {
 	if (_size == _capacity)
 	{
@@ -344,7 +360,7 @@ typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::insert(iterator po
 		_capacity *= 2;
 	}
 
-	Vector tmp(position, this->end());
+	vector tmp(position, this->end());
 
 	for (size_t i = 0; i < tmp.size(); i++)
 		this->pop_back();
@@ -356,7 +372,7 @@ typename ft::Vector<T, Alloc>::iterator ft::Vector<T, Alloc>::insert(iterator po
 }
 
 template<class T, class Alloc>
-void ft::Vector<T, Alloc>::insert(iterator position, size_type n, const value_type& val)
+void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_type& val)
 {
 	if (_size - n < _capacity)
 	{
@@ -372,7 +388,7 @@ void ft::Vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 		_capacity *= 2;
 	}
 
-	Vector tmp(position, this->end());
+	vector tmp(position, this->end());
 
 	for (size_t i = 0; i < tmp.size(); i++)
 		this->pop_back();
@@ -389,7 +405,7 @@ void ft::Vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 
 template <class T, class Alloc>
 template<typename InputIterator>
-void	ft::Vector<T, Alloc>::insert(iterator position,
+void	ft::vector<T, Alloc>::insert(iterator position,
 		typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
 		InputIterator last)
 {
@@ -416,7 +432,7 @@ void	ft::Vector<T, Alloc>::insert(iterator position,
 }
 
 template <class T, class Alloc>
-void ft::Vector<T, Alloc>::assign(size_type n, const_reference val)
+void ft::vector<T, Alloc>::assign(size_type n, const_reference val)
 {
 	this->clear();
 
@@ -426,7 +442,7 @@ void ft::Vector<T, Alloc>::assign(size_type n, const_reference val)
 
 template <class T, class Alloc>
 template <typename InputIterator>
-void ft::Vector<T, Alloc>::assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
+void ft::vector<T, Alloc>::assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
 						InputIterator last)
 {
 	this->clear();

@@ -129,7 +129,7 @@ void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
 void	test_vector_str()
 {
 	std::vector<std::string> std_vec(3, "Hello");
-	ft::Vector<std::string> my_vec(3, "Hello");
+	ft::vector<std::string> my_vec(3, "Hello");
 
 	test_vector(std_vec, my_vec, "Goodbuy");
 }
@@ -137,7 +137,7 @@ void	test_vector_str()
 void	test_vector_int()
 {
 	std::vector<int> std_vec(3, 12);
-	ft::Vector<int> my_vec(3, 12);
+	ft::vector<int> my_vec(3, 12);
 
 	test_vector(std_vec, my_vec, 6);
 }
@@ -145,7 +145,7 @@ void	test_vector_int()
 void	test_vector_float()
 {
 	std::vector<float> std_vec(3, 45.7897);
-	ft::Vector<float> my_vec(3, 45.7897);
+	ft::vector<float> my_vec(3, 45.7897);
 
 	test_vector(std_vec, my_vec, 1.23456);
 }
@@ -160,9 +160,9 @@ int main()
 	test_vector_float();
 	std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
 	std::vector<int> std_vec(3, 12);
-	ft::Vector<int> my_vec(3, 12);
+	ft::vector<int> my_vec(3, 12);
 	std::vector<int> toswap_std_vec(3, 50);
-	ft::Vector<int> toswap_my_vec(3, 50);
+	ft::vector<int> toswap_my_vec(3, 50);
 
 	COLOR(BOLDYELLOW) std::cout << "Std vec content :\n";
 	display_vector(std_vec);

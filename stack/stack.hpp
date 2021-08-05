@@ -6,7 +6,7 @@
 namespace ft
 {
 	template<class T, class C = std::deque<T> >
-	class Stack
+	class stack
 	{
 		private:
 			C		_container;
@@ -17,10 +17,10 @@ namespace ft
 			typedef	size_t 	size_type;
 
 			// Coplien
-			explicit Stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
-			Stack(const Stack<T, C> &stack) : _container(stack._container) {}
-			Stack<T, C> &operator=(const Stack<T, C> &stack) { _container = stack._container; return (*this); }
-			~Stack() {};
+			explicit stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
+			stack(const stack<T, C> &stack) : _container(stack._container) {}
+			stack<T, C> &operator=(const stack<T, C> &stack) { _container = stack._container; return (*this); }
+			~stack() {};
 
 			// Getters
 			container_type		GetContainer() const { return (_container); };
@@ -38,9 +38,9 @@ namespace ft
 // Non member function
 
 template <class T, class C>
-void	swap(ft::Stack<T, C> &x, ft::Stack<T, C> &y)
+void	swap(ft::stack<T, C> &x, ft::stack<T, C> &y)
 {
-	ft::Stack<T, C> tmp = x;
+	ft::stack<T, C> tmp = x;
 	x = y;
 	y = tmp;
 }
@@ -48,27 +48,27 @@ void	swap(ft::Stack<T, C> &x, ft::Stack<T, C> &y)
 // Relational operator overload
 
 template <class T, class C>
-bool operator==(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator==(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() == rhs.GetContainer()); }
  	
 template <class T, class C>
-bool operator!=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator!=(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() != rhs.GetContainer()); }
  	
 template <class T, class C>
-bool operator<(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator<(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() < rhs.GetContainer()); }
  	
 template <class T, class C>
-bool operator<=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator<=(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() <= rhs.GetContainer()); }
  	
 template <class T, class C>
-bool operator>(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator>(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() > rhs.GetContainer()); }
  	
 template <class T, class C>
-bool operator>=(const ft::Stack<T,C> &lhs, const ft::Stack<T,C> &rhs)
+bool operator>=(const ft::stack<T,C> &lhs, const ft::stack<T,C> &rhs)
 { return (lhs.GetContainer() >= rhs.GetContainer()); }
 
 #endif // STACK_HPP

@@ -7,7 +7,7 @@
 namespace ft
 {
 	template<class T>
-	class VectorReverse_Iterator
+	class VectorReverseIterator
 	{
 		public:
 			typedef T										value_type;
@@ -15,18 +15,18 @@ namespace ft
     		typedef T*										pointer;
     		typedef T&										reference;
     		typedef std::random_access_iterator_tag			iterator_category;
-			typedef ft::VectorReverse_Iterator<T>			reverse_iterator;
+			typedef ft::VectorReverseIterator<T>			reverse_iterator;
 
 		private:
 		    pointer		_pvector;
 
 		public:
 			// Coplien
-		    VectorReverse_Iterator() 									{};
-		    VectorReverse_Iterator(const reverse_iterator &it) : _pvector(it._pvector)		{};
-		    VectorReverse_Iterator(pointer vector) : _pvector(vector)	{};
+		    VectorReverseIterator() 									{};
+		    VectorReverseIterator(const reverse_iterator &it) : _pvector(it._pvector)		{};
+		    VectorReverseIterator(pointer vector) : _pvector(vector)	{};
 			reverse_iterator &operator=(reverse_iterator &it) 	{ _pvector = it._pvector; return (this); }
-			~VectorReverse_Iterator()							{};
+			~VectorReverseIterator()							{};
 
 			// Operator overload
 		    reference operator*() const					{ return (*_pvector); }

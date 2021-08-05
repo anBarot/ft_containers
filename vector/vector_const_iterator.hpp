@@ -7,7 +7,7 @@
 namespace ft
 {
 	template <class T>
-	class VectorConst_Iterator
+	class VectorConstIterator
 	{
 		public:
 			typedef T								value_type;
@@ -15,18 +15,18 @@ namespace ft
     		typedef T*								pointer;
     		typedef T&								reference;
     		typedef std::random_access_iterator_tag	iterator_category;
-			typedef ft::VectorConst_Iterator<T>		const_iterator;
+			typedef ft::VectorConstIterator<T>		const_iterator;
 
 		private:
 		    const pointer	_pvector;
 
 		public:
 			// Coplien
-		    VectorConst_Iterator() 							{}
-		    VectorConst_Iterator(const const_iterator &it) : _pvector(it._pvector)	{}
-		    VectorConst_Iterator(const pointer vector) : _pvector(vector)	{}
+		    VectorConstIterator() 							{}
+		    VectorConstIterator(const const_iterator &it) : _pvector(it._pvector)	{}
+		    VectorConstIterator(const pointer vector) : _pvector(vector)	{}
 			const_iterator &operator=(const_iterator &it) 	{ _pvector = it._pvector; return (this); }
-			~VectorConst_Iterator()							{}
+			~VectorConstIterator()							{}
 
 			// Operator overload
 		    reference operator*() const				{ return (*_pvector); }

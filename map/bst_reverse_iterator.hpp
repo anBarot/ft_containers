@@ -20,12 +20,12 @@ namespace ft
 			typedef BSTReverseIterator<T>				iterator;
 
 		private :
-			ft::Stack<s_BSTNode<T>*> 	st_node;
-			ft::Stack<s_BSTNode<T>*> 	save_stack;
+			ft::stack<s_BSTNode<T>*> 	st_node;
+			ft::stack<s_BSTNode<T>*> 	save_stack;
 
 		public :
 			// Coplien
-			BSTReverseIterator() : st_node(ft::Stack<s_BSTNode<T>*>()), save_stack(ft::Stack<s_BSTNode<T>*>()) {}
+			BSTReverseIterator() : st_node(ft::stack<s_BSTNode<T>*>()), save_stack(ft::stack<s_BSTNode<T>*>()) {}
 			BSTReverseIterator(BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();

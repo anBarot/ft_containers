@@ -20,13 +20,13 @@ namespace ft
 			typedef BSTConstIterator<T>				iterator;
 
 		private :
-			ft::Stack<s_BSTNode<T>*> 	st_node;
-			ft::Stack<s_BSTNode<T>*> 	save_stack;
+			ft::stack<s_BSTNode<T>*> 	st_node;
+			ft::stack<s_BSTNode<T>*> 	save_stack;
 
 		public :
 			// Coplien
-			BSTConstIterator() : st_node(ft::Stack<s_BSTNode<T>*>()), save_stack(ft::Stack<s_BSTNode<T>*>()) {}
-			BSTConstIterator(BinarySearchTree<T> &bst)
+			BSTConstIterator() : st_node(ft::stack<s_BSTNode<T>*>()), save_stack(ft::stack<s_BSTNode<T>*>()) {}
+			BSTConstIterator(const BinarySearchTree<T> &bst)
 			{
         		s_BSTNode<T>* current = bst.GetRoot();
 
