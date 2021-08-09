@@ -59,6 +59,20 @@ void	test_insertmap_ft_intstr(ft::map<int, std::string> &map)
 	map.insert(ft::make_pair<int, std::string>(7, "seven"));
 }
 
+template <class M>
+void	test_find(M &map)
+{
+	std::cout << "\nfind 5 : " << (map.find(5))->second << "\n"; 
+	std::cout << "find 6 : ";
+	if (map.find(6) == map.end())
+		std::cout << "Cannot find key 6\n"; 
+	std::cout << "map count(5) : " << map.count(5) << "\n"; 
+	std::cout << "map count(6) : " << map.count(6) << "\n"; 
+	std::cout << "map[5] : " << map[5] << "\n"; 
+	std::cout << "map[6] : " << map[6] << "\n"; 
+	std::cout << "map count(5) : " << map.count(5) << "\n"; 
+	std::cout << "map count(6) : " << map.count(6) << "\n"; 
+}
 
 template <class M>
 void	test_erase_map(M &map)
@@ -78,6 +92,9 @@ void	test_map_int_int()
 
 	COLOR(BOLDGREEN) test_insertmap_ft_intint(ft_map);
 	display_map(ft_map);
+
+	COLOR(BOLDYELLOW) test_find(std_map);
+	COLOR(BOLDGREEN) test_find(ft_map);
 
 	COLOR(BOLDYELLOW) test_erase_map(std_map);
 	COLOR(BOLDGREEN) test_erase_map(ft_map);
@@ -124,13 +141,13 @@ template <class M>
 void	test_plus_less_rev(M &map)
 {
 
-	std::cout << "it rbegin++ loop :\n";
+	std::cout << "\nit rbegin++ loop :\n";
 
 	for (typename M::reverse_iterator it_beg = map.rbegin(); it_beg != map.rend(); it_beg++)
 		std::cout << it_beg->first << " : " << it_beg->second << "\n";
 
 
-	std::cout << "it rend-- loop :\n";
+	std::cout << "\nit rend-- loop :\n";
 
 	typename M::reverse_iterator it = map.rend();
 
@@ -151,7 +168,6 @@ void	test_iterator()
 
 	COLOR(BOLDYELLOW) test_plus_less(std_map);
 	COLOR(BOLDGREEN) test_plus_less(ft_map);
-
 }
 
 void	test_reverse_iterator()
@@ -168,13 +184,18 @@ void	test_reverse_iterator()
 
 int main()
 {
-	std::cout << "Test map <int, int>\n";
+	COLOR(BLUE) std::cout << "Test map <int, int>\n";
 	test_map_int_int();
-	std::cout << "Test map <int, string>\n";
+
+	COLOR(BLUE) std::cout << "\nTest map <int, string>\n";
 	test_map_int_string();
-	std::cout << "Test iterator functions\n";
+
+	COLOR(BLUE) std::cout << "\nTest iterator functions\n";
 	test_iterator();
-	std::cout << "Test reverse iterator functions\n";
+
+	COLOR(BLUE) std::cout << "\nTest reverse iterator functions\n";
 	test_reverse_iterator();
+
+
 	COLOR(RESET)
 }

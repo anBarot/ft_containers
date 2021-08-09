@@ -19,8 +19,7 @@ struct Buffer
 	char buff[BUFFER_SIZE];
 };
 
-
-#define COUNT (MAX_RAM / (int)sizeof(Buffer))
+#define COUNT  (MAX_RAM / (int)sizeof(Buffer))
 
 template<typename T>
 class MutantStack : public ft::stack<T>
@@ -42,6 +41,9 @@ public:
 };
 
 int main(int argc, char** argv) {
+
+	std::cout << "Enter main.cpp\n";
+
 	if (argc != 2)
 	{
 		std::cerr << "Usage: ./test seed" << std::endl;
@@ -51,6 +53,8 @@ int main(int argc, char** argv) {
 	}
 	const int seed = atoi(argv[1]);
 	srand(seed);
+
+	std::cout << "argc == 2\n";
 
 	ft::vector<std::string> vector_str;
 	ft::vector<int> vector_int;
@@ -87,9 +91,9 @@ int main(int argc, char** argv) {
 		std::cout << e.what() << "\n";
 	}
 	
-	std::cout << "exception thrown\n";
+	std::cout << "exception thrown OK\n";
 
-	for (int i = 0; i < COUNT; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		map_int.insert(ft::make_pair(rand(), rand()));
 	}
@@ -97,7 +101,7 @@ int main(int argc, char** argv) {
 	std::cout << "map insert OK \n";
 
 	int sum = 0;
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		int access = rand();
 		sum += map_int[access];
@@ -108,6 +112,7 @@ int main(int argc, char** argv) {
 	{
 		ft::map<int, int> copy = map_int;
 	}
+
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
 		iterable_stack.push(letter);
@@ -115,6 +120,7 @@ int main(int argc, char** argv) {
 	{
 		std::cout << *it;
 	}
+
 	std::cout << std::endl;
 	return (0);
 }
