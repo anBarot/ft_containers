@@ -23,8 +23,8 @@ namespace ft
 		public:
 		// Coplien
 			BinarySearchTree() : bstroot_p(NULL), size(0) {}
-			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node), size(0) {}
-			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)), size(0) {}
+			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node), size(1) {}
+			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)), size(1) {}
 			~BinarySearchTree();
 
 		// Getters
@@ -68,8 +68,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 	if (bstroot_p == NULL)
 	{
 		size++;
-		bstroot_p = GetNewNode(data);
-		return (bstroot_p);
+		return (bstroot_p = GetNewNode(data));
 	}
 	else
 	{
@@ -80,20 +79,18 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 				size++;
 				return (root->left = GetNewNode(data));
 			}
-			Insert(root->left, data);
+			return (Insert(root->left, data));
 		}
 		else
 		{
 			if (root->right == NULL)
 			{
 				size++;
-				root->right = GetNewNode(data);
-				return (root->right);
+				return (root->right = GetNewNode(data));
 			}
-			Insert(root->right, data);
+			return (Insert(root->right, data));
 		}
 	}
-	return (root);
 }
 
 template <class T>

@@ -139,8 +139,8 @@ ft::map<Key, T, Compare, Alloc> &ft::map<Key, T, Compare, Alloc>::operator=(cons
 	comp = x.comp;
 	alloc = x.alloc;
 
-	bst();
 	this->insert(x.begin(), x.end());
+	return (*this);
 }
 
 // Member functions 
@@ -225,7 +225,7 @@ typename ft::map<Key, T, Compare, Alloc>::iterator ft::map<Key, T, Compare, Allo
 	ft::map<Key, T, Compare, Alloc>::iterator it = this->begin();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != it.end() && comp(it->first, k) != true)
+	while (it != this->end() && comp(k, it->first) != true)
 		it++;
 
 	return (it);
@@ -237,7 +237,7 @@ typename ft::map<Key, T, Compare, Alloc>::const_iterator ft::map<Key, T, Compare
 	ft::map<Key, T, Compare, Alloc>::iterator it = this->begin();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != it.end() && comp(it->first, k) != true)
+	while (it != this->end() && comp(k, it->first) != true)
 		it++;
 
 	return (it);
@@ -249,7 +249,7 @@ typename ft::map<Key, T, Compare, Alloc>::iterator ft::map<Key, T, Compare, Allo
 	ft::map<Key, T, Compare, Alloc>::iterator it = this->begin();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != it.end() && comp(*it.first, k) != false)
+	while (it != this->end() && comp(it->first, k) != false)
 		it++;
 
 	return (it);
@@ -261,7 +261,7 @@ typename ft::map<Key, T, Compare, Alloc>::const_iterator ft::map<Key, T, Compare
 	ft::map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != it.end() && comp(*it.first, k) != false)
+	while (it != this->end() && comp(it->first, k) != false)
 		it++;
 
 	return (it);
@@ -270,13 +270,13 @@ typename ft::map<Key, T, Compare, Alloc>::const_iterator ft::map<Key, T, Compare
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Pair<typename ft::map<Key, T, Compare, Alloc>::iterator, typename ft::map<Key, T, Compare, Alloc>::iterator> ft::map<Key, T, Compare, Alloc>::equal_range(const key_type& k)
 {
-	return (ft::Pair<key_type, mapped_type>(this->lower_bound(k), this->upper_bound(k)));
+	return (ft::Pair<iterator, iterator>(this->lower_bound(k), this->upper_bound(k)));
 }
 
 template <class Key, class T, class Compare, class Alloc>
 typename ft::Pair<typename ft::map<Key, T, Compare, Alloc>::const_iterator, typename ft::map<Key, T, Compare, Alloc>::const_iterator> ft::map<Key, T, Compare, Alloc>::equal_range(const key_type& k) const
 {
-	return (ft::Pair<key_type, mapped_type>(this->lower_bound(k), this->upper_bound(k)));
+	return (ft::Pair<const_iterator, const_iterator>(this->lower_bound(k), this->upper_bound(k)));
 }
 
 // Member functions - getters
@@ -294,8 +294,7 @@ typename ft::map<Key, T, Compare, Alloc>::mapped_type& ft::map<Key, T, Compare, 
 
 	if (it == this->end())
 	{
-		ft::s_BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, NULL));
-		node++;
+		ft::s_BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, 0));
 		return (node->data.second);
 	}
 	else
@@ -345,12 +344,8 @@ void	ft::map<Key, T, Compare, Alloc>::erase(ft::map<Key, T, Compare, Alloc>::ite
 template <class Key, class T, class Compare, class Alloc>
 ft::Pair<typename ft::map<Key, T, Compare, Alloc>::iterator, bool>	ft::map<Key, T, Compare, Alloc>::insert(const value_type &val)
 {
-	std::cout << "insert : " << val.first << "\n";
-
 	if (find(val.first) == this->end())
 		return (ft::Pair<typename ft::map<Key, T, Compare, Alloc>::iterator, bool>(bst.Insert(bst.GetRoot(), val), true));
-
-	std::cout << "val found\n";
 
 	return (ft::Pair<typename ft::map<Key, T, Compare, Alloc>::iterator, bool>(find(val.first), false));
 }

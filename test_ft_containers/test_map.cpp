@@ -31,6 +31,7 @@ void	test_insertmap_std_intint(std::map<int, int> &map)
 {
 	map.insert(std::make_pair(3, 4));
 	map.insert(std::make_pair(1, 2));
+	map.insert(std::make_pair(0, 0));
 	map.insert(std::make_pair(5, 6));
 	map.insert(std::make_pair(7, 8));
 }
@@ -39,6 +40,7 @@ void	test_insertmap_ft_intint(ft::map<int, int> &map)
 {
 	map.insert(ft::make_pair(3, 4));
 	map.insert(ft::make_pair(1, 2));
+	map.insert(ft::make_pair(0, 0));
 	map.insert(ft::make_pair(5, 6));
 	map.insert(ft::make_pair(7, 8));
 }
@@ -71,13 +73,16 @@ void	test_find(M &map)
 	std::cout << "map[5] : " << map[5] << "\n"; 
 	std::cout << "map[6] : " << map[6] << "\n"; 
 	std::cout << "map count(5) : " << map.count(5) << "\n"; 
-	std::cout << "map count(6) : " << map.count(6) << "\n"; 
+	std::cout << "map count(6) : " << map.count(6) << "\n";
+	std::cout << "map[6] = 42 : "; 
+	map[6] = 42;
+	std::cout << "map[6] - " << map[6] << "\n"; 
 }
 
 template <class M>
 void	test_erase_map(M &map)
 {
-	std::cout << "Test erase map 5 \n";
+	std::cout << "\nTest erase map 5 \n";
 	map.erase(5);
 	display_map(map);
 }
@@ -141,13 +146,13 @@ template <class M>
 void	test_plus_less_rev(M &map)
 {
 
-	std::cout << "\nit rbegin++ loop :\n";
+	std::cout << "it rbegin++ loop :\n";
 
 	for (typename M::reverse_iterator it_beg = map.rbegin(); it_beg != map.rend(); it_beg++)
 		std::cout << it_beg->first << " : " << it_beg->second << "\n";
 
 
-	std::cout << "\nit rend-- loop :\n";
+	std::cout << "it rend-- loop :\n";
 
 	typename M::reverse_iterator it = map.rend();
 
@@ -182,20 +187,112 @@ void	test_reverse_iterator()
 	COLOR(BOLDGREEN) test_plus_less_rev(ft_map);
 }
 
+void	test_map_bounds_val(int val)
+{
+	std::map<int, int> std_map;
+	ft::map<int, int> ft_map;
+
+	test_insertmap_std_intint(std_map);
+	test_insertmap_ft_intint(ft_map);
+
+	COLOR(BOLDYELLOW)	std::cout << "Upperbound std : " << (std_map.upper_bound(val))->first << "\n";
+	COLOR(BOLDGREEN)
+	if ((ft_map.upper_bound(val)) != ft_map.end())
+		std::cout << "Upperbound ft : " << (ft_map.upper_bound(val))->first << "\n";
+	else 
+		std::cout << "Is map end\n";
+
+	COLOR(BOLDYELLOW)	std::cout << "Lower std : " << (std_map.lower_bound(val))->first << "\n";
+	COLOR(BOLDGREEN)	
+	if ((ft_map.lower_bound(val)) != ft_map.end())
+		std::cout << "Lower ft : " << (ft_map.lower_bound(val))->first << "\n";
+	else 
+		std::cout << "Is map end\n";
+
+	COLOR(BOLDYELLOW)	std::cout << "Equal std : " << (std_map.equal_range(val)).first->first << " - " << (std_map.equal_range(val)).second->first  << "\n";
+	COLOR(BOLDGREEN)	
+	if ((ft_map.equal_range(val)).first != ft_map.end() && (ft_map.equal_range(val)).second != ft_map.end())
+		std::cout << "Equal ft : " << (ft_map.equal_range(val)).first->first << " - " << (ft_map.equal_range(val)).second->first  << "\n";
+	else 
+		std::cout << "Is map end\n";
+}
+
+void	test_map_bounds()
+{
+	COLOR(BLUE) std::cout << "\nTest map bounds 5 :\n";
+	test_map_bounds_val(5);
+	COLOR(BLUE) std::cout << "\nTest map bounds 0 :\n";
+	test_map_bounds_val(0);
+	COLOR(BLUE) std::cout << "\nTest map bounds -5 :\n";
+	test_map_bounds_val(-5);
+	COLOR(BLUE) std::cout << "\nTest map bounds 42 :\n";
+	test_map_bounds_val(42);
+
+}
+
+template <class M>
+void	test_swap_m(M &map_one, M &map_two)
+{
+	std::cout << "display map one :\n";
+	display_map(map_one);
+	std::cout << "display map two :\n";
+	display_map(map_two);
+
+	std::cout << "Swap map one <-> map two\n\n";
+	map_one.swap(map_two);
+
+	std::cout << "display map one :\n";
+	display_map(map_one);
+	std::cout << "display map two :\n";
+	display_map(map_two);
+
+}
+
+template <class M>
+void	init_map(M &map_one, M &map_two)
+{
+	map_one[0] = 1; 
+	map_one[2] = 3; 
+	map_one[4] = 5; 
+	map_one[6] = 7; 
+	map_two[8] = 9;
+	map_two[10] = 11;
+	map_two[12] = 13;
+}
+
+void	test_swap()
+{
+	std::map<int, int> std_map_one;
+	std::map<int, int> std_map_two;
+	ft::map<int, int> ft_map_one;
+	ft::map<int, int> ft_map_two;
+
+	init_map(std_map_one, std_map_two);
+	init_map(ft_map_one, ft_map_two);
+
+	COLOR(BOLDYELLOW) test_swap_m(std_map_one, std_map_two); 
+	COLOR(BOLDGREEN) test_swap_m(ft_map_one, ft_map_two);
+}
+
 int main()
 {
-	COLOR(BLUE) std::cout << "Test map <int, int>\n";
-	test_map_int_int();
+	// COLOR(BLUE) std::cout << "Test map <int, int>\n";
+	// test_map_int_int();
 
-	COLOR(BLUE) std::cout << "\nTest map <int, string>\n";
-	test_map_int_string();
+	// COLOR(BLUE) std::cout << "\nTest map <int, string>\n";
+	// test_map_int_string();
 
-	COLOR(BLUE) std::cout << "\nTest iterator functions\n";
-	test_iterator();
+	// COLOR(BLUE) std::cout << "\nTest iterator functions\n";
+	// test_iterator();
 
-	COLOR(BLUE) std::cout << "\nTest reverse iterator functions\n";
-	test_reverse_iterator();
-
+	// COLOR(BLUE) std::cout << "\nTest reverse iterator functions\n";
+	// test_reverse_iterator();
+	
+	// COLOR(BLUE) std::cout << "\nTest map bounds\n";
+	// test_map_bounds();
+	
+	COLOR(BLUE) std::cout << "\nTest swap\n";
+	test_swap();
 
 	COLOR(RESET)
 }
