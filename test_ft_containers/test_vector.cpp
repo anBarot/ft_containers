@@ -53,11 +53,11 @@ void	test_push_and_pop(V &vec, T value, std::string str)
 template<class T, class V>
 void	test_assign(V &vec, T value, std::string str)
 {
-	std::cout << "Testing assign (3, value) " << value << " - " << str << " :" << std::endl;
+	std::cout << "Testing assign (3, " << value << ") - " << str << " :" << std::endl;
 	vec.assign(3, value);
 	display_vector(vec);
 
-	std::cout << "Testing assign iterator(7, value) " << value << " - " << str << " :" << std::endl;
+	std::cout << "Testing assign iterator(7, " << value << ") - " << str << " :" << std::endl;
 	V vec_test(7, value);
 	vec.assign(vec_test.begin(), vec_test.end());
 	display_vector(vec);
@@ -82,10 +82,13 @@ void	test_insert_erase(V &vec, T value, std::string str)
 	test_front_back(vec, str);
 }
 
-template<class V>
-void	test_riterator(V &vec, std::string str)
+template<class V, class T>
+void	test_riterator(V &vec, std::string str, T value)
 {
 	std::cout << "Testing reverse iterator" << " - " << str << std::endl;
+
+	vec[1] = value;
+	// vec.insert(vec.begin(), value);
 	for (typename V::reverse_iterator it = vec.rbegin(); it + 1 != vec.rend(); ++it)
 		std::cout << *it << " - ";
 	if (vec.size() > 0)
@@ -96,7 +99,7 @@ void	test_riterator(V &vec, std::string str)
 }
 
 template<class T, class V_1, class V_2>
-void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
+void	test_vector(V_1 &std_vec, V_2 &my_vec , T value, T value_two)
 {
 	COLOR(BOLDYELLOW) std::cout << "Vector content std_vec :" << std::endl;
 	display_vector(std_vec);
@@ -120,8 +123,8 @@ void	test_vector(V_1 &std_vec, V_2 &my_vec , T value )
 	COLOR(BOLDYELLOW) test_assign(std_vec, value, "std_vec");
 	COLOR(BOLDGREEN) test_assign(my_vec, value, "my_vec");
 
-	COLOR(BOLDYELLOW) test_riterator(std_vec, "std_vec");
-	COLOR(BOLDGREEN) test_riterator(my_vec, "my_vec");
+	COLOR(BOLDYELLOW) test_riterator(std_vec, "std_vec", value_two);
+	COLOR(BOLDGREEN) test_riterator(my_vec, "my_vec", value_two);
 
 	std::cout << RESET;
 }
@@ -131,7 +134,7 @@ void	test_vector_str()
 	std::vector<std::string> std_vec(3, "Hello");
 	ft::vector<std::string> my_vec(3, "Hello");
 
-	test_vector(std_vec, my_vec, "Goodbuy");
+	test_vector(std_vec, my_vec, "Goodbuy", "Hello");
 }
 
 void	test_vector_int()
@@ -139,7 +142,7 @@ void	test_vector_int()
 	std::vector<int> std_vec(3, 12);
 	ft::vector<int> my_vec(3, 12);
 
-	test_vector(std_vec, my_vec, 6);
+	test_vector(std_vec, my_vec, 6, 42);
 }
 
 void	test_vector_float()
@@ -147,18 +150,11 @@ void	test_vector_float()
 	std::vector<float> std_vec(3, 45.7897);
 	ft::vector<float> my_vec(3, 45.7897);
 
-	test_vector(std_vec, my_vec, 1.23456);
+	test_vector(std_vec, my_vec, 1.23456, 42.4242);
 }
 
-int main()
+void	test_swap()
 {
-	std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
-	test_vector_str();
-	std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
-	test_vector_int();
-	std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
-	test_vector_float();
-	std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
 	std::vector<int> std_vec(3, 12);
 	ft::vector<int> my_vec(3, 12);
 	std::vector<int> toswap_std_vec(3, 50);
@@ -176,6 +172,18 @@ int main()
 	display_vector(std_vec);
 	COLOR(BOLDGREEN) std::cout << "My vec content after swap:\n";
 	display_vector(my_vec);
+}
+
+int main()
+{
+	std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
+	test_vector_str();
+	std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
+	test_vector_int();
+	std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
+	test_vector_float();
+	std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
+	test_swap();
 
 	COLOR(RESET)
 }

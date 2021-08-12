@@ -232,8 +232,6 @@ typename ft::vector<T, Alloc>::const_reference	ft::vector<T, Alloc>::at(size_typ
 template<class T, class Alloc>
 typename ft::vector<T, Alloc>::reference ft::vector<T, Alloc>::operator[](size_type n)
 {
-	if (n >= _size)
-		throw(ft::vector<T, Alloc>::OutOfRange_exception());
 	return(_data[n]);
 }
 

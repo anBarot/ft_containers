@@ -276,20 +276,20 @@ void	test_swap()
 
 int main()
 {
-	// COLOR(BLUE) std::cout << "Test map <int, int>\n";
-	// test_map_int_int();
+	COLOR(BLUE) std::cout << "Test map <int, int>\n";
+	test_map_int_int();
 
-	// COLOR(BLUE) std::cout << "\nTest map <int, string>\n";
-	// test_map_int_string();
+	COLOR(BLUE) std::cout << "\nTest map <int, string>\n";
+	test_map_int_string();
 
-	// COLOR(BLUE) std::cout << "\nTest iterator functions\n";
-	// test_iterator();
+	COLOR(BLUE) std::cout << "\nTest iterator functions\n";
+	test_iterator();
 
-	// COLOR(BLUE) std::cout << "\nTest reverse iterator functions\n";
-	// test_reverse_iterator();
+	COLOR(BLUE) std::cout << "\nTest reverse iterator functions\n";
+	test_reverse_iterator();
 	
-	// COLOR(BLUE) std::cout << "\nTest map bounds\n";
-	// test_map_bounds();
+	COLOR(BLUE) std::cout << "\nTest map bounds\n";
+	test_map_bounds();
 	
 	COLOR(BLUE) std::cout << "\nTest swap\n";
 	test_swap();

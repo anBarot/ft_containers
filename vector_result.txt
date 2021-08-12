@@ -1,0 +1,435 @@
++++++++++++++++++ Test vector <string> +++++++++++++++++
+[1m[33mVector content std_vec :
+Hello - Hello - Hello
+Size : 3
+Max size : 288230376151711743
+Capacity : 3
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+Hello - Hello - Hello
+Size : 3
+Max size : 288230376151711743
+Capacity : 3
+Empty ?  : 0
+
+[1m[33mTesting push_back Goodbuy - std_vec :
+Testing front  - std_vec :
+Hello
+Testing back  - std_vec :
+Goodbuy
+
+Testing pop_back Goodbuy - std_vec :
+Testing front  - std_vec :
+Hello
+Testing back  - std_vec :
+Hello
+
+[1m[32mTesting push_back Goodbuy - my_vec :
+Testing front  - my_vec :
+Hello
+Testing back  - my_vec :
+Goodbuy
+
+Testing pop_back Goodbuy - my_vec :
+Testing front  - my_vec :
+Hello
+Testing back  - my_vec :
+Hello
+
+[1m[33mVector content std_vec :
+Hello - Hello - Hello
+Size : 3
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+Hello - Hello - Hello
+Size : 3
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 0
+
+[1m[33m
+Testing insert (begin) - std_vec
+Goodbuy
+Testing front  - std_vec :
+Goodbuy
+Testing back  - std_vec :
+Hello
+
+
+Testing erase (begin) - std_vec
+Hello
+Testing front  - std_vec :
+Hello
+Testing back  - std_vec :
+Hello
+
+[1m[32m
+Testing insert (begin) - my_vec
+Goodbuy
+Testing front  - my_vec :
+Goodbuy
+Testing back  - my_vec :
+Hello
+
+
+Testing erase (begin) - my_vec
+Hello
+Testing front  - my_vec :
+Hello
+Testing back  - my_vec :
+Hello
+
+[1m[33m
+Testing clear  - std_vec :
+Size : 0
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 1
+
+[1m[32m
+Testing clear  - my_vec :
+Size : 0
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 1
+
+[1m[33mTesting assign (3, Goodbuy) - std_vec :
+Goodbuy - Goodbuy - Goodbuy
+Size : 3
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, Goodbuy) - std_vec :
+Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy
+Size : 7
+Max size : 288230376151711743
+Capacity : 7
+Empty ?  : 0
+
+[1m[32mTesting assign (3, Goodbuy) - my_vec :
+Goodbuy - Goodbuy - Goodbuy
+Size : 3
+Max size : 288230376151711743
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, Goodbuy) - my_vec :
+Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy
+Size : 7
+Max size : 288230376151711743
+Capacity : 7
+Empty ?  : 0
+
+[1m[33mTesting reverse iterator - std_vec
+Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Hello - Goodbuy
+[1m[32mTesting reverse iterator - my_vec
+Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Hello - Goodbuy
+[0m
+
++++++++++++++++++ Test vector <int> +++++++++++++++++
+[1m[33mVector content std_vec :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[33mTesting push_back 6 - std_vec :
+Testing front  - std_vec :
+12
+Testing back  - std_vec :
+6
+
+Testing pop_back 6 - std_vec :
+Testing front  - std_vec :
+12
+Testing back  - std_vec :
+12
+
+[1m[32mTesting push_back 6 - my_vec :
+Testing front  - my_vec :
+12
+Testing back  - my_vec :
+6
+
+Testing pop_back 6 - my_vec :
+Testing front  - my_vec :
+12
+Testing back  - my_vec :
+12
+
+[1m[33mVector content std_vec :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+[1m[33m
+Testing insert (begin) - std_vec
+6
+Testing front  - std_vec :
+6
+Testing back  - std_vec :
+12
+
+
+Testing erase (begin) - std_vec
+12
+Testing front  - std_vec :
+12
+Testing back  - std_vec :
+12
+
+[1m[32m
+Testing insert (begin) - my_vec
+6
+Testing front  - my_vec :
+6
+Testing back  - my_vec :
+12
+
+
+Testing erase (begin) - my_vec
+12
+Testing front  - my_vec :
+12
+Testing back  - my_vec :
+12
+
+[1m[33m
+Testing clear  - std_vec :
+Size : 0
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 1
+
+[1m[32m
+Testing clear  - my_vec :
+Size : 0
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 1
+
+[1m[33mTesting assign (3, 6) - std_vec :
+6 - 6 - 6
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, 6) - std_vec :
+6 - 6 - 6 - 6 - 6 - 6 - 6
+Size : 7
+Max size : 2305843009213693951
+Capacity : 7
+Empty ?  : 0
+
+[1m[32mTesting assign (3, 6) - my_vec :
+6 - 6 - 6
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, 6) - my_vec :
+6 - 6 - 6 - 6 - 6 - 6 - 6
+Size : 7
+Max size : 2305843009213693951
+Capacity : 7
+Empty ?  : 0
+
+[1m[33mTesting reverse iterator - std_vec
+6 - 6 - 6 - 6 - 6 - 42 - 6
+[1m[32mTesting reverse iterator - my_vec
+6 - 6 - 6 - 6 - 6 - 42 - 6
+[0m
+
++++++++++++++++++ Test vector <float> +++++++++++++++++
+[1m[33mVector content std_vec :
+45.7897 - 45.7897 - 45.7897
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+45.7897 - 45.7897 - 45.7897
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[33mTesting push_back 1.23456 - std_vec :
+Testing front  - std_vec :
+45.7897
+Testing back  - std_vec :
+1.23456
+
+Testing pop_back 1.23456 - std_vec :
+Testing front  - std_vec :
+45.7897
+Testing back  - std_vec :
+45.7897
+
+[1m[32mTesting push_back 1.23456 - my_vec :
+Testing front  - my_vec :
+45.7897
+Testing back  - my_vec :
+1.23456
+
+Testing pop_back 1.23456 - my_vec :
+Testing front  - my_vec :
+45.7897
+Testing back  - my_vec :
+45.7897
+
+[1m[33mVector content std_vec :
+45.7897 - 45.7897 - 45.7897
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+[1m[32m
+Vector content my_vec :
+45.7897 - 45.7897 - 45.7897
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+[1m[33m
+Testing insert (begin) - std_vec
+1.23456
+Testing front  - std_vec :
+1.23456
+Testing back  - std_vec :
+45.7897
+
+
+Testing erase (begin) - std_vec
+45.7897
+Testing front  - std_vec :
+45.7897
+Testing back  - std_vec :
+45.7897
+
+[1m[32m
+Testing insert (begin) - my_vec
+1.23456
+Testing front  - my_vec :
+1.23456
+Testing back  - my_vec :
+45.7897
+
+
+Testing erase (begin) - my_vec
+45.7897
+Testing front  - my_vec :
+45.7897
+Testing back  - my_vec :
+45.7897
+
+[1m[33m
+Testing clear  - std_vec :
+Size : 0
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 1
+
+[1m[32m
+Testing clear  - my_vec :
+Size : 0
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 1
+
+[1m[33mTesting assign (3, 1.23456) - std_vec :
+1.23456 - 1.23456 - 1.23456
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, 1.23456) - std_vec :
+1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456
+Size : 7
+Max size : 2305843009213693951
+Capacity : 7
+Empty ?  : 0
+
+[1m[32mTesting assign (3, 1.23456) - my_vec :
+1.23456 - 1.23456 - 1.23456
+Size : 3
+Max size : 2305843009213693951
+Capacity : 6
+Empty ?  : 0
+
+Testing assign iterator(7, 1.23456) - my_vec :
+1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456
+Size : 7
+Max size : 2305843009213693951
+Capacity : 7
+Empty ?  : 0
+
+[1m[33mTesting reverse iterator - std_vec
+1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 42.4242 - 1.23456
+[1m[32mTesting reverse iterator - my_vec
+1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 42.4242 - 1.23456
+[0m
+
++++++++++++++++++ Test swap +++++++++++++++++
+[1m[33mStd vec content :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[32mMy vec content :
+12 - 12 - 12
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[33mStd vec content after swap:
+50 - 50 - 50
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[1m[32mMy vec content after swap:
+50 - 50 - 50
+Size : 3
+Max size : 2305843009213693951
+Capacity : 3
+Empty ?  : 0
+
+[0m
