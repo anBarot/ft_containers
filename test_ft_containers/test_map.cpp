@@ -272,6 +272,21 @@ void	test_swap()
 
 	COLOR(BOLDYELLOW) test_swap_m(std_map_one, std_map_two); 
 	COLOR(BOLDGREEN) test_swap_m(ft_map_one, ft_map_two);
+
+	COLOR(BLUE)	std::cout << "Test comparison operator \n";
+
+	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_map_one == std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator == ft : " << (ft_map_one == ft_map_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator != std : " << (std_map_one != std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator != ft : " << (ft_map_one != ft_map_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator < std : " << (std_map_one < std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator < ft : " << (ft_map_one < ft_map_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator > std : " << (std_map_one > std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator > ft : " << (ft_map_one > ft_map_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator >= std : " << (std_map_one >= std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator >= ft : " << (ft_map_one >= ft_map_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator <= std : " << (std_map_one <= std_map_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator <= ft : " << (ft_map_one <= ft_map_two) << "\n";
 }
 
 int main()
@@ -291,7 +306,7 @@ int main()
 	COLOR(BLUE) std::cout << "\nTest map bounds\n";
 	test_map_bounds();
 	
-	COLOR(BLUE) std::cout << "\nTest swap\n";
+	COLOR(BLUE) std::cout << "\nTest swap and op\n";
 	test_swap();
 
 	COLOR(RESET)

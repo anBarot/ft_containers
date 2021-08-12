@@ -24,7 +24,7 @@ namespace ft
 			// Coplien
 		    VectorIterator() {}
 		    VectorIterator(const iterator &it) { *this = it; }
-		    VectorIterator(pointer vector) : _pvector(vector) {}
+		    VectorIterator(const pointer vector) : _pvector(vector) {}
 			iterator &operator=(const iterator &it) { _pvector = it._pvector; return (*this); }
 			~VectorIterator()					{}
 

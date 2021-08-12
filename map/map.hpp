@@ -19,22 +19,22 @@ namespace ft
 	class map
 	{
 		public :
-			typedef Key													key_type;
-			typedef T													mapped_type;
-			typedef ft::Pair<Key, T>									value_type;
-			typedef Compare												key_compare;
-			typedef ft::value_compare<Key, T, Compare, Alloc>			value_compare;
-			typedef Alloc												allocator_type;
-			typedef value_type&											reference;
-			typedef const value_type&									const_reference;
-			typedef value_type*											pointer;
-			typedef const value_type*									const_pointer;
-			typedef size_t												size_type;
-			typedef typename std::ptrdiff_t								difference_type;
-			typedef typename ft::BSTIterator<value_type>				iterator;
-			typedef typename ft::BSTConstIterator<value_type>			const_iterator;
-			typedef typename ft::BSTReverseIterator<value_type>			reverse_iterator;
-			typedef typename ft::BSTConstReverseIterator<value_type>	const_reverse_iterator;
+			typedef Key														key_type;
+			typedef T														mapped_type;
+			typedef ft::Pair<Key, T>										value_type;
+			typedef Compare													key_compare;
+			typedef ft::value_compare<Key, T, Compare, Alloc>				value_compare;
+			typedef Alloc													allocator_type;
+			typedef value_type&												reference;
+			typedef const value_type&										const_reference;
+			typedef value_type*												pointer;
+			typedef const value_type*										const_pointer;
+			typedef size_t													size_type;
+			typedef typename std::ptrdiff_t									difference_type;
+			typedef typename ft::BSTIterator<value_type>					iterator;
+			typedef typename ft::BSTConstIterator<const value_type>			const_iterator;
+			typedef typename ft::BSTReverseIterator<value_type>				reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<const value_type>	const_reverse_iterator;
 
 		private :
 			key_compare							comp;
@@ -361,17 +361,17 @@ typename ft::map<Key, T, Compare, Alloc>::iterator	ft::map<Key, T, Compare, Allo
 template <class Key, class T, class Compare, class Alloc>
 bool operator==(const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	if (lhs._size != rhs._size)	
+	if (lhs.size() != rhs.size())	
 		return (false);
 
-	typename ft::map<Key, T, Compare, Alloc>::iterator lhs_it = lhs.begin(); 
-	typename ft::map<Key, T, Compare, Alloc>::iterator rhs_it = rhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin(); 
 
 	while (lhs_it != lhs.end())
 	{
-		if (lhs_it.first != rhs_it.first)
+		if (lhs_it->first != rhs_it->first)
 			return (false);
-		if (lhs_it.second != rhs_it.second)
+		if (lhs_it->second != rhs_it->second)
 			return (false);
 		lhs_it++;
 		rhs_it++;
@@ -383,22 +383,20 @@ bool operator==(const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T
 template <class Key, class T, class Compare, class Alloc>
 bool operator!=(const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	if (lhs == rhs)
-		return (false);	
-	return(true);
+	return(!(lhs == rhs));
 }
 
 template <class Key, class T, class Compare, class Alloc>
 bool operator<( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	typename ft::map<Key, T, Compare, Alloc>::iterator lhs_it = lhs.begin(); 
-	typename ft::map<Key, T, Compare, Alloc>::iterator rhs_it = rhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin(); 
 
 	while (lhs_it != lhs.end())
 	{
-		if (lhs_it.first >= rhs_it.first)
+		if (lhs_it->first >= rhs_it->first)
 			return (false);
-		if (lhs_it.second >= rhs_it.second)
+		if (lhs_it->second >= rhs_it->second)
 			return (false);
 		lhs_it++;
 		rhs_it++;
@@ -410,14 +408,14 @@ bool operator<( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T
 template <class Key, class T, class Compare, class Alloc>
 bool operator<=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	typename ft::map<Key, T, Compare, Alloc>::iterator lhs_it = lhs.begin(); 
-	typename ft::map<Key, T, Compare, Alloc>::iterator rhs_it = rhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin(); 
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin(); 
 
 	while (lhs_it != lhs.end())
 	{
-		if (lhs_it.first > rhs_it.first)
+		if (lhs_it->first > rhs_it->first)
 			return (false);
-		if (lhs_it.second > rhs_it.second)
+		if (lhs_it->second > rhs_it->second)
 			return (false);
 		lhs_it++;
 		rhs_it++;
@@ -429,17 +427,13 @@ bool operator<=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, 
 template <class Key, class T, class Compare, class Alloc>
 bool operator>( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	if (lhs <= rhs)
-		return (false);	
-	return (true);
+	return (!(lhs <= rhs));
 }
 
 template <class Key, class T, class Compare, class Alloc>
 bool operator>=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
-	if (lhs < rhs)
-		return (false);	
-	return (true);
+	return (!(lhs < rhs));
 }
 
 #endif

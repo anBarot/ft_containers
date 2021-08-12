@@ -2,7 +2,7 @@
 [1m[33mVector content std_vec :
 Hello - Hello - Hello
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 3
 Empty ?  : 0
 
@@ -10,7 +10,7 @@ Empty ?  : 0
 Vector content my_vec :
 Hello - Hello - Hello
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 3
 Empty ?  : 0
 
@@ -41,7 +41,7 @@ Hello
 [1m[33mVector content std_vec :
 Hello - Hello - Hello
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 0
 
@@ -49,7 +49,7 @@ Empty ?  : 0
 Vector content my_vec :
 Hello - Hello - Hello
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 0
 
@@ -88,42 +88,42 @@ Hello
 [1m[33m
 Testing clear  - std_vec :
 Size : 0
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 1
 
 [1m[32m
 Testing clear  - my_vec :
 Size : 0
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 1
 
 [1m[33mTesting assign (3, Goodbuy) - std_vec :
 Goodbuy - Goodbuy - Goodbuy
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, Goodbuy) - std_vec :
 Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy
 Size : 7
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 7
 Empty ?  : 0
 
 [1m[32mTesting assign (3, Goodbuy) - my_vec :
 Goodbuy - Goodbuy - Goodbuy
 Size : 3
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, Goodbuy) - my_vec :
 Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy
 Size : 7
-Max size : 288230376151711743
+Max size : 768614336404564650
 Capacity : 7
 Empty ?  : 0
 
@@ -137,7 +137,7 @@ Goodbuy - Goodbuy - Goodbuy - Goodbuy - Goodbuy - Hello - Goodbuy
 [1m[33mVector content std_vec :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
@@ -145,7 +145,7 @@ Empty ?  : 0
 Vector content my_vec :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
@@ -176,7 +176,7 @@ Testing back  - my_vec :
 [1m[33mVector content std_vec :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
@@ -184,7 +184,7 @@ Empty ?  : 0
 Vector content my_vec :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
@@ -223,42 +223,42 @@ Testing back  - my_vec :
 [1m[33m
 Testing clear  - std_vec :
 Size : 0
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 1
 
 [1m[32m
 Testing clear  - my_vec :
 Size : 0
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 1
 
 [1m[33mTesting assign (3, 6) - std_vec :
 6 - 6 - 6
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, 6) - std_vec :
 6 - 6 - 6 - 6 - 6 - 6 - 6
 Size : 7
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 7
 Empty ?  : 0
 
 [1m[32mTesting assign (3, 6) - my_vec :
 6 - 6 - 6
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, 6) - my_vec :
 6 - 6 - 6 - 6 - 6 - 6 - 6
 Size : 7
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 7
 Empty ?  : 0
 
@@ -272,7 +272,7 @@ Empty ?  : 0
 [1m[33mVector content std_vec :
 45.7897 - 45.7897 - 45.7897
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
@@ -280,7 +280,7 @@ Empty ?  : 0
 Vector content my_vec :
 45.7897 - 45.7897 - 45.7897
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
@@ -311,7 +311,7 @@ Testing back  - my_vec :
 [1m[33mVector content std_vec :
 45.7897 - 45.7897 - 45.7897
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
@@ -319,7 +319,7 @@ Empty ?  : 0
 Vector content my_vec :
 45.7897 - 45.7897 - 45.7897
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
@@ -358,42 +358,42 @@ Testing back  - my_vec :
 [1m[33m
 Testing clear  - std_vec :
 Size : 0
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 1
 
 [1m[32m
 Testing clear  - my_vec :
 Size : 0
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 1
 
 [1m[33mTesting assign (3, 1.23456) - std_vec :
 1.23456 - 1.23456 - 1.23456
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, 1.23456) - std_vec :
 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456
 Size : 7
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 7
 Empty ?  : 0
 
 [1m[32mTesting assign (3, 1.23456) - my_vec :
 1.23456 - 1.23456 - 1.23456
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 6
 Empty ?  : 0
 
 Testing assign iterator(7, 1.23456) - my_vec :
 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456 - 1.23456
 Size : 7
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 7
 Empty ?  : 0
 
@@ -407,29 +407,42 @@ Empty ?  : 0
 [1m[33mStd vec content :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
 [1m[32mMy vec content :
 12 - 12 - 12
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
 [1m[33mStd vec content after swap:
 50 - 50 - 50
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
 [1m[32mMy vec content after swap:
 50 - 50 - 50
 Size : 3
-Max size : 2305843009213693951
+Max size : 4611686018427387903
 Capacity : 3
 Empty ?  : 0
 
+[34mTest comparison operator 
+[1m[33mOperator == std : 0
+[1m[32mOperator == ft : 0
+[1m[33mOperator != std : 1
+[1m[32mOperator != ft : 1
+[1m[33mOperator < std : 0
+[1m[32mOperator < ft : 0
+[1m[33mOperator > std : 1
+[1m[32mOperator > ft : 1
+[1m[33mOperator >= std : 1
+[1m[32mOperator >= ft : 1
+[1m[33mOperator <= std : 0
+[1m[32mOperator <= ft : 0
 [0m

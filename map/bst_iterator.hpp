@@ -56,7 +56,7 @@ namespace ft
 
 			// Getters
 			s_BSTNode<T>* curr() const		{ return (st_node.top()); }
-			s_BSTNode<T>* prev_curr()const	{ return (save_stack.top()); }
+			s_BSTNode<T>* prev_curr() const	{ return (save_stack.top()); }
 
 			// Member function
     		bool	hasNext();

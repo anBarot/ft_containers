@@ -155,23 +155,38 @@ void	test_vector_float()
 
 void	test_swap()
 {
-	std::vector<int> std_vec(3, 12);
-	ft::vector<int> my_vec(3, 12);
-	std::vector<int> toswap_std_vec(3, 50);
-	ft::vector<int> toswap_my_vec(3, 50);
+	std::vector<int> std_vec_one(3, 12);
+	ft::vector<int> ft_vec_one(3, 12);
+	std::vector<int> std_vec_two(3, 50);
+	ft::vector<int> ft_vec_two(3, 50);
 
 	COLOR(BOLDYELLOW) std::cout << "Std vec content :\n";
-	display_vector(std_vec);
+	display_vector(std_vec_one);
 	COLOR(BOLDGREEN) std::cout << "My vec content :\n";
-	display_vector(my_vec);
+	display_vector(ft_vec_one);
 
-	std_vec.swap(toswap_std_vec);
-	my_vec.swap(toswap_my_vec);
+	std_vec_one.swap(std_vec_two);
+	ft_vec_one.swap(ft_vec_two);
 
 	COLOR(BOLDYELLOW) std::cout << "Std vec content after swap:\n";
-	display_vector(std_vec);
+	display_vector(std_vec_one);
 	COLOR(BOLDGREEN) std::cout << "My vec content after swap:\n";
-	display_vector(my_vec);
+	display_vector(ft_vec_one);
+
+	COLOR(BLUE)	std::cout << "Test comparison operator \n";
+
+	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_vec_one == std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator == ft : " << (ft_vec_one == ft_vec_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator != std : " << (std_vec_one != std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator != ft : " << (ft_vec_one != ft_vec_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator < std : " << (std_vec_one < std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator < ft : " << (ft_vec_one < ft_vec_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator > std : " << (std_vec_one > std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator > ft : " << (ft_vec_one > ft_vec_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator >= std : " << (std_vec_one >= std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator >= ft : " << (ft_vec_one >= ft_vec_two) << "\n";
+	COLOR(BOLDYELLOW)	std::cout << "Operator <= std : " << (std_vec_one <= std_vec_two) << "\n";
+	COLOR(BOLDGREEN)	std::cout << "Operator <= ft : " << (ft_vec_one <= ft_vec_two) << "\n";
 }
 
 int main()

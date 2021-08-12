@@ -10,15 +10,15 @@ namespace ft
 	class VectorConstIterator
 	{
 		public:
-			typedef T								value_type;
-    		typedef std::ptrdiff_t					difference_type;
-    		typedef T*								pointer;
-    		typedef T&								reference;
-    		typedef std::random_access_iterator_tag	iterator_category;
-			typedef ft::VectorConstIterator<T>		const_iterator;
+			typedef const T								value_type;
+    		typedef std::ptrdiff_t						difference_type;
+    		typedef const T*							pointer;
+    		typedef T&									reference;
+    		typedef std::random_access_iterator_tag		iterator_category;
+			typedef ft::VectorConstIterator<const T>	const_iterator;
 
 		private:
-		    const pointer	_pvector;
+		    pointer	_pvector;
 
 		public:
 			// Coplien

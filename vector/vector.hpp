@@ -15,18 +15,18 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef	T												value_type;
-			typedef	T&												reference;
-			typedef	const T& 										const_reference;
-			typedef	T*												pointer;
-			typedef	const T* 										const_pointer;
-			typedef	size_t											size_type;
-			typedef	long 											difference_type;
-			typedef typename ft::VectorIterator<T>					iterator;
-			typedef typename ft::VectorConstIterator<T>				const_iterator;
-			typedef typename ft::VectorReverseIterator<T>			reverse_iterator;
-			typedef typename ft::VectorConstReverseIterator<T>		const_reverse_iterator;
-			typedef	Alloc											allocator_type;
+			typedef	T													value_type;
+			typedef	T&													reference;
+			typedef	const T& 											const_reference;
+			typedef	T*													pointer;
+			typedef	const T* 											const_pointer;
+			typedef	size_t												size_type;
+			typedef	long 												difference_type;
+			typedef typename ft::VectorIterator<T>						iterator;
+			typedef typename ft::VectorConstIterator<const T>			const_iterator;
+			typedef typename ft::VectorReverseIterator<T>				reverse_iterator;
+			typedef typename ft::VectorConstReverseIterator<const T>	const_reverse_iterator;
+			typedef	Alloc												allocator_type;
 
 		private:
 			allocator_type		_alloc;
@@ -235,74 +235,6 @@ typename ft::vector<T, Alloc>::reference ft::vector<T, Alloc>::operator[](size_t
 	return(_data[n]);
 }
 
-// Relational operator overload
-
-template<class T, class Alloc>
-bool operator==(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{
-	if (lhs._size != rhs._size)
-		return (false);
-
-	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
-
-	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
-	{
-		if (*i_lhs != *i_rhs)
-			return (false);
-		i_lhs++;
-		i_rhs++;
-	}
-
-	return (true);
-}
-
-template<class T, class Alloc>
-bool operator!=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{	return (!(lhs == rhs)); }
-
-template<class T, class Alloc>
-bool operator<(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{
-	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
-
-	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
-	{
-		if (*i_lhs >= *i_rhs)
-			return (false);
-		i_lhs++;
-		i_rhs++;
-	}
-
-	return (true);
-}
-
-template<class T, class Alloc>
-bool operator<=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{
-	typename ft::vector<T, Alloc>::iterator i_lhs = lhs.begin();
-	typename ft::vector<T, Alloc>::iterator i_rhs = rhs.begin();
-
-	for (i_lhs; i_lhs != lhs.end(); i_lhs++)
-	{
-		if (*i_lhs > *i_rhs)
-			return (false);
-		i_lhs++;
-		i_rhs++;
-	}
-
-	return (true);
-}
-
-template<class T, class Alloc>
-bool operator>(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{	return (!(lhs <= rhs)); }
-
-template<class T, class Alloc>
-bool operator>=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
-{	return (!(lhs < rhs)); }
-
 // vector methods : Iterator
 
 template<class T, class Alloc>
@@ -461,5 +393,73 @@ void ft::vector<T, Alloc>::assign(typename ft::enable_if<InputIterator::input_it
 		first++;
 	}
 }
+
+// Relational operator overload
+
+template<class T, class Alloc>
+bool operator==(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{
+	if (lhs.size() != rhs.size())
+		return (false);
+
+	typename ft::vector<T, Alloc>::const_iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::const_iterator i_rhs = rhs.begin();
+
+	while (i_lhs != lhs.end())
+	{
+		if (*i_lhs != *i_rhs)
+			return (false);
+		i_lhs++;
+		i_rhs++;
+	}
+
+	return (true);
+}
+
+template<class T, class Alloc>
+bool operator!=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{	return (!(lhs == rhs)); }
+
+template<class T, class Alloc>
+bool operator<(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{
+	typename ft::vector<T, Alloc>::const_iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::const_iterator i_rhs = rhs.begin();
+
+	while (i_lhs != lhs.end())
+	{
+		if (*i_lhs >= *i_rhs)
+			return (false);
+		i_lhs++;
+		i_rhs++;
+	}
+
+	return (true);
+}
+
+template<class T, class Alloc>
+bool operator<=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{
+	typename ft::vector<T, Alloc>::const_iterator i_lhs = lhs.begin();
+	typename ft::vector<T, Alloc>::const_iterator i_rhs = rhs.begin();
+
+	while (i_lhs != lhs.end())
+	{
+		if (*i_lhs > *i_rhs)
+			return (false);
+		i_lhs++;
+		i_rhs++;
+	}
+
+	return (true);
+}
+
+template<class T, class Alloc>
+bool operator>(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{	return (!(lhs <= rhs)); }
+
+template<class T, class Alloc>
+bool operator>=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
+{	return (!(lhs < rhs)); }
 
 #endif
