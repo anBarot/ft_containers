@@ -29,7 +29,7 @@ namespace ft
 			// Member functions
 			bool				empty() const					{ return (_container.empty()); }
 			void				pop()							{ _container.pop_back(); }
-			void				push (const value_type& val)	{ _container.push_back(val); }
+			void				push(const value_type& val)		{ _container.push_back(val); }
 			value_type&			top()							{ return (_container.back()); }
 			const 	value_type& top() const						{ return (_container.back()); }
 	};

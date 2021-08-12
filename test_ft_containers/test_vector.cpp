@@ -173,6 +173,13 @@ void	test_swap()
 	COLOR(BOLDGREEN) std::cout << "My vec content after swap:\n";
 	display_vector(ft_vec_one);
 
+	std_vec_one[0] = std_vec_two[0];
+	std_vec_one[1] = 0;
+	ft_vec_one[0] = ft_vec_two[0];
+	ft_vec_one[1] = 0;
+	display_vector(ft_vec_one);
+	display_vector(ft_vec_two);
+
 	COLOR(BLUE)	std::cout << "Test comparison operator \n";
 
 	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_vec_one == std_vec_two) << "\n";

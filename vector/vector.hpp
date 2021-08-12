@@ -428,30 +428,33 @@ bool operator<(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rh
 
 	while (i_lhs != lhs.end())
 	{
-		if (*i_lhs >= *i_rhs)
-			return (false);
+		if (*i_lhs < *i_rhs )
+			return (true);
 		i_lhs++;
 		i_rhs++;
 	}
 
-	return (true);
+	return (false);
 }
 
 template<class T, class Alloc>
 bool operator<=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {
+	if (lhs == rhs)
+		return (true);
+
 	typename ft::vector<T, Alloc>::const_iterator i_lhs = lhs.begin();
 	typename ft::vector<T, Alloc>::const_iterator i_rhs = rhs.begin();
 
 	while (i_lhs != lhs.end())
 	{
-		if (*i_lhs > *i_rhs)
-			return (false);
+		if (*i_lhs < *i_rhs)
+			return (true);
 		i_lhs++;
 		i_rhs++;
 	}
 
-	return (true);
+	return (false);
 }
 
 template<class T, class Alloc>

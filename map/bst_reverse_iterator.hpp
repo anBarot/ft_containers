@@ -9,15 +9,14 @@
 namespace ft
 {
 	template <class T>
-	class BSTReverseIterator //: public ft::iterator_traits<T*>
+	class BSTReverseIterator
 	{
 		public :
 			typedef T								value_type;
     		typedef std::ptrdiff_t					difference_type;
     		typedef T*								pointer;
     		typedef T&								reference;
-    		typedef std::bidirectional_iterator_tag	iterator_category;
-			typedef BSTReverseIterator<T>				iterator;
+			typedef BSTReverseIterator<T>			iterator;
 
 		private :
 			ft::stack<s_BSTNode<T>*> 	st_node;

@@ -32,9 +32,9 @@ namespace ft
 			typedef size_t													size_type;
 			typedef typename std::ptrdiff_t									difference_type;
 			typedef typename ft::BSTIterator<value_type>					iterator;
-			typedef typename ft::BSTConstIterator<const value_type>			const_iterator;
+			typedef typename ft::BSTConstIterator<value_type>			const_iterator;
 			typedef typename ft::BSTReverseIterator<value_type>				reverse_iterator;
-			typedef typename ft::BSTConstReverseIterator<const value_type>	const_reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<value_type>	const_reverse_iterator;
 
 		private :
 			key_compare							comp;
@@ -406,7 +406,7 @@ bool operator<( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T
 }
 
 template <class Key, class T, class Compare, class Alloc>
-bool operator<=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
+bool operator<=(const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
 	typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin(); 
 	typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin(); 

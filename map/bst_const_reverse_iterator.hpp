@@ -9,14 +9,13 @@
 namespace ft
 {
 	template <class T>
-	class BSTConstReverseIterator //: public ft::iterator_traits<T*>
+	class BSTConstReverseIterator
 	{
 		public :
 			typedef const T								value_type;
     		typedef std::ptrdiff_t						difference_type;
     		typedef const T*							pointer;
     		typedef T&									reference;
-    		typedef std::bidirectional_iterator_tag		iterator_category;
 			typedef BSTConstReverseIterator<const T>	iterator;
 
 		private :
