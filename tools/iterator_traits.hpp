@@ -1,17 +1,23 @@
-#if !defined(ITERATOR_TRAITS_HPP)
-#define ITERATOR_TRAITS_HPP
+#ifndef ITERATOR_TRAITS_HPP
+# define ITERATOR_TRAITS_HPP
 
 namespace ft
 {
-    template <class T>
-    class iterator_traits<T*>
-    { 
+    // class input_iterator_tag {};
+    // class output_iterator_tag {};
+    // class forward_iterator_tag       : public input_iterator_tag {};
+    // class bidirectional_iterator_tag : public forward_iterator_tag {};
+    // class random_access_iterator_tag : public bidirectional_iterator_tag {};
+
+    template <class iterator_tag, class T>
+    class iterator_traits
+    {
         public :
-            typedef typename T::value_type value_type;
-            typedef typename T::difference_type difference_type;
-            typedef typename T::iterator_category iterator_category;
-            typedef typename T::pointer pointer;
-            typedef typename T::reference reference;
+            typedef std::ptrdiff_t  difference_type;
+            typedef T               value_type;
+            typedef T*              pointer;
+            typedef T&              reference;
+            typedef iterator_tag    iterator_category;
     };
 }
 

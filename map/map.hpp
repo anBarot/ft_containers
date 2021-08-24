@@ -30,11 +30,10 @@ namespace ft
 			typedef value_type*												pointer;
 			typedef const value_type*										const_pointer;
 			typedef size_t													size_type;
-			typedef typename std::ptrdiff_t									difference_type;
 			typedef typename ft::BSTIterator<value_type>					iterator;
-			typedef typename ft::BSTConstIterator<value_type>			const_iterator;
+			typedef typename ft::BSTConstIterator<value_type>				const_iterator;
 			typedef typename ft::BSTReverseIterator<value_type>				reverse_iterator;
-			typedef typename ft::BSTConstReverseIterator<value_type>	const_reverse_iterator;
+			typedef typename ft::BSTConstReverseIterator<value_type>		const_reverse_iterator;
 
 		private :
 			key_compare							comp;
@@ -47,10 +46,10 @@ namespace ft
 			: comp(n_comp), bst(), alloc(n_alloc) {}
 			map(const map< Key, T, Compare, Alloc > &x);
 			map &operator=(const map &x);
-			template <class Inputiterator>
-  			map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
-			Inputiterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
-			~map();
+			template <class InputIterator>
+  			map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first,
+			InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
+			virtual ~map();
 
 			// iterator
 			iterator 							begin() { return(iterator(bst)); }
@@ -71,14 +70,14 @@ namespace ft
 			Pair<const_iterator,const_iterator>	equal_range(const key_type& k) const;
 
 			// Getters
-			size_type								size() const;
-			size_type								count(const key_type& k) const;
-			bool									empty() const { return (bst.GetRoot() == NULL); }
-			allocator_type							get_allocator() const { return (alloc); }
-			size_type								max_size() const { return( alloc.max_size() ); }
-			key_compare								key_comp() const { return (comp); }
-			value_compare							value_comp() const { return ( value_compare(Compare())); }
-			mapped_type&					 		operator[](const key_type &k);
+			size_type				size() const;
+			size_type				count(const key_type& k) const;
+			bool					empty() const { return (bst.GetSize() == 0); }
+			allocator_type			get_allocator() const { return (alloc); }
+			size_type				max_size() const { return( alloc.max_size() ); }
+			key_compare				key_comp() const { return (comp); }
+			value_compare			value_comp() const { return ( value_compare(Compare())); }
+			mapped_type&			operator[](const key_type &k);
 
 			// Setters
 			void					clear() { bst.~BinarySearchTree(); }
@@ -87,16 +86,9 @@ namespace ft
 			void					erase(iterator first, iterator last);
 			Pair<iterator, bool>	insert(const value_type &val);
 			iterator				insert(iterator position, const value_type &val);
-			template <class Inputiterator>
-			void					insert(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first,
-											Inputiterator last)
-			{
-				while (first != last)
-				{
-					insert(*first);
-					first++;
-				}
-			}
+			template <class InputIterator>
+			void					insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first,
+											InputIterator last);
 
 			// Other member functions
 			void					swap(map &x) { map tmp(x); x = *this; *this = tmp; };
@@ -106,9 +98,9 @@ namespace ft
 // Coplien
 
 template <class Key, class T, class Compare, class Alloc>
-template <class Inputiterator>
-ft::map<Key, T, Compare, Alloc>::map(typename ft::enable_if<Inputiterator::input_iter, Inputiterator>::type first, 
-Inputiterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(NULL), alloc(n_alloc)
+template <class InputIterator>
+ft::map<Key, T, Compare, Alloc>::map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first, 
+InputIterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(NULL), alloc(n_alloc)
 {
 	while (first != last)
 	{
@@ -122,8 +114,14 @@ ft::map<Key, T, Compare, Alloc>::map(const map< Key, T, Compare, Alloc > &x) : b
 {
 	comp = x.comp;
 	alloc = x.alloc;
+	ft::map<Key, T, Compare, Alloc>::const_iterator beg = x.begin();
+	ft::map<Key, T, Compare, Alloc>::const_iterator end = x.end();
 
-	this->insert(x.begin(), x.end());
+	while (beg != end)
+	{
+		bst.Insert(bst.GetRoot(), *beg);
+		beg++;
+	}
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -138,8 +136,14 @@ ft::map<Key, T, Compare, Alloc> &ft::map<Key, T, Compare, Alloc>::operator=(cons
 	clear();
 	comp = x.comp;
 	alloc = x.alloc;
+	ft::map<Key, T, Compare, Alloc>::const_iterator beg = x.begin();
+	ft::map<Key, T, Compare, Alloc>::const_iterator end = x.end();
 
-	this->insert(x.begin(), x.end());
+	while (beg != end)
+	{
+		bst.Insert(bst.GetRoot(), *beg);
+		beg++;
+	}
 	return (*this);
 }
 
@@ -320,13 +324,15 @@ typename ft::map<Key, T, Compare, Alloc>::size_type ft::map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Alloc>
 void	ft::map<Key, T, Compare, Alloc>::erase(ft::map<Key, T, Compare, Alloc>::iterator position)
 {
-	bst.Delete(bst.GetRoot(), *position);
+	if (position != this->end())
+		bst.Delete(bst.GetRoot(), *position);
 }
 
 template <class Key, class T, class Compare, class Alloc>
 typename ft::map<Key, T, Compare, Alloc>::size_type	ft::map<Key, T, Compare, Alloc>::erase(const ft::map<Key, T, Compare, Alloc>::key_type &k)
 {
-	bst.Delete(bst.GetRoot(), *find(k));
+	if (find(k) != this->end())
+		bst.Delete(bst.GetRoot(), *find(k));
 
 	return (bst.GetSize());
 }
@@ -334,11 +340,8 @@ typename ft::map<Key, T, Compare, Alloc>::size_type	ft::map<Key, T, Compare, All
 template <class Key, class T, class Compare, class Alloc>
 void	ft::map<Key, T, Compare, Alloc>::erase(ft::map<Key, T, Compare, Alloc>::iterator first, ft::map<Key, T, Compare, Alloc>::iterator last)
 {
-	while (first != last)
-	{
-		this->erase(first);
-		first++;
-	}
+	while (last-- != first)
+		this->erase(last);
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -354,6 +357,17 @@ template <class Key, class T, class Compare, class Alloc>
 typename ft::map<Key, T, Compare, Alloc>::iterator	ft::map<Key, T, Compare, Alloc>::insert(ft::map<Key, T, Compare, Alloc>::iterator position, const value_type &val)
 {
 	return (bst.Insert(position.curr(), val));
+}
+
+template <class Key, class T, class Compare, class Alloc>
+template <class InputIterator>
+void ft::map<Key, T, Compare, Alloc>::insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first, InputIterator last)
+{
+	while (first != last)
+	{
+		insert(*first);
+		first++;
+	}
 }
 
 // Relational operators
@@ -434,6 +448,14 @@ template <class Key, class T, class Compare, class Alloc>
 bool operator>=( const ft::map<Key, T, Compare, Alloc>& lhs, const ft::map<Key, T, Compare, Alloc>& rhs)
 { 
 	return (!(lhs < rhs));
+}
+
+// Other function
+
+template <class Key, class T, class Compare, class Alloc>
+void swap(ft::map<Key,T,Compare,Alloc>& x, ft::map<Key,T,Compare,Alloc>& y)
+{
+	x.swap(y);
 }
 
 #endif

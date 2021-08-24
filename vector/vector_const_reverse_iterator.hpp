@@ -3,18 +3,18 @@
 
 #include <iostream>
 #include <cstddef>
+#include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class VectorConstReverseIterator
+	class VectorConstReverseIterator : public ft::iterator_traits<std::__1::random_access_iterator_tag, T>
 	{
 		public:
+			typedef typename ft::iterator_traits<std::__1::random_access_iterator_tag, T>::iterator_category iterator_category;
 			typedef const T										value_type;
-    		typedef std::ptrdiff_t								difference_type;
     		typedef const T*									pointer;
-    		typedef T&											reference;
-    		typedef std::random_access_iterator_tag				iterator_category;
+			typedef T&    						          		reference;
 			typedef ft::VectorConstReverseIterator<const T>		const_reverse_iterator;
 
 		private:
@@ -29,6 +29,9 @@ namespace ft
 			: _pvector(vector)										{}
 			const_reverse_iterator &operator=(const_reverse_iterator &it) 	{ _pvector = it._pvector; return (this); }
 			~VectorConstReverseIterator()										{}
+
+			// Getter
+			pointer		GetPointer() { return(_pvector); }
 
 			// Operator overload
 		    reference operator*() const						{ return (*_pvector); }
@@ -47,9 +50,6 @@ namespace ft
 		    bool operator>(const const_reverse_iterator &sec_it) const	{ return (_pvector < sec_it._pvector); }
 		    bool operator<=(const const_reverse_iterator &sec_it) const	{ return (_pvector >= sec_it._pvector); }
 		    bool operator<(const const_reverse_iterator &sec_it) const	{ return (_pvector > sec_it._pvector); }
-
-			// Is input iterator
-			static const bool input_iter = true;
 	};
 }
 

@@ -4,19 +4,16 @@
 #include <iterator>
 #include "binary_search_tree.hpp"
 #include "../stack/stack.hpp"
-// #include "../tools/iterator_traits.hpp"
+#include "../tools/iterator_traits.hpp"
 
 namespace ft
 {
 	template <class T>
-	class BSTConstIterator
+	class BSTConstIterator : public ft::iterator_traits<std::__1::bidirectional_iterator_tag, T>
 	{
 		public :
-			typedef T								value_type;
-    		typedef std::ptrdiff_t					difference_type;
-    		typedef T*						pointer;
-    		typedef T&								reference;
-			typedef BSTConstIterator<T>				iterator;
+			typedef typename ft::iterator_traits<std::__1::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+			typedef BSTConstIterator<T>		iterator;
 
 		private :
 			ft::stack<s_BSTNode<T>*> 	st_node;
@@ -94,9 +91,6 @@ namespace ft
 																return (true);
 															}
 		    bool operator>=(const iterator &sec_it) const	{ return !(st_node < sec_it.st_node); }
-
-			// Is input iterator
-			static const bool input_iter = true;
 	};
 }
 

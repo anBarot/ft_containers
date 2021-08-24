@@ -20,7 +20,7 @@ namespace ft
 			explicit stack(const container_type &ctnr = container_type()) : _container(ctnr) {}
 			stack(const stack<T, C> &stack) : _container(stack._container) {}
 			stack<T, C> &operator=(const stack<T, C> &stack) { _container = stack._container; return (*this); }
-			~stack() {};
+			virtual ~stack() {};
 
 			// Getters
 			container_type		GetContainer() const { return (_container); };

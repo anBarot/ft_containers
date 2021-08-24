@@ -23,9 +23,16 @@ namespace ft
 		public:
 		// Coplien
 			BinarySearchTree() : bstroot_p(NULL), size(0) {}
-			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(n_node), size(1) {}
+			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(NULL), size(0)
+			{
+				if (n_node != NULL)
+				{
+					bstroot_p = n_node;
+					size = 1;
+				}
+			}
 			BinarySearchTree(T &data) : bstroot_p(GetNewNode(data)), size(1) {}
-			~BinarySearchTree();
+			virtual ~BinarySearchTree();
 
 		// Getters
 			struct s_BSTNode<T>	*GetRoot() const 	{ return (bstroot_p); }

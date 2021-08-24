@@ -85,6 +85,15 @@ void	test_erase_map(M &map)
 	std::cout << "\nTest erase map 5 \n";
 	map.erase(5);
 	display_map(map);
+	std::cout << "\nTest erase begin\n";
+	map.erase(map.begin());
+	display_map(map);
+	std::cout << "\nTest erase begin to find(6)\n";
+	map.erase(map.begin(), map.find(6));
+	display_map(map);
+	std::cout << "\nTest erase begin to end\n";
+	map.erase(map.begin(), map.end());
+	display_map(map);
 }
 
 void	test_map_int_int()
@@ -258,6 +267,7 @@ void	init_map(M &map_one, M &map_two)
 	map_two[8] = 9;
 	map_two[10] = 11;
 	map_two[12] = 13;
+	map_two[14] = 15;
 }
 
 void	test_swap()
@@ -275,6 +285,9 @@ void	test_swap()
 
 	COLOR(BLUE)	std::cout << "Test comparison operator \n";
 
+	// std_map_two = std_map_one;
+	// ft_map_two = ft_map_one;
+
 	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_map_one == std_map_two) << "\n";
 	COLOR(BOLDGREEN)	std::cout << "Operator == ft : " << (ft_map_one == ft_map_two) << "\n";
 	COLOR(BOLDYELLOW)	std::cout << "Operator != std : " << (std_map_one != std_map_two) << "\n";
@@ -287,6 +300,33 @@ void	test_swap()
 	COLOR(BOLDGREEN)	std::cout << "Operator >= ft : " << (ft_map_one >= ft_map_two) << "\n";
 	COLOR(BOLDYELLOW)	std::cout << "Operator <= std : " << (std_map_one <= std_map_two) << "\n";
 	COLOR(BOLDGREEN)	std::cout << "Operator <= ft : " << (ft_map_one <= ft_map_two) << "\n";
+}
+
+void	test_input_iterator()
+{
+	COLOR(BOLDYELLOW)
+	std::map<int, int> std_map;
+	std_map.insert(std::make_pair(0, 1));
+	std_map.insert(std::make_pair(1, 2));
+	std_map.insert(std::make_pair(3, 4));
+
+	std::map<int, int>::iterator std_beg = std_map.begin();
+	std::map<int, int>::iterator std_end = std_map.end();
+
+	std::map<int, int> std_map_2(std_beg, std_end);
+	display_map(std_map_2);
+
+	COLOR(BOLDGREEN)
+	ft::map<int, int> ft_map;
+	ft_map.insert(ft::make_pair(0, 1));
+	ft_map.insert(ft::make_pair(1, 2));
+	ft_map.insert(ft::make_pair(3, 4));
+
+	ft::map<int, int>::iterator ft_beg = ft_map.begin();
+	ft::map<int, int>::iterator ft_end = ft_map.end();
+
+	ft::map<int, int> ft_map_2(ft_beg, ft_end);
+	display_map(ft_map_2);
 }
 
 int main()
@@ -305,6 +345,9 @@ int main()
 	
 	COLOR(BLUE) std::cout << "\nTest map bounds\n";
 	test_map_bounds();
+
+	COLOR(BLUE) std::cout << "\nTest input iterator\n";
+	test_input_iterator();
 	
 	COLOR(BLUE) std::cout << "\nTest swap and op\n";
 	test_swap();

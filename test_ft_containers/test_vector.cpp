@@ -36,7 +36,8 @@ void	test_front_back(V &vec, std::string str)
 	std::cout << "Testing front " << " - " << str << " :" << std::endl;
 	std::cout << vec.front() << "\n";
 	std::cout << "Testing back " << " - " << str << " :" << std::endl;
-	std::cout << vec.back() << "\n\n";
+	std::cout << vec.back();
+	std::cout << "\nSize : " << vec.size() << "\n\n";
 }
 
 template<class T, class V>
@@ -45,7 +46,7 @@ void	test_push_and_pop(V &vec, T value, std::string str)
 	std::cout << "Testing push_back " << value << " - " << str << " :" << std::endl;
 	vec.push_back(value);
 	test_front_back(vec, str);
-	std::cout << "Testing pop_back " << value << " - " << str << " :" << std::endl;
+	std::cout << "Testing pop_back - " << str << " :" << std::endl;
 	vec.pop_back();
 	test_front_back(vec, str);
 }
@@ -77,6 +78,7 @@ void	test_insert_erase(V &vec, T value, std::string str)
 	std::cout << "\nTesting insert (begin)" << " - " << str << std::endl;
 	std::cout << *(vec.insert(vec.begin(), value)) << "\n";
 	test_front_back(vec, str);
+
 	std::cout << "\nTesting erase (begin)" << " - " << str << std::endl;
 	std::cout << *(vec.erase(vec.begin())) << "\n";
 	test_front_back(vec, str);
@@ -88,9 +90,19 @@ void	test_riterator(V &vec, std::string str, T value)
 	std::cout << "Testing reverse iterator" << " - " << str << std::endl;
 
 	vec[1] = value;
-	// vec.insert(vec.begin(), value);
+
+	std:: cout << "Testing insert ++(vec.begin()), value : " << *(vec.insert(++(vec.begin()), value)) << "\n";
+	
+	std:: cout << "Testing insert ++(vec.begin()), 3, value\n";
+	vec.insert(++(vec.begin()), 3, value);
+	
+	std:: cout << "Testing insert (++(begin), vec(2, val).begin(), vec(2, val).last()\n";
+	V n_vec(2, value);
+	vec.insert(++(vec.begin()), n_vec.begin(), n_vec.end());
+	
 	for (typename V::reverse_iterator it = vec.rbegin(); it + 1 != vec.rend(); ++it)
 		std::cout << *it << " - ";
+
 	if (vec.size() > 0)
 	{
 		typename V::reverse_iterator it = vec.rend() - 1;
@@ -177,10 +189,11 @@ void	test_swap()
 	std_vec_one[1] = 0;
 	ft_vec_one[0] = ft_vec_two[0];
 	ft_vec_one[1] = 0;
-	display_vector(ft_vec_one);
-	display_vector(ft_vec_two);
 
 	COLOR(BLUE)	std::cout << "Test comparison operator \n";
+
+	// std_vec_one = std_vec_two;
+	// ft_vec_one = ft_vec_two;
 
 	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_vec_one == std_vec_two) << "\n";
 	COLOR(BOLDGREEN)	std::cout << "Operator == ft : " << (ft_vec_one == ft_vec_two) << "\n";
@@ -196,15 +209,38 @@ void	test_swap()
 	COLOR(BOLDGREEN)	std::cout << "Operator <= ft : " << (ft_vec_one <= ft_vec_two) << "\n";
 }
 
+template <class V>
+void	test_input_iterator_tpl(V vec)
+{
+	typename V::iterator beg = vec.begin();
+	typename V::iterator end = vec.end();
+
+	V vec_2(beg, end);
+	display_vector(vec_2);
+}
+
+void	test_input_iterator()
+{
+	COLOR(BOLDYELLOW)
+	ft::vector<int> std_vec(5, 12);
+	test_input_iterator_tpl(std_vec);
+
+	COLOR(BOLDGREEN)
+	ft::vector<int> ft_vec(5, 12);
+	test_input_iterator_tpl(ft_vec);
+}
+
 int main()
 {
-	std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
+	COLOR(BLUE) std::cout << "+++++++++++++++++ Test vector <string> +++++++++++++++++" << std::endl;
 	test_vector_str();
-	std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
+	COLOR(BLUE) std::cout << "\n\n+++++++++++++++++ Test vector <int> +++++++++++++++++" << std::endl;
 	test_vector_int();
-	std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
+	COLOR(BLUE) std::cout << "\n\n+++++++++++++++++ Test vector <float> +++++++++++++++++" << std::endl;
 	test_vector_float();
-	std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
+	COLOR(BLUE) std::cout << "\n\n+++++++++++++++++ Test input iterator +++++++++++++++++" << std::endl;
+	test_input_iterator();
+	COLOR(BLUE) std::cout << "\n\n+++++++++++++++++ Test swap +++++++++++++++++" << std::endl;
 	test_swap();
 
 	COLOR(RESET)

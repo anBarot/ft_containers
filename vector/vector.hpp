@@ -39,14 +39,29 @@ namespace ft
 			explicit vector(const allocator_type &alloc = allocator_type()) : _alloc(alloc), _data(NULL), _capacity(0), _size(0) {}
 			explicit vector(size_type n, const value_type &val = value_type(), const allocator_type& alloc = allocator_type());
 			vector<T, Alloc> &operator=(const vector &vector);
-			vector(vector &x);
+			vector(const vector &x);
 			template <typename InputIterator>
-			vector(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+			vector(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
 			InputIterator last, const allocator_type &alloc = allocator_type())
 			: _alloc(alloc),  _data(NULL),  _capacity(0), _size(0)
 			{
+				if (first > last)
+					return ;
+
+				for(InputIterator it = first; it != last; it++)
+    			    _size += 1;
+
+				_capacity = _size;
+				_data = _alloc.allocate(_capacity);
+
+				int i = 0;
+
 				while (first != last)
-					this->push_back(*first++);
+				{
+					_alloc.construct(_data + i, *first);
+					first++;
+					i++;
+				}
 			}
 			virtual ~vector();
 
@@ -81,11 +96,11 @@ namespace ft
     		void					insert(iterator position, size_type n, const value_type& val);
 			template<typename InputIterator>
 			void					insert(iterator position,
-									typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+									typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
 									InputIterator last);
 			void					assign(size_type n, const_reference val);
 			template <typename InputIterator>
-			void					assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
+			void					assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first, 
 									InputIterator last);
 
 			// Resizers
@@ -119,6 +134,7 @@ ft::vector<T, Alloc>::vector(size_type n, const value_type &val, const allocator
 : _alloc(alloc), _capacity(0), _size(0) 
 {
 	this->reserve(n);
+
 	for (size_type i = 0; i < n; i++)
 		_alloc.construct(_data + i, val);
 	_size = n;
@@ -126,12 +142,12 @@ ft::vector<T, Alloc>::vector(size_type n, const value_type &val, const allocator
 }
 
 template<class T, class Alloc>
-ft::vector<T, Alloc>::vector(ft::vector<T, Alloc> &x) : 
+ft::vector<T, Alloc>::vector(const ft::vector<T, Alloc> &x) : 
 _alloc(allocator_type()), _capacity(0), _size(0)
 { *this = x; }
 
 template<class T, class Alloc>
-ft::vector<T, Alloc> &ft::vector<T, Alloc>::operator=(const vector &vector)
+ft::vector<T, Alloc> &ft::vector<T, Alloc>::operator=(const ft::vector<T, Alloc> &vector)
 {
 	_size = vector._size;
 	_capacity = vector._capacity;
@@ -276,8 +292,11 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::erase(iterator fir
 template<class T, class Alloc>
 typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator position, const value_type& val)
 {
+
 	if (_size == _capacity)
 	{
+		int posi = this->begin().GetPointer() - position.GetPointer() + 1;
+		
 		pointer n_data = _alloc.allocate(_capacity * 2);
 
 		for (size_type i = 0; i < _size; i++)
@@ -285,16 +304,20 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator po
 			_alloc.construct(n_data + i, _data[i]);
 			_alloc.destroy(_data + i);
 		}
+
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
 		_capacity *= 2;
+		position = this->begin() + posi + 1;
 	}
 
 	vector tmp(position, this->end());
 
 	for (size_t i = 0; i < tmp.size(); i++)
 		this->pop_back();
+
 	this->push_back(val);
+
 	for (iterator it = tmp.begin(); it != tmp.end(); it++)
 		this->push_back(*it);
 
@@ -306,6 +329,8 @@ void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 {
 	if (_size - n < _capacity)
 	{
+		int posi = this->begin().GetPointer() - position.GetPointer() + 1;
+		
 		pointer n_data = _alloc.allocate(_capacity * 2);
 
 		for (size_type i = 0; i < _size; i++)
@@ -316,6 +341,7 @@ void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
 		_capacity *= 2;
+		position = this->begin() + posi + 1;
 	}
 
 	vector tmp(position, this->end());
@@ -336,11 +362,14 @@ void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 template <class T, class Alloc>
 template<typename InputIterator>
 void	ft::vector<T, Alloc>::insert(iterator position,
-		typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first,
+		typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
 		InputIterator last)
 {
-	if (last - first < _capacity)
+	int posi = this->begin().GetPointer() - position.GetPointer() + 1;
+
+	if ((size_t)posi < _capacity)
 	{
+
 		pointer n_data = _alloc.allocate(_capacity * 2);
 
 		for (size_type i = 0; i < _size; i++)
@@ -352,12 +381,14 @@ void	ft::vector<T, Alloc>::insert(iterator position,
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
 		_capacity *= 2;
+		position = this->begin() + posi + 1;
 	}
 
-	for (first; first <= last; first++)
+	while (first < last)
 	{
 		insert(position, *first);
 		position++;
+		first++;
 	}
 }
 
@@ -372,7 +403,7 @@ void ft::vector<T, Alloc>::assign(size_type n, const_reference val)
 
 template <class T, class Alloc>
 template <typename InputIterator>
-void ft::vector<T, Alloc>::assign(typename ft::enable_if<InputIterator::input_iter, InputIterator>::type first, 
+void ft::vector<T, Alloc>::assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first, 
 						InputIterator last)
 {
 	this->clear();
@@ -464,5 +495,13 @@ bool operator>(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rh
 template<class T, class Alloc>
 bool operator>=(const ft::vector<T, Alloc> & lhs, const ft::vector<T, Alloc> & rhs)
 {	return (!(lhs < rhs)); }
+
+// Other non member function
+
+template <class T, class Alloc>
+void swap(ft::vector<T,Alloc>& x, ft::vector<T,Alloc>& y)
+{
+	x.swap(y);
+}
 
 #endif

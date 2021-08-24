@@ -21,7 +21,7 @@ void	display_stack(S &stack)
 {
 	std::cout << stack.top() << "\n";
 	std::cout << "Size : " << stack.size() << std::endl;
-	std::cout << "Empty ? " << " : " << stack.empty() << "\n\n";
+	std::cout << "Empty ? " << " : " << stack.empty() << "\n";
 }
 
 template<class S>
@@ -34,7 +34,7 @@ void	test_top(S &stack, std::string str)
 template<class T, class S>
 void	test_push_and_pop(S &stack, T value, std::string str)
 {
-	std::cout << "Testing push " << value << " - " << str << " :" << std::endl;
+	std::cout << "\nTesting push " << value << " - " << str << " :" << std::endl;
 	stack.push(value);
 	test_top(stack, str);
 	std::cout << "Testing pop " <<  " - " << str << " :" << std::endl;
@@ -45,10 +45,10 @@ void	test_push_and_pop(S &stack, T value, std::string str)
 template <class S>
 void	push_things(S &st, int val)
 {
+	// st.push(20 + val);
+	// st.push(30 + val);
+	// st.push(40 + val);
 	st.push(10 + val);
-	st.push(20 + val);
-	st.push(30 + val);
-	st.push(40 + val);
 } 
 
 void 	test_comp_operator()
@@ -59,6 +59,8 @@ void 	test_comp_operator()
 	ft::stack<int, std::vector<int> > ft_stack_one(vec);
 	std::stack<int, std::vector<int> > std_stack_two(vec);
 	ft::stack<int, std::vector<int> > ft_stack_two(vec);
+
+	COLOR(RED) std::cout << "\nCreating stack vec(5, 5), pushing :\none - 10\ntwo - 15\n\n";
 
 	push_things(std_stack_one, 0);
 	push_things(ft_stack_one, 0);
@@ -75,6 +77,9 @@ void 	test_comp_operator()
 	
 	COLOR(BOLDYELLOW)	std::cout << "Stack top std (one and two) : " << std_stack_one.top() << " - " << std_stack_two.top() << "\n";
 	COLOR(BOLDGREEN)	std::cout << "Stack top ft (one and two) : " << ft_stack_one.top() << " - " << ft_stack_two.top() << "\n";
+
+	// std_stack_one = std_stack_two;
+	// ft_stack_one = ft_stack_two;
 
 	COLOR(BLUE) std::cout << "\nComparison operator test :\n";
 	COLOR(BOLDYELLOW)	std::cout << "Operator == std : " << (std_stack_one == std_stack_two) << "\n";
@@ -106,23 +111,36 @@ void	test_stack(V_1 &std_stack, V_2 &my_stack , T value )
 	COLOR(RESET);
 }
 
-void	test_stack_vector()
+void	test_stack_vector_int()
 {
 	std::vector<int> vec(5, 12);
 
 	std::stack<int, std::vector<int> > std_stack(vec);
 	ft::stack<int, std::vector<int> > my_stack(vec);
 
-	std::cout << "Stack <int, vector<int>> created, vec(5, 12)\n";
+	std::cout << "Stack <int, vector<int>> : vec(5, 12)\n";
 
 	test_stack(std_stack, my_stack, 24);
+}
 
+void	test_stack_vector_string()
+{
+	std::vector<std::string> vec(5, "Hi");
+
+	std::stack<std::string, std::vector<std::string> > std_stack(vec);
+	ft::stack<std::string, std::vector<std::string> > my_stack(vec);
+
+	std::cout << "Stack <string, vector<string>> : vec(5, \"Hi\")\n";
+
+	test_stack(std_stack, my_stack, "Bye");
 }
 
 int main()
 {
-	COLOR(BLUE) std::cout << "+++++++++++++++++ Test stack <vector> +++++++++++++++++" << std::endl;
-	test_stack_vector();
+	COLOR(BLUE) std::cout << "+++++++++++++++++ Test stack <vector<int>> +++++++++++++++++" << std::endl;
+	test_stack_vector_int();
+	COLOR(BLUE) std::cout << "+++++++++++++++++ Test stack <vector<string>> +++++++++++++++++" << std::endl;
+	test_stack_vector_string();
 	COLOR(BLUE) std::cout << "\nTest comparison op and swap :" << std::endl;
 	test_comp_operator();
 	COLOR(RESET)
