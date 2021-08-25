@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp"
+    }
+}

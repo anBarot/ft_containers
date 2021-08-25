@@ -298,7 +298,7 @@ typename ft::map<Key, T, Compare, Alloc>::mapped_type& ft::map<Key, T, Compare, 
 
 	if (it == this->end())
 	{
-		ft::s_BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, 0));
+		ft::BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, 0));
 		return (node->data.second);
 	}
 	else

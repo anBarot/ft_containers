@@ -2,28 +2,23 @@
 #define BINARY_SEARCH_TREE_HPP
 
 #include <iostream>
+#include "BSTnode.hpp"
 
 namespace ft
 {
-	template <class T>
-	struct	s_BSTNode
-	{
-		T				data;
-		s_BSTNode		*left;
-		s_BSTNode		*right;
-	};
-
-	template <class T>
+	template <class T, class Alloc = std::allocator<T> >
 	class BinarySearchTree
 	{
 		private:
-			struct s_BSTNode<T>	*bstroot_p;
+			BSTNode<T>			*bstroot_p;
 			size_t				size;
+			typedef typename	Alloc::template rebind<BSTNode<T> >::other t_alloc;
+			t_alloc				alloc;
 
 		public:
 		// Coplien
 			BinarySearchTree() : bstroot_p(NULL), size(0) {}
-			BinarySearchTree(s_BSTNode<T> *n_node) : bstroot_p(NULL), size(0)
+			BinarySearchTree(BSTNode<T> *n_node) : bstroot_p(NULL), size(0)
 			{
 				if (n_node != NULL)
 				{
@@ -35,21 +30,21 @@ namespace ft
 			virtual ~BinarySearchTree();
 
 		// Getters
-			struct s_BSTNode<T>	*GetRoot() const 	{ return (bstroot_p); }
+			BSTNode<T>	*GetRoot() const 	{ return (bstroot_p); }
 			size_t	GetSize() const					{ return (size); }
 
 		// Member function
-			s_BSTNode<T>	*GetNewNode(const T &data);
-			s_BSTNode<T>	*Insert(s_BSTNode<T> *root, const T &data);
-			s_BSTNode<T>	*Delete(s_BSTNode<T> *root, const T &data);
-			bool			Search(s_BSTNode<T> *root, const T &data);
-			s_BSTNode<T>	*FindMin(s_BSTNode<T> *root);
-			s_BSTNode<T>	*FindMax(s_BSTNode<T> *root);
+			BSTNode<T>	*GetNewNode(const T &data);
+			BSTNode<T>	*Insert(BSTNode<T> *root, const T &data);
+			BSTNode<T>	*Delete(BSTNode<T> *root, const T &data);
+			bool		Search(BSTNode<T> *root, const T &data);
+			BSTNode<T>	*FindMin(BSTNode<T> *root);
+			BSTNode<T>	*FindMax(BSTNode<T> *root);
 	};
 }
 
-template <class T>
-ft::BinarySearchTree<T>::~BinarySearchTree()
+template <class T, class Alloc>
+ft::BinarySearchTree<T, Alloc>::~BinarySearchTree()
 {
 	while (bstroot_p != NULL)
 	{
@@ -57,20 +52,20 @@ ft::BinarySearchTree<T>::~BinarySearchTree()
 	}
 }
 
-template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::GetNewNode(const T &n_data)
+template <class T, class Alloc>
+ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::GetNewNode(const T &n_data)
 {
-	ft::s_BSTNode<T> *n_node = new ft::s_BSTNode<T>;
+	ft::BSTNode<T> *n_node =  alloc.allocate(1);
 
-	n_node->data = n_data;
+	alloc.construct(n_node, n_data);
 	n_node->right = NULL;
 	n_node->left = NULL;
 
 	return (n_node);
 }
 
-template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const T &data)
+template <class T, class Alloc>
+ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Insert(ft::BSTNode<T> *root, const T &data)
 {
 	if (bstroot_p == NULL)
 	{
@@ -100,8 +95,8 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Insert(ft::s_BSTNode<T> *root, const 
 	}
 }
 
-template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const T &data)
+template <class T, class Alloc>
+ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Delete(ft::BSTNode<T> *root, const T &data)
 {
 	if (root == NULL || bstroot_p == NULL)
 		return (NULL);
@@ -123,7 +118,7 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const 
 		{
 			if (root == bstroot_p)
 				bstroot_p = root->right;
-			ft::s_BSTNode<T> *tmp = root->right;
+			ft::BSTNode<T> *tmp = root->right;
 			delete root;
 			size--;
 			return (tmp);
@@ -132,14 +127,14 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const 
 		{
 			if (root == bstroot_p)
 				bstroot_p = root->left;
-			ft::s_BSTNode<T> *tmp = root->left;
+			ft::BSTNode<T> *tmp = root->left;
 			delete root;
 			size--;
 			return (tmp);
 		}
 		else
 		{
-			ft::s_BSTNode<T> *tmp = FindMin(root->right);
+			ft::BSTNode<T> *tmp = FindMin(root->right);
 			root->data = tmp->data;
 			root->right = Delete(root->right, tmp->data);
 		}
@@ -147,8 +142,8 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::Delete(ft::s_BSTNode<T> *root, const 
 	return (root);
 }
 
-template <class T>
-bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, const T &data)
+template <class T, class Alloc>
+bool	ft::BinarySearchTree<T, Alloc>::Search(ft::BSTNode<T> *root, const T &data)
 {
 	if (bstroot_p == NULL || root == NULL)
 		return (false);
@@ -160,8 +155,8 @@ bool	ft::BinarySearchTree<T>::Search(ft::s_BSTNode<T> *root, const T &data)
 		return (Search(root->right, data));
 }
 
-template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
+template <class T, class Alloc>
+ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::FindMin(ft::BSTNode<T> *root)
 {
 	if (bstroot_p == NULL || root == NULL)
 		return (NULL);
@@ -172,8 +167,8 @@ ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMin(ft::s_BSTNode<T> *root)
 		return (FindMin(root->left));
 }
 
-template <class T>
-ft::s_BSTNode<T>	*ft::BinarySearchTree<T>::FindMax(ft::s_BSTNode<T> *root)
+template <class T, class Alloc>
+ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::FindMax(ft::BSTNode<T> *root)
 {
 	if (bstroot_p == NULL || root == NULL)
 		return (NULL);
