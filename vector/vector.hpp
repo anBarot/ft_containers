@@ -292,12 +292,22 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::erase(iterator fir
 template<class T, class Alloc>
 typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator position, const value_type& val)
 {
+	if (_capacity == this->max_size())
+		return (NULL);
 
 	if (_size == _capacity)
 	{
+		size_t n_capacity = 0;
+
+		if (_capacity * 2 > this->max_size())
+			n_capacity = this->max_size();
+		else
+			n_capacity = _capacity * 2;
+		
+
 		int posi = this->begin().GetPointer() - position.GetPointer() + 1;
 		
-		pointer n_data = _alloc.allocate(_capacity * 2);
+		pointer n_data = _alloc.allocate(n_capacity);
 
 		for (size_type i = 0; i < _size; i++)
 		{
@@ -307,7 +317,7 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator po
 
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
-		_capacity *= 2;
+		_capacity = n_capacity;
 		position = this->begin() + posi + 1;
 	}
 
@@ -327,11 +337,21 @@ typename ft::vector<T, Alloc>::iterator ft::vector<T, Alloc>::insert(iterator po
 template<class T, class Alloc>
 void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_type& val)
 {
+	if (_capacity == this->max_size())
+		return ;
+
 	if (_size - n < _capacity)
 	{
+		size_t n_capacity = 0;
+
+		if (_capacity * 2 > this->max_size())
+			n_capacity = this->max_size();
+		else
+			n_capacity = _capacity * 2;
+		
 		int posi = this->begin().GetPointer() - position.GetPointer() + 1;
 		
-		pointer n_data = _alloc.allocate(_capacity * 2);
+		pointer n_data = _alloc.allocate(n_capacity);
 
 		for (size_type i = 0; i < _size; i++)
 		{
@@ -340,7 +360,7 @@ void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 		}
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
-		_capacity *= 2;
+		_capacity = n_capacity;
 		position = this->begin() + posi + 1;
 	}
 
@@ -365,12 +385,21 @@ void	ft::vector<T, Alloc>::insert(iterator position,
 		typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
 		InputIterator last)
 {
+	if (_capacity == this->max_size())
+		return ;
+
 	int posi = this->begin().GetPointer() - position.GetPointer() + 1;
 
 	if ((size_t)posi < _capacity)
 	{
+		size_t n_capacity = 0;
 
-		pointer n_data = _alloc.allocate(_capacity * 2);
+		if (_capacity * 2 > this->max_size())
+			n_capacity = this->max_size();
+		else
+			n_capacity = _capacity * 2;
+		
+		pointer n_data = _alloc.allocate(n_capacity);
 
 		for (size_type i = 0; i < _size; i++)
 		{
@@ -380,7 +409,7 @@ void	ft::vector<T, Alloc>::insert(iterator position,
 
 		_alloc.deallocate(_data, _capacity);
 		_data = n_data;
-		_capacity *= 2;
+		_capacity = n_capacity;
 		position = this->begin() + posi + 1;
 	}
 
