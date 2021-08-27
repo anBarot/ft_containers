@@ -6,12 +6,13 @@
 namespace ft
 {
 	template <class T>
-	class	BSTNode
+	struct	BSTNode
 	{
-		public :
-			T				data;
-			BSTNode		*left;
-			BSTNode		*right;
+		T			data;
+		BSTNode		*left;
+		BSTNode		*right;
+		BSTNode(const T &n_data) : data(n_data) {}
+		~BSTNode() {}
 	};
 }
 

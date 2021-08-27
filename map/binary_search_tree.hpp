@@ -12,8 +12,8 @@ namespace ft
 		private:
 			BSTNode<T>			*bstroot_p;
 			size_t				size;
-			typedef typename	Alloc::template rebind<BSTNode<T> >::other t_alloc;
-			t_alloc				alloc;
+			typedef typename 	Alloc::template rebind<BSTNode<T> >::other t_node_alloc;
+			t_node_alloc		alloc;
 
 		public:
 		// Coplien
@@ -111,7 +111,7 @@ ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Delete(ft::BSTNode<T> *root, con
 			if (root == bstroot_p)
 				bstroot_p = NULL;
 			size--;
-			delete root;
+			alloc.destroy(root);
 			root = NULL;
 		}
 		else if (root->left == NULL)
@@ -119,7 +119,7 @@ ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Delete(ft::BSTNode<T> *root, con
 			if (root == bstroot_p)
 				bstroot_p = root->right;
 			ft::BSTNode<T> *tmp = root->right;
-			delete root;
+			alloc.destroy(root);
 			size--;
 			return (tmp);
 		}
@@ -128,7 +128,7 @@ ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Delete(ft::BSTNode<T> *root, con
 			if (root == bstroot_p)
 				bstroot_p = root->left;
 			ft::BSTNode<T> *tmp = root->left;
-			delete root;
+			alloc.destroy(root);
 			size--;
 			return (tmp);
 		}

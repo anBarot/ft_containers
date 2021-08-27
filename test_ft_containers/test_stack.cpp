@@ -113,10 +113,10 @@ void	test_stack(V_1 &std_stack, V_2 &my_stack , T value )
 
 void	test_stack_vector_int()
 {
-	std::vector<int> vec(5, 12);
+	ft::vector<int> vec(5, 12);
 
-	std::stack<int, std::vector<int> > std_stack(vec);
-	ft::stack<int, std::vector<int> > my_stack(vec);
+	std::stack<int, ft::vector<int> > std_stack(vec);
+	ft::stack<int, ft::vector<int> > my_stack(vec);
 
 	std::cout << "Stack <int, vector<int>> : vec(5, 12)\n";
 
@@ -125,10 +125,10 @@ void	test_stack_vector_int()
 
 void	test_stack_vector_string()
 {
-	std::vector<std::string> vec(5, "Hi");
+	ft::vector<std::string> vec(5, "Hi");
 
-	std::stack<std::string, std::vector<std::string> > std_stack(vec);
-	ft::stack<std::string, std::vector<std::string> > my_stack(vec);
+	std::stack<std::string, ft::vector<std::string> > std_stack(vec);
+	ft::stack<std::string, ft::vector<std::string> > my_stack(vec);
 
 	std::cout << "Stack <string, vector<string>> : vec(5, \"Hi\")\n";
 
