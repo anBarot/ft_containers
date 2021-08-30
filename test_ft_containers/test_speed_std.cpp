@@ -16,7 +16,7 @@ void    test_map_speed()
 {
     std::map<int, int> std_map;
 
-    for (size_t i = 0; i < 1000; i++)
+    for (size_t i = 0; i < 50; i++)
         std_map.insert(std::make_pair(i, rand()));
 }
 
