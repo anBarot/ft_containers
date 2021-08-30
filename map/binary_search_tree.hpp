@@ -79,7 +79,8 @@ ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Insert(ft::BSTNode<T> *root, con
 			if (root->left == NULL)
 			{
 				size++;
-				return (root->left = GetNewNode(data));
+				root->left = GetNewNode(data);
+				return (root->left);
 			}
 			return (Insert(root->left, data));
 		}
@@ -88,7 +89,8 @@ ft::BSTNode<T>	*ft::BinarySearchTree<T, Alloc>::Insert(ft::BSTNode<T> *root, con
 			if (root->right == NULL)
 			{
 				size++;
-				return (root->right = GetNewNode(data));
+				root->right = GetNewNode(data);
+				return (root->right);
 			}
 			return (Insert(root->right, data));
 		}

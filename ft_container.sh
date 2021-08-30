@@ -22,7 +22,6 @@ echo -ne "test std :\n" > speed_result.txt
 time ./a.out >> speed_result.txt
 sed -e '/test_vector_speed();/s/^/\/\//g' test_ft_containers/test_speed_ft.cpp > test_ft_containers/tmp.cpp
 clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/tmp.cpp
-clang++ -Wall -Wextra -Werror -std=c++98 -pedantic-errors -g test_ft_containers/test_speed_ft.cpp
 echo -ne "test ft :\n" >> speed_result.txt
 time ./a.out >> speed_result.txt
 rm test_ft_containers/tmp.cpp
