@@ -222,7 +222,7 @@ void	test_input_iterator_tpl(V vec)
 void	test_input_iterator()
 {
 	COLOR(BOLDYELLOW)
-	std::vector<int> std_vec(5, 12);
+	ft::vector<int> std_vec(5, 12);
 	test_input_iterator_tpl(std_vec);
 
 	COLOR(BOLDGREEN)

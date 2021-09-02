@@ -196,18 +196,14 @@ typename ft::map<Key, T, Compare, Alloc>::const_reverse_iterator ft::map<Key, T,
 template <class Key, class T, class Compare, class Alloc>
 typename ft::map<Key, T, Compare, Alloc>::iterator ft::map<Key, T, Compare, Alloc>::find(const ft::map<Key, T, Compare, Alloc>::key_type& k)
 {
-	if (bst.GetRoot() == NULL)
+	if (bst.GetRoot() == NULL || this->count(k) == 0)
 		return (this->end());
 
 	ft::map<Key, T, Compare, Alloc>::iterator it = this->begin();
-	ft::map<Key, T, Compare, Alloc>::iterator end = this->end();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != this->end() && comp(it->first, k) == true)
+	while (comp(it->first, k) == true)
 		it++;
-	
-	if (it == end || comp(k, it->first) == true)
-		return (end);
 
 	return (it);
 }
@@ -215,19 +211,15 @@ typename ft::map<Key, T, Compare, Alloc>::iterator ft::map<Key, T, Compare, Allo
 template <class Key, class T, class Compare, class Alloc>
 typename ft::map<Key, T, Compare, Alloc>::const_iterator ft::map<Key, T, Compare, Alloc>::find(const ft::map<Key, T, Compare, Alloc>::key_type& k) const
 {
-	if (bst.GetRoot() == NULL)
+	if (bst.GetRoot() == NULL || this->count(k) == 0)
 		return (this->end());
 
 	ft::map<Key, T, Compare, Alloc>::const_iterator it = this->begin();
-	ft::map<Key, T, Compare, Alloc>::iterator end = this->end();
 	ft::map<Key, T, Compare, Alloc>::key_compare comp = this->key_comp();
 
-	while (it != this->end() && comp(it->first, k) == true)
+	while (comp(it->first, k) == true)
 		it++;
 
-	if (it == end || comp(k, it->first) == true)
-		return (end);
-		
 	return (it);
 }
 
@@ -306,7 +298,7 @@ typename ft::map<Key, T, Compare, Alloc>::mapped_type& ft::map<Key, T, Compare, 
 
 	if (it == this->end())
 	{
-		ft::BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, 0));
+		ft::s_BSTNode<value_type>* node = bst.Insert(bst.GetRoot(), Pair<Key, T>(k, 0));
 		return (node->data.second);
 	}
 	else

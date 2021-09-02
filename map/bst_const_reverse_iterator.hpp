@@ -18,15 +18,15 @@ namespace ft
 			typedef BSTConstReverseIterator<const T>	iterator;
 
 		private :
-			ft::stack<BSTNode<T>*> 	st_node;
-			ft::stack<BSTNode<T>*> 	save_stack;
+			ft::stack<s_BSTNode<T>*> 	st_node;
+			ft::stack<s_BSTNode<T>*> 	save_stack;
 
 		public :
 			// Coplien
-			BSTConstReverseIterator() : st_node(ft::stack<BSTNode<T>*>()), save_stack(ft::stack<BSTNode<T>*>()) {}
+			BSTConstReverseIterator() : st_node(ft::stack<s_BSTNode<T>*>()), save_stack(ft::stack<s_BSTNode<T>*>()) {}
 			BSTConstReverseIterator(const BinarySearchTree<T> &bst)
 			{
-        		BSTNode<T>* current = bst.GetRoot();
+        		s_BSTNode<T>* current = bst.GetRoot();
 
         		while (current != NULL)
             	{
@@ -34,9 +34,9 @@ namespace ft
 					current = current->right;
 				}
 			}
-			BSTConstReverseIterator(BSTNode<T> *bst_node)
+			BSTConstReverseIterator(s_BSTNode<T> *bst_node)
 			{
-        		BSTNode<T>* current = bst_node;
+        		s_BSTNode<T>* current = bst_node;
 
         		while (current != NULL)
             	{
@@ -53,8 +53,8 @@ namespace ft
 			~BSTConstReverseIterator() {}
 
 			// Getters
-			BSTNode<T>* curr() const		{ return (st_node.top()); }
-			BSTNode<T>* prev_curr()const	{ return (save_stack.top()); }
+			s_BSTNode<T>* curr() const		{ return (st_node.top()); }
+			s_BSTNode<T>* prev_curr()const	{ return (save_stack.top()); }
 
 			// Member function
     		bool	hasNext();
@@ -113,7 +113,7 @@ void ft::BSTConstReverseIterator<T>::next()
 	{
 		save_stack.push(this->curr());
 
-		BSTNode<T>* curr = this->curr()->left;
+		s_BSTNode<T>* curr = this->curr()->left;
 
 		st_node.pop();
 
