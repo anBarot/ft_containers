@@ -41,7 +41,7 @@ namespace ft
 			vector<T, Alloc> &operator=(const vector &vector);
 			vector(const vector &x);
 			template <typename InputIterator>
-			vector(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
+			vector(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::random_access_iterator_tag>::value, InputIterator>::type first,
 			InputIterator last, const allocator_type &alloc = allocator_type())
 			: _alloc(alloc),  _data(NULL),  _capacity(0), _size(0)
 			{
@@ -96,11 +96,11 @@ namespace ft
     		void					insert(iterator position, size_type n, const value_type& val);
 			template<typename InputIterator>
 			void					insert(iterator position,
-									typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
+									typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::random_access_iterator_tag>::value, InputIterator>::type first,
 									InputIterator last);
 			void					assign(size_type n, const_reference val);
 			template <typename InputIterator>
-			void					assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first, 
+			void					assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::random_access_iterator_tag>::value, InputIterator>::type first, 
 									InputIterator last);
 
 			// Resizers
@@ -362,7 +362,7 @@ void ft::vector<T, Alloc>::insert(iterator position, size_type n, const value_ty
 template <class T, class Alloc>
 template<typename InputIterator>
 void	ft::vector<T, Alloc>::insert(iterator position,
-		typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first,
+		typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::random_access_iterator_tag>::value, InputIterator>::type first,
 		InputIterator last)
 {
 	int posi = this->begin().GetPointer() - position.GetPointer() + 1;
@@ -403,7 +403,7 @@ void ft::vector<T, Alloc>::assign(size_type n, const_reference val)
 
 template <class T, class Alloc>
 template <typename InputIterator>
-void ft::vector<T, Alloc>::assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::random_access_iterator_tag>::value, InputIterator>::type first, 
+void ft::vector<T, Alloc>::assign(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::random_access_iterator_tag>::value, InputIterator>::type first, 
 						InputIterator last)
 {
 	this->clear();
