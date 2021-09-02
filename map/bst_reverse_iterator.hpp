@@ -9,10 +9,10 @@
 namespace ft
 {
 	template <class T>
-	class BSTReverseIterator : public ft::iterator_traits<std::__1::bidirectional_iterator_tag, T>
+	class BSTReverseIterator : public ft::iterator_traits<std::bidirectional_iterator_tag, T>
 	{
 		public :
-			typedef typename ft::iterator_traits<std::__1::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+			typedef typename ft::iterator_traits<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
 			typedef BSTReverseIterator<T>		iterator;
 
 		private :

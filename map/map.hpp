@@ -47,7 +47,7 @@ namespace ft
 			map(const map< Key, T, Compare, Alloc > &x);
 			map &operator=(const map &x);
 			template <class InputIterator>
-  			map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first,
+  			map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::bidirectional_iterator_tag>::value, InputIterator>::type first,
 			InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());
 			virtual ~map();
 
@@ -87,7 +87,7 @@ namespace ft
 			Pair<iterator, bool>	insert(const value_type &val);
 			iterator				insert(iterator position, const value_type &val);
 			template <class InputIterator>
-			void					insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first,
+			void					insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::bidirectional_iterator_tag>::value, InputIterator>::type first,
 											InputIterator last);
 
 			// Other member functions
@@ -99,7 +99,7 @@ namespace ft
 
 template <class Key, class T, class Compare, class Alloc>
 template <class InputIterator>
-ft::map<Key, T, Compare, Alloc>::map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first, 
+ft::map<Key, T, Compare, Alloc>::map(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::bidirectional_iterator_tag>::value, InputIterator>::type first, 
 InputIterator last, const key_compare& n_comp, const allocator_type& n_alloc) : comp(n_comp), bst(NULL), alloc(n_alloc)
 {
 	while (first != last)
@@ -361,7 +361,7 @@ typename ft::map<Key, T, Compare, Alloc>::iterator	ft::map<Key, T, Compare, Allo
 
 template <class Key, class T, class Compare, class Alloc>
 template <class InputIterator>
-void ft::map<Key, T, Compare, Alloc>::insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::__1::bidirectional_iterator_tag>::value, InputIterator>::type first, InputIterator last)
+void ft::map<Key, T, Compare, Alloc>::insert(typename ft::enable_if<std::is_base_of<typename InputIterator::iterator_category, std::bidirectional_iterator_tag>::value, InputIterator>::type first, InputIterator last)
 {
 	while (first != last)
 	{

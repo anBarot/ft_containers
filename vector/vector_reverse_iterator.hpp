@@ -8,10 +8,10 @@
 namespace ft
 {
 	template<class T>
-	class VectorReverseIterator : public ft::iterator_traits<std::__1::random_access_iterator_tag, T>
+	class VectorReverseIterator : public ft::iterator_traits<std::random_access_iterator_tag, T>
 	{
 		public:
-			typedef typename ft::iterator_traits<std::__1::random_access_iterator_tag, T>::iterator_category iterator_category;
+			typedef typename ft::iterator_traits<std::random_access_iterator_tag, T>::iterator_category iterator_category;
 		    typedef T          			     		value_type;
             typedef T*          		    		pointer;
             typedef T&          		    		reference;
